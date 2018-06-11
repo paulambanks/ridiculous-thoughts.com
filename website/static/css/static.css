@@ -1,0 +1,347 @@
+/*--------- MAIN SETTINGS--------*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 100%;
+	line-height: 1em;
+}
+
+#wrapper {
+    max-width: 980px;
+    box-sizing: border-box;
+    padding-right: 10px;
+    padding-left: 10px;
+    padding-bottom: 5%;
+    margin: 0 auto;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+/*--------- MOBILE SETTINGS--------*/
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+  body {
+      background-color: #F09A9D; /* Red */
+  }
+  #wrapper {
+      max-width: 380px;
+      box-sizing: border-box;
+      padding-right: 10px;
+      padding-left: 10px;
+      padding-bottom: 5%;
+      margin: 0 auto;
+      flex-wrap: wrap;
+  }
+
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+  body {
+    background-color: #F5CF8E; /* Yellow */
+  }
+}
+
+/* Desktop Styles */
+@media only screen and (min-width: 961px) {
+  body {
+    background-color: white; /* Blue */
+  }
+}
+
+/*--------- GENERAL HEADER SETTINGS--------*/
+
+header {
+    box-sizing: border-box;
+    top: 0;
+	left: 0;
+	right: 0;
+    /*width: 100%;*/
+	height: 72px;
+	margin: 0 auto;  /*make the menu center-aligned*/
+    padding-right: 10px;
+    padding-left: 10px;
+    position: fixed;
+	transition: top 0.2s ease-in-out;
+	max-width: 1200px;
+	background-color: white;
+}
+
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+  header {
+      width: 100%;
+  }
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+  header {
+
+      margin: 0 auto;
+      padding-left: 10px;
+      padding-right: 10px;
+
+  }
+}
+/*--------- NAVIGATION SETTINGS--------*/
+
+.nav-up {
+    top: -80px;
+}
+
+.navigation {
+    background: #e2e2e2;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.navigation .toggle, .navigation .logo {
+    display: inline-block;
+}
+
+.navigation .nav-link {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 1em;
+    text-decoration: none;
+    background: seagreen;
+    color: black;
+}
+.navigation .nav-link:hover,
+.navigation .nav-link:active {
+      background: #ddd;
+    }
+
+.navigation .logo {
+    width: 10em;
+    padding: 1em;
+    color: black;
+    text-decoration: none;
+}
+
+.navigation .logo:hover {
+    background: seagreen;
+}
+
+.navigation .toggle {
+    padding: 1em;
+    width: 10em;
+    text-align: end;
+    color: black;
+    /*vertical-align: center;*/
+}
+
+@media (min-width: 400px) {
+    .navigation {
+        display: flex;
+    }
+    .navigation .right {
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+    }
+    .navigation .nav-link {
+        width: auto;
+    }
+    .navigation .toggle {
+        display: none;
+    }
+}
+
+.navigation .nav-items {
+    display: none;
+}
+
+@media (min-width: 400px) {
+    .navigation .nav-items {
+      display: flex;
+    }
+}
+
+@media (max-width: 400px) {
+    .navigation.active .toggle {
+            background: seagreen;
+            color: black;
+        }
+    .navigation.active .nav-items {
+            display: block;
+    }
+}
+
+/*--------- PAGINATION SETTINGS--------*/
+
+.pagination {
+	display: flex;
+	height: 100%;
+	width: 80%;
+	clear: both;
+}
+
+.pagination-items {
+	display: inline-flex;
+	flex: 1;
+	justify-content: space-evenly;
+	font-size: 1rem;
+}
+.pagination-items > li {
+	list-style: none;
+}
+
+
+/*--------- PAGE CONTENT SETTINGS--------*/
+.page-content {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+	height: 100%;
+}
+
+#posts {
+    background-color: gray;
+    margin: 1%;
+    width: 100%;
+}
+
+.posts-container {
+    display: flex;
+	flex-wrap: wrap;
+    margin: 0 auto;
+	height: 100%;
+    justify-content: center;
+}
+
+.flex-item {
+    background-color: white;
+    box-sizing: border-box;
+    border: dashed gray;
+    justify-content: space-between;
+    float: left;
+    flex: 0 0 31.3%;
+    margin: 1%;
+}
+
+.flex-item:last-child {
+    flex: 0 0 31.3%;
+    justify-content: center;
+ }
+
+/* Mobile Styles */
+@media only screen and (max-width: 768px) {
+    .posts-container {
+        display: flex;
+        flex-direction: column;
+	    width: 100%;
+        justify-content: center;
+    }
+}
+
+/*--------- FORMS SETTINGS--------*/
+
+.post-edit {
+    display: flex;
+    width: 25%;
+    text-align: center;
+    justify-content: center;
+    margin: 1% auto;
+}
+
+.post-edit a {
+    flex: 1;
+}
+
+.flex-table {
+    flex: 1;
+    flex-basis: 300px;
+}
+
+#id_content {
+    width: 80%;
+}
+
+button {
+    display: flex;
+    margin: 0 auto;
+}
+
+
+/*--------- IMAGE SETTINGS--------*/
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.image-container img {
+    display:inline-block;
+    margin-top: 80px;
+}
+
+
+/*--------- WELCOME PAGE / JUMBOTRON SETTINGS--------*/
+.jumbotron {
+    width: 80%;
+	margin: 2% auto;
+    background-color: #1f6ebc;
+    color: white;
+}
+
+.welcome-banner {
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	width: 70%;
+}
+
+.users {
+	display: inline-flex;
+	margin: auto 20px;
+	flex: 1;
+	padding: 0;
+	text-align: center;
+}
+.users li {
+	list-style: none;
+	margin: 10px auto;
+	text-align: center;
+}
+
+h1, h2, h3, h4, h5, p {
+	text-align: center;
+	font-family: 'Montserrat', sans-serif;
+}
+
+
+/*--------- FOOTER SETTINGS--------*/
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+	left: 0;
+	right: 0;
+	/* center all inline content */
+	text-align: center;
+    margin: 0 auto;
+    padding-right: 10px;
+    padding-left: 10px;
+	clear: both;
+	background-color: white;
+}
+
+.page-footer h5 {
+	height: 100%;
+	text-align: center;
+	margin: 1% auto;
+	font-family: "Courier New", Courier, monospace;
+}

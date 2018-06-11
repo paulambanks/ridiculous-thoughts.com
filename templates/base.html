@@ -1,0 +1,108 @@
+<!-- templates/base.html -->
+<!--This is a generic base template for all pages-->
+
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+
+    <head>
+        <!-- Basic Page Needs
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <meta charset="utf-8">
+        <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- Mobile Specific Metas
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!-- FONTS
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Montserrat:500" rel="stylesheet">
+        <!-- CSS
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+        <link rel="stylesheet" href="{% static 'css/static.css' %}" type="text/css">
+
+    </head>
+
+    <body>
+
+        <div id="wrapper"><!-- Flex box container -->
+
+        <!-- HEADER // NAVIGATION
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+            <header class="nav-down"><!-- Hidden header with JS -->
+
+                <nav class="navigation">
+                    <a href="{% url 'website:posts_list' %}" class="logo">12 FITNESS</a>
+                    <a href="#" class="toggle"><i class="fas fa-bars"></i></a>
+
+                    {% if user.is_authenticated and request.user.is_staff%}<!-- float this right-->
+
+                        <div class="nav-items right"><!-- ADMIN VIEW-->
+                            <a class="nav-link" href="{% url 'website:post_new' %}" title="New Post">
+                                <i class="fas fa-plus"></i></a>
+                            <a class="nav-link" href="{% url 'website:post_draft_list' %}" title="Drafts">
+                                <i class="far fa-edit"></i></a>
+                            <a class="nav-link" href="{% url 'logout' %}" title="Logout">
+                                <i class="fas fa-sign-out-alt"></i></a>
+                        </div>
+
+                    {% elif user.is_authenticated %}
+
+                        <div class="nav-items right"><!-- USER VIEW-->
+                            <a class="nav-link" href="#">MY FITNESS</a>
+                            <a class="nav-link" href="#">VIDEOS</a>
+                            <a class="nav-link" href="#">MY TRAINER</a>
+                            <a class="nav-link" href="{% url 'logout' %}" title="Logout">
+                            <i class="fas fa-sign-out-alt"></i></a>
+                        </div>
+
+                    {% else %}
+
+                        <div class="nav-items right"><!-- PUBLIC VIEW-->
+                            <a class="nav-link" href="{% url 'login' %}" title="Login">
+                                <i class="fas fa-sign-in-alt"></i></a>
+                            <a class="nav-link" href="{% url 'users:signup' %}" title="Register">
+                                <i class="fas fa-user-plus"></i></a>
+                        </div>
+
+                    {% endif %}
+
+                </nav>
+
+            </header>
+
+            <!-- MAIN PAGE CONTENT
+            –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+            <main>
+                <div class="image-container"> <!-- Picture -->
+                    <img src="/static/12fitnessbackground.jpg" alt="Picture of Mitch" />
+                </div>
+
+                <div class="page-content">
+                    {% block content %}
+                    {% endblock %}
+                </div>
+
+            </main>
+
+        </div>
+
+        <!-- FOOTER
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <footer class="page-footer">
+            <h5>&copy; 2018 Powered by Paula</h5>
+        </footer>
+
+
+        <!-- JAVASCRIPT
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="{% static 'JavaScript/static.js' %}" type="text/javascript"></script>
+
+    </body>
+
+</html>

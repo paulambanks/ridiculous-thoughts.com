@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+    {% block content %}
+
+        <main class="posts">
+            {% for post in posts %}
+
+            {% if user.is_authenticated and request.user == post.author %}
+                <article class="post">
+
+                    <h5><i class="far fa-clock"></i> Post by {{ author }} {{ post.created }}</h5>
+                    <h2><a href="{% url 'website:post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+                    <p>{{ post.content|linebreaksbr }}</p>
+
+                </article>
+            {% endif %}
+
+            {% endfor %}
+
+        </main>
+
+    {% endblock %}

@@ -1,0 +1,29 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+    {% block content %}
+
+        <div class="jumbotron">
+            <div class="welcome-banner">
+                <h1>Hi!</h1>
+
+                <ul class="users">
+                {% if user.is_authenticated %}
+                    Hi {{ user.username }}
+
+                {% else %}
+                    <li><a href="{% url 'login' %}">login</a></li>
+                    <li><a href="{% url 'users:signup' %}">Register an account</a></li>
+
+                {% endif %}
+                </ul>
+
+            </div>
+
+        </div>
+
+
+
+{% endblock %}

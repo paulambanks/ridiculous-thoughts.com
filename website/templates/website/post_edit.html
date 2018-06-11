@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+    {% block content %}
+
+        <div id="posts">
+            <h2>EDIT POST</h2>
+        </div>
+
+        <article class="flex-table">
+
+            <form method="POST" class="post-form">
+
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="save btn btn-default">Save</button>
+
+            </form>
+        </article>
+
+    {% endblock %}
