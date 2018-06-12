@@ -1,6 +1,7 @@
 /*--------- MAIN SETTINGS--------*/
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 1em;
 }
 
 body {
@@ -10,7 +11,7 @@ body {
     box-sizing: border-box;
     position: relative;
     font-family: 'Archivo Black', sans-serif;
-    font-size: 100%;
+    font-size: 1em;
 	line-height: 1em;
 }
 
@@ -32,6 +33,7 @@ body {
   body {
       background-color: #F09A9D; /* Red */
   }
+
   #wrapper {
       max-width: 380px;
       box-sizing: border-box;
@@ -65,15 +67,13 @@ header {
     top: 0;
 	left: 0;
 	right: 0;
-    /*width: 100%;*/
-	height: 72px;
 	margin: 0 auto;  /*make the menu center-aligned*/
     padding-right: 10px;
     padding-left: 10px;
     position: fixed;
 	transition: top 0.2s ease-in-out;
 	max-width: 1200px;
-	background-color: white;
+	/*background-color: white;*/
 }
 
 /* Tablet Styles */
@@ -139,7 +139,7 @@ header {
     width: 10em;
     text-align: end;
     color: black;
-    /*vertical-align: center;*/
+    vertical-align: center;
 }
 
 @media (min-width: 400px) {
@@ -213,10 +213,15 @@ header {
     width: 100%;
 }
 
+.single-post {
+    width: 100%;
+}
+
 .posts-container {
     display: flex;
 	flex-wrap: wrap;
     margin: 0 auto;
+    width: 100%;
 	height: 100%;
     justify-content: center;
 }
@@ -227,12 +232,12 @@ header {
     border: dashed gray;
     justify-content: space-between;
     float: left;
-    flex: 0 0 31.3%;
+    flex: 0 1 31.3%;
     margin: 1%;
 }
 
 .flex-item:last-child {
-    flex: 0 0 31.3%;
+    flex: 0 1 31.3%;
     justify-content: center;
  }
 
@@ -281,18 +286,22 @@ button {
     display: flex;
     justify-content: center;
     width: 100%;
+
 }
 
 .image-container img {
     display:inline-block;
     margin-top: 80px;
+    object-fit: cover;
+    object-position: 100%;
+    width: 100%;
 }
 
 
 /*--------- WELCOME PAGE / JUMBOTRON SETTINGS--------*/
 .jumbotron {
     width: 80%;
-	margin: 2% auto;
+	margin: 1% auto;
     background-color: #1f6ebc;
     color: white;
 }

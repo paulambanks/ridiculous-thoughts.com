@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
     {% block content %}
 
@@ -8,15 +9,17 @@
             <h2>EDIT POST</h2>
         </div>
 
-        <article class="flex-table">
+        <article class="single-post">
 
-            <form method="POST" class="post-form">
+            <form method="POST" class="post-table">
 
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="save btn btn-default">Save</button>
+                <a href='{% url 'website:posts_list' %} ' class='btn btn-default'>Cancel</a>
 
             </form>
+
         </article>
 
     {% endblock %}

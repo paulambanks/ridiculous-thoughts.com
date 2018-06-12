@@ -4,21 +4,53 @@
 
     {% block content %}
 
-        <main class="posts">
-            {% for post in posts %}
+        <div id="posts">
+            <h2>ALL DRAFTS</h2>
+        </div>
+
+        <div class="posts-container">
+        {% for post in posts %}
 
             {% if user.is_authenticated and request.user == post.author %}
-                <article class="post">
 
-                    <h5><i class="far fa-clock"></i> Post by {{ author }} {{ post.created }}</h5>
-                    <h2><a href="{% url 'website:post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
-                    <p>{{ post.content|linebreaksbr }}</p>
+            <article class="flex-item">
 
-                </article>
+                <h1><a href="{% url 'website:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                <h5><i class="far fa-clock"></i> Post by {{ author }} {{ post.created }}</h5>
+
+                <p>Tagged under {{ post.tags.all | join:', '   }} </p>
+                <p>{{ post.content | linebreaksbr | truncatechars:255 }}</p>
+
+            </article>
+
             {% endif %}
 
-            {% endfor %}
+        {% endfor %}
 
-        </main>
+        <div class="pagination">
 
+            {% if posts.has_other_pages %}
+              <ul class="pagination-items">
+                {% if posts.has_previous %}
+                  <li><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                  <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in posts.paginator.page_range %}
+                  {% if posts.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                  {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% if posts.has_next %}
+                  <li><a href="?page={{ posts.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                  <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+              </ul>
+            {% endif %}
+        </div>
+
+        </div>
     {% endblock %}

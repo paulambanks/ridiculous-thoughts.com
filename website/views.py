@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -38,11 +39,18 @@ def posts_list(request):
 @login_required
 def post_draft_list(request):
     template = 'website/post_draft_list.html'
-    posts = Post.objects.filter(status='Draft').order_by('created')
-    context = {
-        'posts': list(posts),
-    }
-    return render(request, template, context)
+    post_list = Post.objects.filter(status='Draft').order_by('created')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(post_list, 6)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
+    return render(request, template, {'posts': posts})
 
 
 def post_detail(request, pk):
@@ -58,10 +66,13 @@ def post_new(request):
 
         try:
             if form.is_valid():
-                post = form.save(commit=False)
-                post.author = request.user
-                post.save()
-                return redirect('website:post_detail', pk=post.pk)
+                if 'cancel' in request.POST:
+                    return HttpResponseRedirect(get_success_url())
+                else:
+                    post = form.save(commit=False)
+                    post.author = request.user
+                    post.save()
+                    return redirect('website:post_detail', pk=post.pk)
 
         except Exception as e:
             messages.warning(request, 'Post Failed To Save. Error: {}".format(e)')
@@ -75,16 +86,25 @@ def post_new(request):
     return render(request, template, context)
 
 
+def get_success_url():
+    return reverse('website:posts_list')
+
+
 @login_required
 def post_edit(request, pk):  # also post update
     template = 'website/post_edit.html'
     post = get_object_or_404(Post, pk=pk)
 
+    # Only author of the post can edit the post
     if request.user == post.author:
+        # If this is a POST request then process the Form data
         if request.method == "POST":
+
+            # Create a form instance and populate it with data from the request (binding):
             form = PostForm(request.POST, instance=post)
 
             try:
+                # Check if the form is valid:
                 if form.is_valid():
                     post = form.save(commit=False)
                     post.author = request.user
@@ -95,6 +115,7 @@ def post_edit(request, pk):  # also post update
             except Exception as e:
                 messages.warning(request, 'Your Post Was Not Saved Due To An Error: {}.format(e)')
 
+        # If this is a GET (or any other method) create the default form.
         else:
             form = PostForm(instance=post)
 
@@ -109,16 +130,38 @@ def post_edit(request, pk):  # also post update
 @login_required
 def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    post.publish()
-    return HttpResponseRedirect(reverse('website:post_list'))
+    template = 'website/confirmation_publish.html'
+
+    if request.method == "POST":
+        post.publish()
+        messages.success(request, "This post has been published.")
+        return HttpResponseRedirect(reverse('website:posts_list'))
+
+    if request.user != post.author:
+        raise PermissionDenied
+
+    context = {
+        "post": post
+    }
+
+    return render(request, template, context)
 
 
 @login_required
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    if request.user == post.author:
+    template = 'website/confirmation_delete.html'
+
+    if request.method == "POST":
         post.delete()
-        return HttpResponseRedirect(reverse('website:post_list'))
-    else:
+        messages.success(request, "This has been deleted.")
+        return HttpResponseRedirect(reverse('website:posts_list'))
+
+    if request.user != post.author:
         raise PermissionDenied
 
+    context = {
+        "post": post
+    }
+
+    return render(request, template, context)

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+
+{% block head_title %}
+{{ post.title }} | {{ block.super }}
+{% endblock head_title %}
+
+
+
+{% block content %}
+
+    <div class='col-sm-6 col-sm-offset-3'>
+      <h1>Confirm Publish</h1>
+
+
+                <form method="POST" action="."> {% csrf_token %}
+                    <p>Are you sure you want to publish: "{{ post.content }}"?</p>
+
+                    <input type='submit' value='Confirm' class='btn btn-warning'>
+                    <a href='{% url 'website:posts_list'  %} ' class='btn btn-default'>Cancel</a>
+                </form>
+            </div>
+
+
+
+            <hr/>
+    </div>
+
+
+{% endblock content %}

@@ -40,6 +40,6 @@ function hasScrolled() {
 }
 
 
-$(".toggle").on("click", function() {
-  $(".toggle").parent().toggleClass('active');
+$('.toggle').on("click", function() {
+  $('.toggle').parent().toggleClass('active');
 });
