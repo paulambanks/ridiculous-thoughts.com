@@ -9,19 +9,20 @@
 {{ post.title }} | {{ block.super }}
 {% endblock head_title %}
 
-
-
 {% block content %}
 
-    <div class='col-sm-6 col-sm-offset-3'>
+    <div class='col-md-12'>
       <h1>Confirm Delete</h1>
 
 
                 <form method="POST" action="."> {% csrf_token %}
-                    <p>A re you sure you want to delete: "{{ post.content }}"?</p>
+                    <p>Are you sure you want to delete: </p>
+                    <p>"{{ post.content | linebreaksbr | truncatechars:200 }}" ?</p>
 
-                    <input type='submit' value='Confirm' class='btn btn-warning'>
-                    <a href='{% url 'website:post_detail' pk=post.pk  %} ' class='btn btn-default'>Cancel</a>
+                    <div class="buttons">
+                        <input type='submit' value='Confirm' class='btn btn-warning'>
+                        <a href='{% url 'website:post_detail' pk=post.pk  %} ' class='btn btn-default'>Cancel</a>
+                    </div>
                 </form>
             </div>
 

@@ -3,33 +3,40 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-    {% block content %}
+{% block content %}
 
-        <article class="single-post">
+    <div class="row">
 
-            {% if user.is_authenticated and request.user == post.author %}
+        <div class="col-md-12">
 
-            <form class="post-edit">
-                {%  if post.status == "Draft" %}
+        {% if user.is_authenticated and request.user == post.author %}
 
-                    <a class="btn btn-default" href="{% url 'website:post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt"></i></a>
-                    <a class="btn btn-default" href="{% url 'website:post_remove' pk=post.pk %}"><i class="far fa-trash-alt"></i></a>
-                    <a class="btn btn-default" href="{% url 'website:post_publish' pk=post.pk %}">Publish</a>
+        <form class="buttons">
+            {%  if post.status == "Draft" %}
 
-                {% else %}
+                <a class="btn btn-default" href="{% url 'website:post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt"></i></a>
+                <a class="btn btn-default" href="{% url 'website:post_remove' pk=post.pk %}"><i class="far fa-trash-alt"></i></a>
+                <a class="btn btn-default" href="{% url 'website:post_publish' pk=post.pk %}">Publish</a>
 
-                    <a class="btn btn-default" href="{% url 'website:post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt"></i></a>
-                    <a class="btn btn-default" href="{% url 'website:post_remove' pk=post.pk %}"><i class="far fa-trash-alt"></i></a>
+            {% else %}
 
-                {% endif %}
-            </form>
+                <a class="btn btn-default" href="{% url 'website:post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt"></i></a>
+                <a class="btn btn-default" href="{% url 'website:post_remove' pk=post.pk %}"><i class="far fa-trash-alt"></i></a>
 
-             {% endif %}
+            {% endif %}
+        </form>
 
-                <h5><i class="far fa-clock"></i> Post by {{ post.author }} {{ post.created }}</h5>
-                <h1>{{ post.title }}</h1>
-                <p>{{ post.content|linebreaksbr }}</p>
+         {% endif %}
 
-        </article>
+            <h3>{{ post.title }}</h3>
 
-    {% endblock %}
+            <h6><i class="far fa-clock"></i> {{ post.created }}</h6>
+            <p>TAGS {{ post.tags.all | join:', '   }} </p>
+
+            <p>{{ post.content|linebreaksbr }}</p>
+
+        </div>
+
+    </div>
+
+{% endblock %}
