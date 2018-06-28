@@ -33,11 +33,10 @@
 
                 <ul class="users">
                     {% if user.is_authenticated %}
-                        Hi {{ user.username }}
+                        Hi {{ user.first_name }}
 
                     {% else %}
                         <li><a href="{% url 'login' %}">Login</a></li>
-                        <li><a href="{% url 'users:signup' %}">Sign Up</a></li>
 
                     {% endif %}
                 </ul>

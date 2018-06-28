@@ -14,22 +14,18 @@
     <div class='col-md-12'>
       <h1>Confirm Delete</h1>
 
+        <form method="POST" action="."> {% csrf_token %}
+            <p>Are you sure you want to delete: </p>
+            <p>"{{ post.content | linebreaksbr | truncatechars:200 }}" ?</p>
 
-                <form method="POST" action="."> {% csrf_token %}
-                    <p>Are you sure you want to delete: </p>
-                    <p>"{{ post.content | linebreaksbr | truncatechars:200 }}" ?</p>
-
-                    <div class="buttons">
-                        <input type='submit' value='Confirm' class='btn btn-warning'>
-                        <a href='{% url 'website:post_detail' pk=post.pk  %} ' class='btn btn-default'>Cancel</a>
-                    </div>
-                </form>
+            <div class="buttons">
+                <input type='submit' value='Confirm' class='btn btn-warning'>
+                <a href='{% url   %} ' class='btn btn-default'>Cancel</a>
             </div>
-
-
-
-            <hr/>
+        </form>
     </div>
+
+    <hr/>
 
 
 {% endblock content %}
