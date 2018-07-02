@@ -200,6 +200,9 @@ label[for=id_tags] {
     flex-direction: column;
 }
 
+.post-text > p {
+
+}
 /*--------- IMAGE SETTINGS--------*/
 
 .image-container {
@@ -243,6 +246,8 @@ h6 {
 
 p {
     font-size: 0.875em;
+    margin: 0;
+    padding: 0;
 }
 
 /*--------- FOOTER SETTINGS--------*/

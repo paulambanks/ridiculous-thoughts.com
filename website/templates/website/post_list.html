@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="post-text">
-                    <p>{{ post.content | linebreaksbr | truncatechars:200 }}</p>
+                    <p>{{ post.content | safe | truncatechars_html:100 }}</p>
                 </div>
 
                 <div class="fixed-bottom">

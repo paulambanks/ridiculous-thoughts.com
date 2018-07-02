@@ -24,4 +24,5 @@ urlpatterns = [
     path('users/', include('django.contrib.auth.urls')),
     path('users/', include('authtools.urls')),
     path('website/', include('website.urls')),
+    path('tinymce/', include('tinymce.urls')),
 ]

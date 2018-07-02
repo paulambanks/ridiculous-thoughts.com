@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.template.defaultfilters import slugify
+from tinymce import HTMLField
 
 
 class Tag(models.Model):
@@ -19,7 +20,7 @@ class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
-    content = models.TextField()
+    content = HTMLField('Content')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, default='Draft', choices=STATUS_CHOICES)

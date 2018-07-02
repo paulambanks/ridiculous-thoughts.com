@@ -21,7 +21,7 @@ class CustomUserAdmin(UserAdmin):
                 " The user will be emailed a link allowing them to login to"
                 " the site and set their password."
             ),
-            'fields': ('email', 'first_name', 'last_name'),
+            'fields': ('email', 'username', 'first_name', 'last_name'),
         }),
         ('Password', {
             'description': "Optionally, you may set the user's password here.",
@@ -52,7 +52,7 @@ class CustomUserAdmin(UserAdmin):
             )
     form = CustomUserChangeForm
     model = CustomUser
-    list_display = ('email', 'first_name', 'last_name',)
+    list_display = ('email', 'username', 'first_name', 'last_name',)
 
 
 admin.site.register(CustomUser, CustomUserAdmin)
