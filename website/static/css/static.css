@@ -1,19 +1,92 @@
-/*--------- MAIN SETTINGS--------*/
+/*--------- MAIN PAGE SETTINGS--------*/
 * {
     box-sizing: border-box;
-    font-size: 1em;
+    font-size: 20px;
 }
 
 body {
     max-width: 980px;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
     padding-bottom: 5%;
     margin: 0 auto;
     width: 100%;
+    font-family: 'Lora', 'Times New Roman', serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 800;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.2;
+}
+
+h3, h6 {
+    text-align: center;
+}
+
+p {
+    line-height: 1.5;
+}
+
+/*--------- GENERAL HEADER SETTINGS--------*/
+
+header {
+    box-sizing: border-box;
+    top: 0;
+	left: 0;
+	right: 0;
+    margin: 0 auto;
+    padding-right: 10px;
+    padding-left: 10px;
+    position: fixed;
+	transition: top 0.2s ease-in-out;
+	max-width: 1200px;
+    z-index: 2;
 }
 
 
+/*--------- NAVIGATION SETTINGS--------*/
+
+.nav-up {
+    top: -80px;
+}
+
+#mainNav {
+    background: #e2e2e2;
+    margin-bottom: 40px;
+    padding: 0;
+}
+
+#mainNav .navbar-toggler {
+    font-weight: 800;
+    text-transform: uppercase;
+    color: gray;
+}
+
+#mainNav .navbar-brand {
+    font-weight: 800;
+    color: white;
+}
+
+#mainNav .navbar-brand:hover {
+    color: rgba(0,0,0,.5);
+    background: #ddd;
+}
+
+#mainNav .nav-item .nav-link {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: normal;
+}
+
+.navigation .nav-item .nav-link:hover,
+.navigation .nav-item .nav-link:active {
+      background: #ddd;
+}
 
 
 /*--------- MOBILE SETTINGS--------*/
@@ -29,26 +102,6 @@ body {
     }
 }
 
-/*--------- GENERAL HEADER SETTINGS--------*/
-
-header {
-    box-sizing: border-box;
-    top: 0;
-	left: 0;
-	right: 0;
-	margin: 0 auto;  /*make the menu center-aligned*/
-    padding-right: 10px;
-    padding-left: 10px;
-    position: fixed;
-	transition: top 0.2s ease-in-out;
-	max-width: 1200px;
-    z-index: 2;
-}
-
-.container-fluid {
-    z-index: 1;
-}
-
 /* Tablet Styles */
 @media only screen and (min-width: 401px) and (max-width: 960px) {
   header {
@@ -59,55 +112,9 @@ header {
 /* Mobile Styles */
 @media only screen and (max-width: 400px) {
   header {
-      margin: 0 auto;
-      padding-left: 10px;
-      padding-right: 10px;
+      margin-right: auto;
+      margin-left: auto;
   }
-}
-/*--------- NAVIGATION SETTINGS--------*/
-
-.nav-up {
-    top: -80px;
-}
-
-.navigation {
-    background: #e2e2e2;
-    /*max-width: 980px;*/
-    margin: 0 auto;
-}
-
-.navigation .navbar-toggler {
-    font-size: 12px;
-    font-weight: 800;
-    padding: 13px;
-    text-transform: uppercase;
-    color: gray;
-}
-
-.navigation .navbar-brand {
-    font-weight: 800;
-    color: white;
-}
-
-.navigation .logo:hover {
-    background: #ddd;
-}
-
-.navigation .nav-link {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 1em;
-    font-size: 12px;
-    font-weight: 800;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.navigation .nav-link:hover,
-.navigation .nav-link:active {
-      background: #ddd;
 }
 
 @media only screen and (min-width: 992px) {
@@ -128,14 +135,24 @@ header {
         background-color: #212529;
         opacity: 0.5;
     }
-    .navbar-brand {
-        padding: 10px 20px;
+    .navbar-light .navbar-nav .nav-link {
         color: white;
     }
-    .navbar-light .navbar-nav .nav-link {
-    color: white;
-    }
 
+}
+@media only screen and (max-width: 400px) {
+    .navigation .navbar-brand {
+        font-size: 20px;
+        margin-left: 10px;
+        color: gray;
+    }
+}
+
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+    .navigation .navbar-brand {
+        margin-left: 10px;
+        color: gray;
+    }
 }
 
 /*--------- BOOTSTRAP PAGINATION SETTINGS--------*/
@@ -146,22 +163,26 @@ header {
 
 /*--------- PAGE CONTENT SETTINGS--------*/
 
-
-.container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+.container-fluid {
+    z-index: 1;
+}
+.row {
+    margin-top: 80px;
 }
 
-.posts {
+.single-post {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     text-align: center;
 }
 
-.row-eq-height {
-    display: flex;
-    flex-wrap: wrap;
+.post-text {
+    margin-bottom: 15px;
+}
+
+.post-tags {
     text-align: center;
 }
 
@@ -169,6 +190,17 @@ header {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
     position: relative;
+}
+.col-md-12 {
+    text-align: center;
+}
+
+form > ul {
+    list-style: none;
+}
+
+form > ul > li {
+    font-size: 12px;
 }
 
 label[for=id_title],
@@ -182,6 +214,11 @@ label[for=id_tags] {
     width: 80%;
 }
 
+#id_tags {
+    width: 25%;
+    text-align: center;
+}
+
 .fixed-bottom {
     position: absolute;
     right: 0;
@@ -192,21 +229,31 @@ label[for=id_tags] {
 }
 /*--------- FORMS SETTINGS--------*/
 
+form {
+    text-align: center;
+}
+
 .buttons {
     text-align: center;
 }
+body > main > div.container-fluid > div > div:nth-child(2) > form {
+    text-align: left;
+}
+
+.btn .btn-primary .left {
+    text-align: left;
+}
+
 .post-edit-form {
     display: flex;
     flex-direction: column;
 }
 
-.post-text > p {
 
-}
 /*--------- IMAGE SETTINGS--------*/
 
 .image-container {
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
     width: 100%;
 }
@@ -214,7 +261,7 @@ label[for=id_tags] {
 .image-container img {
     display:inline-block;
     margin-top: 80px;
-    object-fit: cover;
+    object-fit: contain;
     object-position: 100%;
     width: 100%;
 }
@@ -223,32 +270,8 @@ label[for=id_tags] {
 /*--------- WELCOME PAGE / JUMBOTRON SETTINGS--------*/
 
 
-.users {
-	margin: 0 auto;
-	padding: 0;
-	text-align: center;
-    font-family: "Courier New", Courier, monospace;
-}
-.users li {
-	list-style: none;
-	margin: 10px auto;
-	text-align: center;
-}
 
-h1, h2, h3, h4, h5, h6, p {
-	text-align: center;
-	font-family: "Courier New", Courier, monospace;
-}
 
-h6 {
-    font-size: 1em;
-}
-
-p {
-    font-size: 0.875em;
-    margin: 0;
-    padding: 0;
-}
 
 /*--------- FOOTER SETTINGS--------*/
 footer {

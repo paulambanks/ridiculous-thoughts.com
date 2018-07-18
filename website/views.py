@@ -2,13 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, Http404
+from django.core.mail import send_mail, BadHeaderError
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, ContactForm
 
 # Create your views here.
 
@@ -18,6 +18,31 @@ from .forms import PostForm
 def home(request):
     """The home page introduces user to the blog and allows for registration or login"""
     return render(request, 'home.html')
+
+
+def send_email(request):
+    template = 'website/email.html'
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = request.user.email
+            message = form.cleaned_data['message']
+
+            try:
+                send_mail(subject, message, from_email, ['bankspaula576@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+
+            return redirect('website:success')
+
+    return render(request, template, {'form': form})
+
+
+def email_success(request):
+    return HttpResponse('Success! Thank you for your message.')
 
 
 def posts_list(request):

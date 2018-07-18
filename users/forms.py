@@ -7,8 +7,6 @@ class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(max_length=200, help_text='Required')
     first_name = forms.CharField(max_length=20, help_text='Required')
     last_name = forms.CharField(max_length=20, help_text='Required')
-
-
     """
     A UserCreationForm with optional password inputs.
     """

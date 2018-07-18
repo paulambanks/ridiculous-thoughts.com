@@ -18,3 +18,8 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'content', 'tags',)
+
+
+class ContactForm(forms.Form):
+    subject = forms.CharField(required=True)
+    message = forms.CharField(widget=forms.Textarea, required=True)
