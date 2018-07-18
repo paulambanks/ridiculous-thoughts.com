@@ -5,21 +5,24 @@
 
     {% block content %}
 
-        <main class="posts">
-            <h2>Login</h2>
+        <div class="row">
 
-            <form method="post">
+            <div class="col-md-12">
+                <h3>Login</h3>
 
-                {% csrf_token %}
-                {{ form.as_p }}
+                <form method="POST">
 
-                <div class="buttons">
-                    <button class="btn btn-primary" type="submit">Login</button>
-                    <a href='{% url 'users:password_reset' %} ' class='btn btn-default'>RESET PASSWORD</a>
-                </div>
+                    {% csrf_token %}
+                    {{ form.as_p }}
 
-            </form>
+                    <div class="buttons">
+                        <button class="btn btn-primary" type="submit">Login</button>
+                        <a href='{% url 'users:password_reset' %} ' class='btn btn-default'>Forgot my password</a>
+                    </div>
 
-        </main>
+                </form>
+            </div>
+
+        </div>
 
     {% endblock %}

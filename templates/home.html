@@ -1,49 +1,29 @@
 <!-- templates/home.html -->
 {% extends 'base.html' %}
 
-{% block title %}Home{% endblock %}
-
     {% block content %}
 
-        <div class="row">
-
-            <div class="col-lg-6 col-md-10 mx-auto">
-
-                <h1 id="welcome-to-12-fitness">Welcome to 12 Fitness!</h1>
-
-                <p><strong>Here is a little about your trainer:</strong></p>
-
-                <p>From a captain &amp; leader on and off the field, Mitchell was an every sport star
-                growing up! Now a retired CFL, CIS, MFL &amp; Team Canada Football QB/WR/DB/PR with
-                a BSc in Kiniesiology, Mitchell brings knowledge from trainers and coaches from
-                across the country. He has been in the fitness industry for over 15 years and is
-                certified through CanFitPro as a Specialized Personal Trainer, Precision
-                Nutrition, TRX Coach, Crossfit Level 1, Olympic Lifting and Life Coaching.
-                Mitchell is currently in Calgary working for The Bay Club World Health as an
-                Elite Trainer.</p>
-
-            </div>
-
-            <div class="col-lg-6 col-md-10 mx-auto">
-
-                <h1>Join us!</h1>
-
-                <p>Working with Mitch you will learn and become immersed into the <strong>12</strong> components
-                of Fitness!</p>
-
-                <ul class="users">
-                    {% if user.is_authenticated %}
-                        Hi {{ user.first_name }}
-
-                    {% else %}
-                        <li><a href="{% url 'login' %}">Login</a></li>
-
-                    {% endif %}
-                </ul>
-
-            </div>
-
+        <div class="image-container"> <!-- Picture -->
+            <img src="/static/mountains.jpg" alt="Picture of Mitch" />
         </div>
+
+        <div class="col-md-12">
+
+            <h1 id="welcome-to-ridiculousthoughts">Welcome to Ridiculous Thoughts!</h1>
+
+            <form class="buttons left">
+
+                {% if user.is_authenticated %}
+                    Hi {{ user.first_name }}
+
+                {% else %}
+                    <p>If you would like to share your thoughts feel free to contact the Admin or Login to your profile </p>
+                    <a class="btn btn-primary left" href="{% url 'login' %}">Login</a>
+
+                {% endif %}
+            </form>
+        </div>
+
 
 {% endblock %}
 
