@@ -7,7 +7,7 @@
 
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-lg-8 col-md-10 mx-auto">
 
         {% if user.is_authenticated and request.user == post.author %}
 
@@ -26,14 +26,18 @@
             {% endif %}
         </form>
 
-         {% endif %}
+        {% endif %}
 
             <h3>{{ post.title }}</h3>
+            <h6><i class="far fa-clock"></i> Posted on {{ post.created }}</h6>
 
-            <h6><i class="far fa-clock"></i> {{ post.created }}</h6>
-            <p>TAGS {{ post.tags.all | join:', '   }} </p>
+            <div class="post-tags">
+                <p> Tags: {{ post.tags.all | join:', '   }} </p>
+            </div>
 
-            <p>{{ post.content | safe }}</p>
+            <div class="post-text">
+                <p>{{ post.content | safe }}</p>
+            </div>
 
         </div>
 

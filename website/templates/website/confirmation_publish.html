@@ -4,31 +4,27 @@
 
 {% load crispy_forms_tags %}
 
-
-{% block head_title %}
-{{ post.title }} | {{ block.super }}
-{% endblock head_title %}
-
 {% block content %}
 
-    <div class='col-md-12'>
-      <h1>Confirm Publish</h1>
+    <div class="row">
 
+        <div class='col-md-12'>
+            <h3>Confirm Publish</h3>
 
                 <form method="POST" action="."> {% csrf_token %}
-                    <p>Are you sure you want to publish: </p>
-                    <p>"{{ post.content | linebreaksbr | truncatechars:200 }}" ?</p>
+                    <p>Are you sure you want to publish draft: </p>
+
+                    <h6>{{ post.title }}</h6>
+                    <p>{{ post.content | safe | truncatechars:200 }}</p>
 
                     <div class="buttons">
                         <input type='submit' value='Confirm' class='btn btn-warning'>
                         <a href='{% url 'website:posts_list'  %} ' class='btn btn-default'>Cancel</a>
                     </div>
                 </form>
-            </div>
+        </div>
 
-
-
-            <hr/>
+        <hr/>
     </div>
 
 

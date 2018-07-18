@@ -4,31 +4,34 @@
 
 {% block content %}
 
-    <div class="row-eq-height">
+    <div class="row">
 
-        {% for post in posts %}
+        <div class="col-md-12">
 
-            <div class="col-md-4">
+            {% for post in posts %}
 
-                <h3>{{ post.title }}</h3>
-                <h6><i class="far fa-clock"></i> Created on {{ post.created }}</h6>
+                <div class="single-post row-eq-height">
 
-                <div class="post-tags">
-                    <p>TAGS {{ post.tags.all | join:', '   }} </p>
+                    <h3>{{ post.title }}</h3>
+                    <h6><i class="far fa-clock"></i> Created on {{ post.created }}</h6>
+
+                    <div class="post-tags">
+                        <p> Tags: {{ post.tags.all | join:', '   }} </p>
+                    </div>
+
+                    <div class="post-text">
+                        <p>{{ post.content | safe | linebreaksbr | truncatechars:200 }}</p>
+                    </div>
+
+                    <form class="buttons">
+                        <a class="btn btn-secondary" href="{% url 'website:post_detail' pk=post.pk %}"
+                          role="button">View details »</a>
+                    </form>
+
                 </div>
-
-                <div class="post-text">
-                    <p>{{ post.content | safe | linebreaksbr | truncatechars:200 }}</p>
-                </div>
-
-                <div class="fixed-bottom">
-                    <a class="btn btn-secondary" href="{% url 'website:post_detail' pk=post.pk %}"
-                      role="button">View details »</a>
-                </div>
-
-            </div>
 
         {% endfor %}
+        </div>
     </div>
 
     <hr>
