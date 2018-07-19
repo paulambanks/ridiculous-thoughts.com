@@ -32,6 +32,7 @@ def send_email(request):
             message = form.cleaned_data['message']
 
             try:
+                message = "User {} has sent you a message\n".format(from_email) + message
                 send_mail(subject, message, from_email, ['bankspaula576@gmail.com'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
