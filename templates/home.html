@@ -4,7 +4,7 @@
     {% block content %}
 
         <div class="image-container"> <!-- Picture -->
-            <img src="/static/mountains.jpg" alt="Picture of Mitch" />
+            <img src="/static/mountains.jpg" alt="Picture of Mountains" />
         </div>
 
         <div class="col-md-12">
@@ -18,7 +18,10 @@
 
                 {% else %}
                     <p>If you would like to share your thoughts feel free to contact the Admin or Login to your profile </p>
-                    <a class="btn btn-primary left" href="{% url 'login' %}">Login</a>
+                     <div class="buttons">
+                        <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+                        <a href='{% url 'website:email'  %} ' class='btn btn-info'>Contact</a>
+                    </div>
 
                 {% endif %}
             </form>

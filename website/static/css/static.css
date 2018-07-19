@@ -253,11 +253,26 @@ body > main > div.container-fluid > div > div:nth-child(2) > form {
 /*--------- IMAGE SETTINGS--------*/
 
 .image-container {
-    /*display: flex;*/
     justify-content: center;
     width: 100%;
 }
 
+.small-image-container {
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.small-image-container img {
+    display:inline-block;
+    object-fit: contain;
+    object-position: 100%;
+    width: 100%;
+}
+
+.list-inline-item > a {
+    color: black;
+}
 .image-container img {
     display:inline-block;
     margin-top: 80px;

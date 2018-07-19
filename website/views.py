@@ -20,33 +20,13 @@ def home(request):
     return render(request, 'home.html')
 
 
-def send_email(request):
-    template = 'website/email.html'
-    if request.method == 'GET':
-        form = ContactForm()
-    else:
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            subject = form.cleaned_data['subject']
-            from_email = request.user.email
-            message = form.cleaned_data['message']
-
-            try:
-                message = "User {} has sent you a message\n".format(from_email) + message
-                send_mail(subject, message, from_email, ['bankspaula576@gmail.com'])
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
-
-            return redirect('website:success')
-
-    return render(request, template, {'form': form})
-
-
-def email_success(request):
-    return HttpResponse('Success! Thank you for your message.')
+def about(request):
+    """The page containing information about the author, including online CV and PDF download link"""
+    return render(request, 'website/about.html')
 
 
 def posts_list(request):
+    """The page with all blog posts, visible to all"""
     template = 'website/post_list.html'
     post_list = Post.objects.filter(status='Published').order_by('-created')
     page = request.GET.get('page', 1)
@@ -62,8 +42,14 @@ def posts_list(request):
     return render(request, template, {'posts': posts})
 
 
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'website/post_detail.html', {'post': post})
+
+
 @login_required
 def post_draft_list(request):
+    """The page with all unpublished yet drafts. Visible only to the admin/staff"""
     if request.user.is_staff:
         template = 'website/post_draft_list.html'
         post_list = Post.objects.filter(status='Draft').order_by('created')
@@ -82,13 +68,9 @@ def post_draft_list(request):
         raise Http404
 
 
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, 'website/post_detail.html', {'post': post})
-
-
 @login_required
 def post_new(request):
+    """Create new post is visible only for the admin/staff"""
     if request.user.is_staff:
         template = 'website/post_edit.html'
         if request.method == "POST":
@@ -118,34 +100,29 @@ def post_new(request):
         raise Http404
 
 
-def get_success_url():
-    return reverse('website:posts_list')
-
-
 @login_required
 def post_edit(request, pk):  # also post update
     if request.user.is_staff:
         template = 'website/post_edit.html'
         post = get_object_or_404(Post, pk=pk)
-        # If this is a POST request then process the Form data
-        if request.method == "POST":
 
-            # Create a form instance and populate it with data from the request (binding):
+        if request.method == "POST":
             form = PostForm(request.POST, instance=post)
 
             try:
-                # Check if the form is valid:
                 if form.is_valid():
-                    post = form.save(commit=False)
-                    post.author = request.user
-                    post.save()
-                    messages.success(request, "Your Post Was Successfully Updated")
-                    return redirect('website:post_detail', pk=post.pk)
+                    if 'cancel' in request.POST:
+                        return HttpResponseRedirect(get_success_url())
+                    else:
+                        post = form.save(commit=False)
+                        post.author = request.user
+                        post.save()
+                        messages.success(request, "Your Post Was Successfully Updated")
+                        return redirect('website:post_detail', pk=post.pk)
 
             except Exception as e:
                 messages.warning(request, 'Your Post Was Not Saved Due To An Error: {}.format(e)')
 
-        # If this is a GET (or any other method) create the default form.
         else:
             form = PostForm(instance=post)
 
@@ -157,6 +134,11 @@ def post_edit(request, pk):  # also post update
         return render(request, template, context)
     else:
         raise Http404
+
+
+def get_success_url():
+    """Return page if creating/edition of post was canceled"""
+    return reverse('website:posts_list')
 
 
 @login_required
@@ -203,3 +185,30 @@ def post_remove(request, pk):
         return render(request, template, context)
     else:
         raise Http404
+
+
+def send_email(request):
+    """Sends a message to the admin from the user"""
+    template = 'website/email.html'
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = request.user.email
+            message = form.cleaned_data['message']
+
+            try:
+                message = "User {} has sent you a message\n".format(from_email) + message
+                send_mail(subject, message, from_email, ['bankspaula576@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+
+            return redirect('website:success')
+
+    return render(request, template, {'form': form})
+
+
+def email_success(request):
+    return HttpResponse('Success! Thank you for your message.')
