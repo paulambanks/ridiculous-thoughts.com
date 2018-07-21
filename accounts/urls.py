@@ -1,7 +1,7 @@
 from django.urls import path, re_path
 from authtools import views
 
-app_name = 'users'
+app_name = 'accounts'
 
 urlpatterns = [
     path('password_reset/', views.PasswordResetView.as_view(), name='password_reset'),
