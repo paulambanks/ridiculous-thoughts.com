@@ -49,10 +49,9 @@
                                 aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fa fa-bars"></i>
                         </button>
 
-                        {% if user.is_authenticated and request.user.is_staff%}<!-- float this right-->
+                        {% if user.is_authenticated %}<!-- float this right-->
 
-
-                            <div class="collapse navbar-collapse nav-items right" id="navbarResponsive"><!-- ADMIN VIEW-->
+                            <div class="collapse navbar-collapse nav-items right" id="navbarResponsive"><!-- USER VIEW-->
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'website:post_new' %}" title="New Post">
@@ -63,24 +62,10 @@
                                             <i class="far fa-edit"></i></a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{% url 'logout' %}" title="Logout">
-                                            <i class="fas fa-sign-out-alt"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                        {% elif user.is_authenticated %}
-
-                            <div class="collapse navbar-collapse nav-items right" id="navbarResponsive"><!-- USER VIEW-->
-                                <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">MY FITNESS</a>
+                                        <a class="nav-link" href="{% url 'friends:private_posts_list' %}">MY POSTS</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">VIDEOS</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">MY TRAINER</a>
+                                        <a class="nav-link" href="{% url 'friends:friends_posts_list' %}">FRIENDS POSTS</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'website:email' %}" title="Contact">Contact us</a>

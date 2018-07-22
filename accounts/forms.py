@@ -5,6 +5,7 @@ from django import forms
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(max_length=200, help_text='Required')
+    username = forms.CharField(label='Enter Username', min_length=4, max_length=150, help_text='Required')
     first_name = forms.CharField(max_length=20, help_text='Required')
     last_name = forms.CharField(max_length=20, help_text='Required')
     """
@@ -22,11 +23,11 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = CustomUser
-        fields = ('name', 'email')
+        fields = ('email', 'username', 'first_name', 'last_name',)
 
 
 class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'first_name', 'last_name',)
+        fields = ('email', 'username', 'first_name', 'last_name',)

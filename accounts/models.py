@@ -12,7 +12,6 @@ class UserManager(BaseUserManager):
         if not email:
             raise ValueError('The given email must be set')
         email = self.normalize_email(email)
-
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -45,7 +44,7 @@ class CustomUser(AbstractUser):
     )
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']  # Email & Password are required by default.
+    REQUIRED_FIELDS = ['first_name', 'last_name']  # Email & Password are required by default.
 
     def __str__(self):
         return self.email
