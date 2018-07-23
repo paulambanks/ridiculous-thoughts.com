@@ -14,7 +14,7 @@
 
                     <h3>{{ post.title }}</h3>
                     <!-- Add link to username so posts can be filtered by the username -->
-                    <h6><i class="far fa-clock"></i> Posted on {{ post.created }} by
+                    <h6><i class="far fa-clock"></i> Updated on {{ post.updated }} by
                         <a href="{% url 'website:individual_public_post_list' post.author_id %}">{{ post.author.username }}</a></h6>
 
                     <div class="post-tags">

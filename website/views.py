@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.core.mail import send_mail, BadHeaderError
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.utils import timezone
 
 from .models import Post
 from .forms import PostForm, ContactForm
@@ -28,7 +29,7 @@ def about(request):
 def posts_list(request):
     """The page with all blog posts, visible to all"""
     template = 'website/post_list.html'
-    post_list = Post.objects.filter(status='Published', privacy='Public').order_by('-created')
+    post_list = Post.objects.filter(status='Published', privacy='Public').order_by('-updated')
     page = request.GET.get('page', 1)
 
     paginator = Paginator(post_list, 6)
@@ -45,7 +46,7 @@ def posts_list(request):
 def individual_public_post_list(request, user):
     """The page with all blog posts, visible to all"""
     template = 'website/post_list.html'
-    post_list = Post.objects.filter(author=user, status='Published', privacy='Public').order_by('-created')
+    post_list = Post.objects.filter(author=user, status='Published', privacy='Public').order_by('-updated')
     page = request.GET.get('page', 1)
 
     paginator = Paginator(post_list, 6)
@@ -75,7 +76,7 @@ def post_detail(request, pk):
 def post_draft_list(request):
     """The page with all unpublished yet drafts. Visible only to the admin/staff"""
     template = 'website/post_draft_list.html'
-    post_list = Post.objects.filter(status='Draft', author=request.user).order_by('created')
+    post_list = Post.objects.filter(status='Draft', author=request.user).order_by('-created')
 
     page = request.GET.get('page', 1)
 
@@ -92,7 +93,7 @@ def post_draft_list(request):
 
 @login_required
 def post_new(request):
-    """Create new post is visible only for the admin/staff"""
+    """Create new post is visible only for the admin and logged users"""
     template = 'website/post_edit.html'
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -104,6 +105,7 @@ def post_new(request):
                 else:
                     post = form.save(commit=False)
                     post.author = request.user
+                    post.created = timezone.now
                     post.save()
                     return redirect('website:post_detail', pk=post.pk)
 
@@ -136,6 +138,7 @@ def post_edit(request, pk):  # also post update
                     else:
                         post = form.save(commit=False)
                         post.author = request.user
+                        post.updated = timezone.now
                         post.save()
                         messages.success(request, "Your Post Was Successfully Updated")
                         return redirect('website:post_detail', pk=post.pk)

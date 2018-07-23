@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.template.defaultfilters import slugify
 from tinymce import HTMLField
+from django.utils import timezone
+from datetime import datetime
 
 
 class Tag(models.Model):
@@ -29,6 +31,7 @@ class Post(models.Model):
     content = HTMLField('Content')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    published = models.DateTimeField(null=True, blank=True)
     status = models.CharField(max_length=20, default='Draft', choices=STATUS_CHOICES)
     privacy = models.CharField(max_length=20, default='Private', choices=PRIVACY_CHOICES,
                                help_text='Private - for your eyes only, Friends - visible only to friends, '
@@ -42,7 +45,11 @@ class Post(models.Model):
 
     def publish(self):
         self.status = "Published"
+        self.published = datetime.now()
         self.save()
+
+    def share(self):
+        pass
 
     def __str__(self):
         return self.title

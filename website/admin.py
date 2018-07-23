@@ -9,7 +9,7 @@ from django.db import models
 class PostAdmin(admin.ModelAdmin):
 
     exclude = ('slug',)
-    list_display = ('title', 'status', 'author', 'created', 'updated',)
+    list_display = ('title', 'status', 'author', 'created', 'updated', 'published',)
     list_filter = ('status', 'privacy', 'tags',)
     search_fields = ('title', 'content',)
 
