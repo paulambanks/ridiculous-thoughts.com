@@ -31,8 +31,25 @@ def private_posts_list(request):
 
 def friends_posts_list(request):
     """The page with all blog posts, visible to all"""
-    template = 'friends/public_post_list.html'
+    template = 'friends/friends_post_list.html'
     post_list = Post.objects.filter(status='Published', privacy='Public').order_by('-created')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(post_list, 6)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
+    return render(request, template, {'posts': posts})
+
+
+def individual_friend_post_list(request, user):
+    """The page with all blog posts, visible to all"""
+    template = 'friends/friends_post_list.html'
+    post_list = Post.objects.filter(author=user, status='Published', privacy='Public').order_by('-created')
     page = request.GET.get('page', 1)
 
     paginator = Paginator(post_list, 6)

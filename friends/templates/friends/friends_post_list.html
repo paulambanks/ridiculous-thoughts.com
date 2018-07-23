@@ -13,7 +13,9 @@
                 <div class="single-post">
 
                     <h3>{{ post.title }}</h3>
-                    <h6><i class="far fa-clock"></i> Posted on {{ post.created }} by {{ post.author.username }}</h6>
+                    <!-- Add link to username so posts can be filtered by the username -->
+                    <h6><i class="far fa-clock"></i> Posted on {{ post.created }} by
+                        <a href="{% url 'friends:individual_friend_post_list' post.author_id %}">{{ post.author.username }}</a></h6>
 
                     <div class="post-tags">
                         <p> Tags: {{ post.tags.all | join:', '   }} </p>
