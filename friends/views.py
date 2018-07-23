@@ -32,7 +32,7 @@ def private_posts_list(request):
 def friends_posts_list(request):
     """The page with all blog posts, visible to all"""
     template = 'friends/friends_post_list.html'
-    post_list = Post.objects.filter(status='Published', privacy='Public').order_by('-created')
+    post_list = Post.objects.filter(status='Published', privacy='Friends').order_by('-created')
     page = request.GET.get('page', 1)
 
     paginator = Paginator(post_list, 6)
@@ -49,7 +49,7 @@ def friends_posts_list(request):
 def individual_friend_post_list(request, user):
     """The page with all blog posts, visible to all"""
     template = 'friends/friends_post_list.html'
-    post_list = Post.objects.filter(author=user, status='Published', privacy='Public').order_by('-created')
+    post_list = Post.objects.filter(author=user, status='Published', privacy='Friends').order_by('-created')
     page = request.GET.get('page', 1)
 
     paginator = Paginator(post_list, 6)

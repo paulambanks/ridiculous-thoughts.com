@@ -23,3 +23,6 @@ class PostForm(forms.ModelForm):
 class ContactForm(forms.Form):
     subject = forms.CharField(required=True)
     message = forms.CharField(widget=forms.Textarea, required=True)
+    name = forms.CharField(required=True)
+    email = forms.CharField(required=False)
+

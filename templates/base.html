@@ -46,7 +46,7 @@
                         <a class="navbar-brand" href="{% url 'website:posts_list' %}">Ridiculous Thoughts</a>
                         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                                 data-target="#navbarResponsive" aria-controls="navbarResponsive"
-                                aria-expanded="false" aria-label="Toggle navigation">Menu<i class="fa fa-bars"></i>
+                                aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i>
                         </button>
 
                         {% if user.is_authenticated %}<!-- float this right-->
@@ -68,7 +68,7 @@
                                         <a class="nav-link" href="{% url 'friends:friends_posts_list' %}">FRIENDS POSTS</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{% url 'website:email' %}" title="Contact">Contact us</a>
+                                        <a class="nav-link" href="{% url 'website:email' %}" title="Contact">CONTACT</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'logout' %}" title="Logout">

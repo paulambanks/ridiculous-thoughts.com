@@ -111,10 +111,10 @@ header {
 
 /* Mobile Styles */
 @media only screen and (max-width: 400px) {
-  header {
+    header {
       margin-right: auto;
       margin-left: auto;
-  }
+    }
 }
 
 @media only screen and (min-width: 992px) {
@@ -168,6 +168,10 @@ header {
 }
 .row {
     margin-top: 80px;
+}
+
+.row .no-margin {
+    margin-top: 0;
 }
 
 .single-post {
@@ -257,6 +261,14 @@ body > main > div.container-fluid > div > div:nth-child(2) > form {
     width: 100%;
 }
 
+.image-container img {
+    display:inline-block;
+    margin-top: 80px;
+    object-fit: contain;
+    object-position: 100%;
+    width: 100%;
+}
+
 .small-image-container {
     justify-content: center;
     width: 100%;
@@ -267,19 +279,24 @@ body > main > div.container-fluid > div > div:nth-child(2) > form {
     display:inline-block;
     object-fit: contain;
     object-position: 100%;
-    width: 100%;
+    max-width: 100%;
+    border-radius: 50%;
+}
+
+@media only screen and (max-width: 450px) {
+    .small-image-container {
+        text-align: center;
+    }
+    .small-image-container img {
+        max-width: 75%;
+
+    }
 }
 
 .list-inline-item > a {
     color: black;
 }
-.image-container img {
-    display:inline-block;
-    margin-top: 80px;
-    object-fit: contain;
-    object-position: 100%;
-    width: 100%;
-}
+
 
 
 /*--------- WELCOME PAGE / JUMBOTRON SETTINGS--------*/

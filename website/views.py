@@ -28,7 +28,24 @@ def about(request):
 def posts_list(request):
     """The page with all blog posts, visible to all"""
     template = 'website/post_list.html'
-    post_list = Post.objects.filter(status='Published', privacy='General').order_by('-created')
+    post_list = Post.objects.filter(status='Published', privacy='Public').order_by('-created')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(post_list, 6)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
+    return render(request, template, {'posts': posts})
+
+
+def individual_public_post_list(request, user):
+    """The page with all blog posts, visible to all"""
+    template = 'website/post_list.html'
+    post_list = Post.objects.filter(author=user, status='Published', privacy='Public').order_by('-created')
     page = request.GET.get('page', 1)
 
     paginator = Paginator(post_list, 6)
@@ -44,9 +61,11 @@ def posts_list(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    if post.privacy == 'General':
+    if post.privacy == 'Public':
         return render(request, 'website/post_detail.html', {'post': post})
-    elif post.privacy == 'Public' and request.user.is_authenticated:
+    elif post.privacy == 'Friends' and request.user.is_authenticated:
+        return render(request, 'website/post_detail.html', {'post': post})
+    elif post.privacy == 'Private' and request.user == post.author:
         return render(request, 'website/post_detail.html', {'post': post})
     else:
         return PermissionDenied
@@ -134,7 +153,7 @@ def post_edit(request, pk):  # also post update
 
         return render(request, template, context)
     else:
-        raise Http404
+        raise PermissionDenied
 
 
 def get_success_url():
@@ -154,16 +173,13 @@ def post_publish(request, pk):
             messages.success(request, "This post has been published.")
             return HttpResponseRedirect(reverse('website:posts_list'))
 
-        if request.user != post.author:
-            raise PermissionDenied
-
         context = {
             "post": post
         }
 
         return render(request, template, context)
     else:
-        raise Http404
+        raise PermissionDenied
 
 
 @login_required
@@ -178,16 +194,13 @@ def post_remove(request, pk):
             messages.success(request, "This has been deleted.")
             return HttpResponseRedirect(reverse('website:posts_list'))
 
-        if request.user != post.author:
-            raise PermissionDenied
-
         context = {
             "post": post
         }
 
         return render(request, template, context)
     else:
-        raise Http404
+        raise PermissionDenied
 
 
 def send_email(request):
@@ -199,14 +212,25 @@ def send_email(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             subject = form.cleaned_data['subject']
-            from_email = request.user.email
+            name = form.cleaned_data['name']
             message = form.cleaned_data['message']
+            if request.user.is_authenticated:
+                from_email = request.user.email
 
-            try:
-                message = "User {} has sent you a message\n".format(from_email) + message
-                send_mail(subject, message, from_email, ['bankspaula576@gmail.com'])
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
+                try:
+                    message = "User {} with email {} has sent you a message:\n".format(name, from_email) + message
+                    send_mail(subject, message, from_email, ['bankspaula576@gmail.com'])
+                except BadHeaderError:
+                    return HttpResponse('Invalid header found.')
+
+            else:
+                email = form.cleaned_data['email']
+
+                try:
+                    message = "User {} with email {} has sent you a message:\n".format(name, email) + message
+                    send_mail(subject, message, email, ['bankspaula576@gmail.com'])
+                except BadHeaderError:
+                    return HttpResponse('Invalid header found.')
 
             return redirect('website:success')
 
@@ -214,4 +238,5 @@ def send_email(request):
 
 
 def email_success(request):
-    return HttpResponse('Success! Thank you for your message.')
+    return render(request, 'website/success.html')
+

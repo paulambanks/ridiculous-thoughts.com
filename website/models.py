@@ -44,9 +44,5 @@ class Post(models.Model):
         self.status = "Published"
         self.save()
 
-    def make_public(self):
-        self.status = "Public"
-        self.save()
-
     def __str__(self):
         return self.title
