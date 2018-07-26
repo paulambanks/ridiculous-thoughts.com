@@ -6,10 +6,11 @@ from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.core.mail import send_mail, BadHeaderError
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from django.utils import timezone
 
-from .models import Post
-from .forms import PostForm, ContactForm
+from .models import Post, TagPost
+from .forms import PostForm, ContactForm, TagPostForm
 
 # Create your views here.
 
@@ -95,27 +96,37 @@ def post_draft_list(request):
 def post_new(request):
     """Create new post is visible only for the admin and logged users"""
     template = 'website/post_edit.html'
+
     if request.method == "POST":
         form = PostForm(request.POST)
+        tag_form = TagPostForm(request.POST)
 
         try:
-            if form.is_valid():
+            if all([form.is_valid() and tag_form.is_valid()]):
                 if 'cancel' in request.POST:
                     return HttpResponseRedirect(get_success_url())
                 else:
+                    # Save post data from the form to Post DB
                     post = form.save(commit=False)
                     post.author = request.user
                     post.created = timezone.now
                     post.save()
-                    return redirect('website:post_detail', pk=post.pk)
+
+                    tagpost = tag_form.save(commit=False)
+                    tagpost.tagged_post_id = post.id
+                    tagpost.save()
+
+                    return redirect('website:post_detail', pk=post.pk,)
 
         except Exception as e:
             messages.warning(request, 'Post Failed To Save. Error: {}".format(e)')
 
     else:
         form = PostForm()
+        tag_form = TagPostForm()
     context = {
         'form': form,
+        'tag_form': tag_form,
     }
 
     return render(request, template, context)

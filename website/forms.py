@@ -1,11 +1,18 @@
 from django import forms
-from .models import Post
+from .models import Post, TagPost
 from tinymce import TinyMCE
 
 
 class TinyMCEWidget(TinyMCE):
     def use_required_attribute(self, *args):
         return False
+
+
+class TagPostForm(forms.ModelForm):
+
+    class Meta:
+        model = TagPost
+        fields = ('tagged_with', )
 
 
 class PostForm(forms.ModelForm):
@@ -17,7 +24,7 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title', 'content', 'tags', 'privacy',)
+        fields = ('title', 'content', 'privacy',)
 
 
 class ContactForm(forms.Form):

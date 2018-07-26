@@ -3,7 +3,8 @@ from django.conf import settings
 from django.template.defaultfilters import slugify
 from tinymce import HTMLField
 from django.utils import timezone
-from datetime import datetime
+
+from accounts.models import CustomUser
 
 
 class Tag(models.Model):
@@ -25,7 +26,7 @@ class Post(models.Model):
     )
 
     # Fields
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='authors')
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     content = HTMLField('Content')
@@ -36,7 +37,6 @@ class Post(models.Model):
     privacy = models.CharField(max_length=20, default='Private', choices=PRIVACY_CHOICES,
                                help_text='Private - for your eyes only, Friends - visible only to friends, '
                                          'Public - visible to everyone')
-    tags = models.ManyToManyField(Tag)
 
     # Functions
     def save(self, *args, **kwargs):
@@ -45,11 +45,38 @@ class Post(models.Model):
 
     def publish(self):
         self.status = "Published"
-        self.published = datetime.now()
+        self.published = timezone.now()
         self.save()
-
-    def share(self):
-        pass
 
     def __str__(self):
         return self.title
+
+
+class SharedPost(models.Model):
+    id = models.AutoField(primary_key=True)
+    shared_post = models.ForeignKey(Post,
+                                    on_delete=models.CASCADE,
+                                    related_name="post_away")
+    shared_with = models.ForeignKey(CustomUser,
+                                    null=True, on_delete=models.CASCADE,
+                                    related_name="sharer")
+
+    def share(self, *args, **kwargs):
+        super(SharedPost, self).save(*args, **kwargs)
+
+    class Meta:
+        unique_together = ('shared_post', 'shared_with')
+
+
+class TagPost(models.Model):
+    id = models.AutoField(primary_key=True)
+    tagged_post = models.ForeignKey(Post,
+                                    on_delete=models.CASCADE,
+                                    related_name="tagged_posts")
+    tagged_with = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name="tags")
+
+    def save(self, *args, **kwargs):
+        super(TagPost, self).save(*args, **kwargs)
+
+    class Meta:
+        unique_together = ('tagged_post', 'tagged_with')

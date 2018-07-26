@@ -32,7 +32,7 @@
             <h6><i class="far fa-clock"></i> Updated on {{ post.updated }} by {{ post.author.username }}</h6>
 
             <div class="post-tags">
-                <p> Tags: {{ post.tags.all | join:', '   }} </p>
+                <p> Tags: {{ tag.slug.all | join:', '   }} </p>
             </div>
 
             <div class="post-text">
