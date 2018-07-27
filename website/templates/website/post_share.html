@@ -15,7 +15,7 @@
             <form method="POST" class="post-share-form">
                 {% csrf_token %}
 
-                <p>Are you sure you want to delete post: </p>
+                <p>Are you sure you want to share this post: </p>
 
                 <h6>{{ post.title }}</h6>
                 <p>{{ post.content | safe | truncatechars:200 }}</p>

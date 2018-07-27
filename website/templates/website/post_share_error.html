@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
-{% block title %}Email successful{% endblock %}
+{% block title %}Post share error{% endblock %}
+{% load crispy_forms_tags %}
 
 {% block content %}
+    {{ form.media }}
 
     <div class="row">
 
@@ -13,6 +15,8 @@
             </p>
 
         </div>
+
+
     </div>
 
 {% endblock %}

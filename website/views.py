@@ -2,13 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse, Http404
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.mail import send_mail, BadHeaderError
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.utils import timezone
-from django.core.exceptions import ValidationError
 
 from .models import Post, SharedPost
 from .forms import PostForm, ContactForm, TagPostForm, SharedPostForm
@@ -216,9 +215,12 @@ def post_share(request, pk):
                     else:
                         sharedpost = form.save(commit=False)
                         sharedpost.post_id = post.id
-                        sharedpost.save()
-                        messages.success(request, "This post has been shared.")
-                        return redirect('website:post_detail', pk=post.pk, )
+                        if sharedpost.user_id == post.author_id:  # WORKS!
+                            return redirect('website:error')  # needs better way to show error
+                        else:
+                            sharedpost.save()
+                            messages.success(request, "This post has been shared.")
+                            return redirect('website:post_detail', pk=post.pk, )
 
             except Exception as e:
                 messages.warning(request, 'Your Post Was Not Saved Due To An Error: {}.format(e)')
@@ -296,4 +298,4 @@ def email_success(request):
 
 
 def error(request):
-    return render(request, 'website/error.html')
+    return render(request, 'website/post_share_error.html')

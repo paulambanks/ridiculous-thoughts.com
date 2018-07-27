@@ -21,5 +21,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('email/', views.send_email, name='email'),
     path('success/', views.email_success, name='success'),
-    path('success/', views.email_success, name='success'),
+    path('error/', views.error, name='error'),
 ]
