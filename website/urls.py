@@ -8,8 +8,8 @@ app_name = "website"
 urlpatterns = [
     url(r'^$', views.home, name="home"),
     url(r'^post_list/$', views.posts_list, name='posts_list'),
-    url(r'^individual_public_post_list/(?P<user>\w+)/$', views.individual_public_post_list,
-        name='individual_public_post_list'),
+    url(r'^individual_author_public_posts/(?P<user>\w+)/$', views.individual_author_public_posts,
+        name='individual_author_public_posts'),
     url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),
     url(r'^post/new/$', views.post_new, name='post_new'),
     url(r'^post/(?P<pk>\d+)/edit/$', views.post_edit, name='post_edit'),

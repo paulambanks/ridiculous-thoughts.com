@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Tag, SharedPost, TagPost
+from .models import Post, Tag, SharedPost, TaggedPost
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -22,4 +22,4 @@ class TagPostAdmin(admin.ModelAdmin):
 admin.site.register(Post, PostAdmin)
 admin.site.register(Tag)
 admin.site.register(SharedPost, SharedPostAdmin)
-admin.site.register(TagPost, TagPostAdmin)
+admin.site.register(TaggedPost, TagPostAdmin)

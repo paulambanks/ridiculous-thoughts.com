@@ -36,6 +36,7 @@ class UserManager(BaseUserManager):
 
 class CustomUser(AbstractUser):
     # First/last name is not a global-friendly pattern
+    id = models.AutoField(primary_key=True)
     name = models.CharField(blank=True, max_length=255)
     email = models.EmailField(
         verbose_name='email address',

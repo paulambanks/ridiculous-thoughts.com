@@ -1,7 +1,8 @@
 from django import forms
-from .models import Post, TagPost, SharedPost
+from .models import Post, TaggedPost, SharedPost
 from tinymce import TinyMCE
-from django.core.exceptions import NON_FIELD_ERRORS
+
+from accounts.models import CustomUser
 
 
 class TinyMCEWidget(TinyMCE):
@@ -12,7 +13,7 @@ class TinyMCEWidget(TinyMCE):
 class TagPostForm(forms.ModelForm):
 
     class Meta:
-        model = TagPost
+        model = TaggedPost
         fields = ('tag', )
 
 

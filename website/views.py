@@ -11,25 +11,85 @@ from django.utils import timezone
 
 from .models import Post, SharedPost
 from .forms import PostForm, ContactForm, TagPostForm, SharedPostForm
+from accounts.models import CustomUser
 
-# Create your views here.
 
-# posts/views.py
-
+# ----------------- MAIN PUBLIC VIEWS -------------------------- #
 
 def home(request):
-    """The home page introduces user to the blog and allows for registration or login"""
-    return render(request, 'home.html')
+    template = 'home.html'
+    """
+    The MAIN HOME PAGE introduces visitor to the blog. 
+    Page allows for USER login, use of the CONTACT FORM for the anonymous visitor and access to the ABOUT ME page.
+    """
+    return render(request, template)
 
 
-def about(request):
-    """The page containing information about the author, including online CV and PDF download link"""
-    return render(request, 'website/about.html')
+def send_email(request):  # CONTACT FORM
+    template = 'website/contact_me.html'
+    """
+    Sends a message to the website ADMIN from the user or anonymous visitor. 
+    Form requires an extra EMAIL and NAME fields if send from an anonymous visitor.
+    """
+
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            name = form.cleaned_data['name']
+            message = form.cleaned_data['message']
+
+            if request.user.is_authenticated:  # if contact form send from the logged user
+                from_email = request.user.email
+
+                try:
+                    message = "User {} with email {} has sent you a message:\n".format(name, from_email) + message
+                    send_mail(subject, message, from_email, ['bankspaula576@gmail.com'])
+                except BadHeaderError:
+                    return HttpResponse('Invalid header found.')
+
+            else:
+                email = form.cleaned_data['email']  # if contact form send from an anonymous visitor
+
+                try:
+                    message = "User {} with email {} has sent you a message:\n".format(name, email) + message
+                    send_mail(subject, message, email, ['bankspaula576@gmail.com'])
+                except BadHeaderError:
+                    return HttpResponse('Invalid header found.')
+
+            return redirect('website:success')
+
+    context = {
+        'form': form
+    }
+
+    return render(request, template, context)
+
+
+def email_success(request):  # CONTACT FORM
+    template = 'website/email_success.html'
+    """
+    Send a success message to the user that filled correctly and send the contact form.
+    """
+    return render(request, template)
+
+
+def about(request):  # TO DO: Add downloadable CV / link to the static website!
+    template = 'website/about.html'
+    """
+    The ABOUT page contains information about the website ADMIN.
+    """
+    return render(request, template)
 
 
 def posts_list(request):
-    """The page with all blog posts, visible to all"""
     template = 'website/post_list.html'
+    """
+    The PUBLIC page containing all public blog posts. Access is granted to both authorised users and visitors.
+    """
+    # TO DO: Each page consists of 6 posts. Should introduce infinite scrolling? or more posts per page?
     post_list = Post.objects.filter(status='Published', privacy='Public').order_by('-updated')
     page = request.GET.get('page', 1)
 
@@ -41,12 +101,20 @@ def posts_list(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, template, {'posts': posts})
+    context = {
+        'posts': posts
+    }
+
+    return render(request, template, context)
 
 
-def individual_public_post_list(request, user):
-    """The page with all blog posts, visible to all"""
+def individual_author_public_posts(request, user):
     template = 'website/post_list.html'
+    """
+    The PUBLIC page with all public posts of an individual author. 
+    Access is granted to both authorised users and visitors.
+    """
+    # TO DO: Each page consists of 6 posts. Should introduce infinite scrolling? or more posts per page?
     post_list = Post.objects.filter(author=user, status='Published', privacy='Public').order_by('-updated')
     page = request.GET.get('page', 1)
 
@@ -58,27 +126,43 @@ def individual_public_post_list(request, user):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, template, {'posts': posts})
+    context = {
+        'posts': posts
+    }
+
+    return render(request, template, context)
 
 
 def post_detail(request, pk):
+    template = 'website/post_detail.html'
+    """
+    Page with post details. Depends on the permission, appropriate access is granted to both authorised users and visitors.
+    """
     post = get_object_or_404(Post, pk=pk)
+
+    context = {
+        'post': post
+    }
+
     if post.privacy == 'Public':
-        return render(request, 'website/post_detail.html', {'post': post})
+        return render(request, template, context)
     elif post.privacy == 'Friends' and request.user.is_authenticated:
-        return render(request, 'website/post_detail.html', {'post': post})
+        return render(request, template, context)
     elif post.privacy == 'Private' and request.user == post.author:
-        return render(request, 'website/post_detail.html', {'post': post})
+        return render(request, template, context)
     else:
         return PermissionDenied
 
 
+# ----------------- MAIN AUTHOR VIEWS -------------------------- #
 @login_required
 def post_draft_list(request):
-    """The page with all unpublished yet drafts. Visible only to the admin/staff"""
     template = 'website/post_draft_list.html'
+    """
+    The page with all unpublished yet DRAFTS filtered by the author. 
+    Visible only to the logged author.
+    """
     post_list = Post.objects.filter(status='Draft', author=request.user).order_by('-created')
-
     page = request.GET.get('page', 1)
 
     paginator = Paginator(post_list, 6)
@@ -89,13 +173,21 @@ def post_draft_list(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, template, {'posts': posts})
+    context = {
+        'posts': posts
+    }
+
+    return render(request, template, context)
 
 
 @login_required
 def post_new(request):
-    """Create new post is visible only for the admin and logged users"""
     template = 'website/post_edit.html'
+    """
+    Page that allows to create the new post. It is visible only for the logged AUTHOR.
+    Page also allows to tag created post. It uses two forms at once.
+    """
+    # TO DO: Needs to be modified to accommodate multiple tagging at once
 
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -112,9 +204,11 @@ def post_new(request):
                     post.created = timezone.now
                     post.save()
 
-                    # Save tag data from the form to Post DB
-
+                    # Save only one tag data from the form to Post DB; NOT IDEAL!
+                    # I need to add remove the tag, as well as allow for
+                    # multiple tagging happening at once
                     tagpost = tag_form.save(commit=False)
+                    # I need to add a proper view for unique_together {tag, post} error
                     tagpost.post_id = post.id
                     tagpost.save()
 
@@ -137,15 +231,21 @@ def post_new(request):
 @login_required
 def post_edit(request, pk):  # also post update
     template = 'website/post_edit.html'
+    """
+    Page that allows to edit the post. It is visible only for the logged AUTHOR.
+    Page also allows to tag the post. It uses two forms at once.
+    """
+    # TO DO: Needs to be modified to accommodate multiple tagging at once
     post = get_object_or_404(Post, pk=pk)
 
     if post.author == request.user:
 
         if request.method == "POST":
             form = PostForm(request.POST, instance=post)
+            tag_form = TagPostForm(request.POST)
 
             try:
-                if form.is_valid():
+                if all([form.is_valid() and tag_form.is_valid()]):
                     if 'cancel' in request.POST:
                         return HttpResponseRedirect(get_success_url())
                     else:
@@ -153,6 +253,14 @@ def post_edit(request, pk):  # also post update
                         post.author = request.user
                         post.updated = timezone.now
                         post.save()
+
+                        # Save additional tags data anytime user edits the post;
+                        # however, I need to add remove the tag, as well as allow for
+                        # multiple changes happening at once
+                        tagpost = tag_form.save(commit=False)
+                        tagpost.post_id = post.id
+                        # I need to add a proper view for unique_together {tag, post} error
+                        tagpost.save()
                         messages.success(request, "Your Post Was Successfully Updated")
                         return redirect('website:post_detail', pk=post.pk)
 
@@ -161,9 +269,11 @@ def post_edit(request, pk):  # also post update
 
         else:
             form = PostForm(instance=post)
+            tag_form = TagPostForm()
 
         context = {
             'form': form,
+            'tag_form': tag_form,
             'post': post,
         }
 
@@ -172,15 +282,21 @@ def post_edit(request, pk):  # also post update
         raise PermissionDenied
 
 
-def get_success_url():
-    """Return page if creating/edition of post was canceled"""
-    return reverse('website:posts_list')
+def get_success_url():  # CANCELLATION
+    template = 'website:posts_list'
+    """
+    Return to the post list page if creating/edition of post was canceled
+    """
+    return reverse(template)
 
 
 @login_required
 def post_publish(request, pk):
-    post = get_object_or_404(Post, pk=pk)
     template = 'website/confirmation_publish.html'
+    """
+    Page used to confirm the PUBLISH 
+    """
+    post = get_object_or_404(Post, pk=pk)
 
     if post.author == request.user:
 
@@ -200,10 +316,13 @@ def post_publish(request, pk):
 
 @login_required
 def post_share(request, pk):
-    post = get_object_or_404(Post, pk=pk)
     template = 'website/post_share.html'
+    """
+    Page used to share a private post with other users. 
+    """
+    post = get_object_or_404(Post, pk=pk)
 
-    if post.author == request.user:
+    if post.privacy == "Private" and post.author == request.user:
 
         if request.method == "POST":
             form = SharedPostForm(request.POST)
@@ -213,10 +332,14 @@ def post_share(request, pk):
                     if 'cancel' in request.POST:
                         return HttpResponseRedirect(get_success_url())
                     else:
+                        # Saves only one sharing instance from the form to Post DB; NOT IDEAL!
+                        # I need to add un-share the post, as well as allow for
+                        # multiple sharing happening at once
                         sharedpost = form.save(commit=False)
                         sharedpost.post_id = post.id
                         if sharedpost.user_id == post.author_id:  # WORKS!
                             return redirect('website:error')  # needs better way to show error
+                        # I need to add a proper view for unique_together {user, post} error
                         else:
                             sharedpost.save()
                             messages.success(request, "This post has been shared.")
@@ -238,10 +361,22 @@ def post_share(request, pk):
         raise PermissionDenied
 
 
+def error(request):
+    template = 'website/post_share_error.html'
+    """
+    Return to the post list page if there was an error during post sharing. 
+    Specifically, if users tried to shared the post with themselves.
+    """
+    return render(request, template)
+
+
 @login_required
 def post_remove(request, pk):
-    post = get_object_or_404(Post, pk=pk)
     template = 'website/confirmation_delete.html'
+    """
+    Page used to confirm the DELETION.  
+    """
+    post = get_object_or_404(Post, pk=pk)
 
     if post.author == request.user:
 
@@ -259,43 +394,4 @@ def post_remove(request, pk):
         raise PermissionDenied
 
 
-def send_email(request):
-    """Sends a message to the admin from the user"""
-    template = 'website/email.html'
-    if request.method == 'GET':
-        form = ContactForm()
-    else:
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            subject = form.cleaned_data['subject']
-            name = form.cleaned_data['name']
-            message = form.cleaned_data['message']
-            if request.user.is_authenticated:
-                from_email = request.user.email
 
-                try:
-                    message = "User {} with email {} has sent you a message:\n".format(name, from_email) + message
-                    send_mail(subject, message, from_email, ['bankspaula576@gmail.com'])
-                except BadHeaderError:
-                    return HttpResponse('Invalid header found.')
-
-            else:
-                email = form.cleaned_data['email']
-
-                try:
-                    message = "User {} with email {} has sent you a message:\n".format(name, email) + message
-                    send_mail(subject, message, email, ['bankspaula576@gmail.com'])
-                except BadHeaderError:
-                    return HttpResponse('Invalid header found.')
-
-            return redirect('website:success')
-
-    return render(request, template, {'form': form})
-
-
-def email_success(request):
-    return render(request, 'website/success.html')
-
-
-def error(request):
-    return render(request, 'website/post_share_error.html')

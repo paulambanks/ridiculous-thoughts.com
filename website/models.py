@@ -37,12 +37,12 @@ class Post(models.Model):
     privacy = models.CharField(max_length=20, default='Private', choices=PRIVACY_CHOICES,
                                help_text='Private - for your eyes only, Friends - visible only to friends, '
                                          'Public - visible to everyone')
-    tags = models.ManyToManyField(Tag, blank=True, through='TagPost')
+    tags = models.ManyToManyField(Tag, blank=True, through='TaggedPost')
     sharing = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, through='SharedPost')
 
     # Functions
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = '%s-%s' % (slugify(self.title), str(self.id))
         super(Post, self).save(*args, **kwargs)
 
     def publish(self):
@@ -57,7 +57,8 @@ class Post(models.Model):
 class SharedPost(models.Model):
     id = models.AutoField(primary_key=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="shared_post_id")
-    user = models.ForeignKey(CustomUser, default='', on_delete=models.CASCADE, related_name="shared_with_id")
+    user = models.ForeignKey(CustomUser, default='', on_delete=models.CASCADE, related_name="user_id",
+                             help_text="Just do not share the post with yourself!")
 
     def __unicode__(self):
         return self.id
@@ -69,10 +70,10 @@ class SharedPost(models.Model):
         super(SharedPost, self).save(*args, **kwargs)
 
 
-class TagPost(models.Model):
+class TaggedPost(models.Model):
     id = models.AutoField(primary_key=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="tagged_post_id")
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name="tag_id")
+    tag = models.ForeignKey(Tag, blank=True, null=True, on_delete=models.CASCADE, related_name="tag_id")
 
     class Meta:
         unique_together = ('post', 'tag')

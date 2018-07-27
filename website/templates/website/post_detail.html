@@ -19,11 +19,17 @@
                 <a class="btn btn-default" href="{% url 'website:post_publish' pk=post.pk %}">Publish</a>
 
 
-            {% else %}
+            {% elif post.status == "Published" and post.privacy == "Private"%}
 
                 <a class="btn btn-default" href="{% url 'website:post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt"></i></a>
                 <a class="btn btn-default" href="{% url 'website:post_remove' pk=post.pk %}"><i class="far fa-trash-alt"></i></a>
                 <a class="btn btn-default" href="{% url 'website:post_share' pk=post.pk %}">Share</a>
+
+
+            {% else %}
+
+                <a class="btn btn-default" href="{% url 'website:post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt"></i></a>
+                <a class="btn btn-default" href="{% url 'website:post_remove' pk=post.pk %}"><i class="far fa-trash-alt"></i></a>
 
             {% endif %}
         </form>
