@@ -18,10 +18,12 @@
                 <a class="btn btn-default" href="{% url 'website:post_remove' pk=post.pk %}"><i class="far fa-trash-alt"></i></a>
                 <a class="btn btn-default" href="{% url 'website:post_publish' pk=post.pk %}">Publish</a>
 
+
             {% else %}
 
                 <a class="btn btn-default" href="{% url 'website:post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt"></i></a>
                 <a class="btn btn-default" href="{% url 'website:post_remove' pk=post.pk %}"><i class="far fa-trash-alt"></i></a>
+                <a class="btn btn-default" href="{% url 'website:post_share' pk=post.pk %}">Share</a>
 
             {% endif %}
         </form>
@@ -32,7 +34,7 @@
             <h6><i class="far fa-clock"></i> Updated on {{ post.updated }} by {{ post.author.username }}</h6>
 
             <div class="post-tags">
-                <p> Tags: {{ tag.slug.all | join:', '   }} </p>
+                <p> Tags: {{ post.tags.all | join:', '   }} </p>
             </div>
 
             <div class="post-text">

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {{ form.media }}
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <h3>Share POST</h3>
+
+            <form method="POST" class="post-share-form">
+                {% csrf_token %}
+
+                <p>Are you sure you want to delete post: </p>
+
+                <h6>{{ post.title }}</h6>
+                <p>{{ post.content | safe | truncatechars:200 }}</p>
+
+                {{ form.as_p }}
+
+                <div class="buttons">
+                    <input type="submit" value="SHARE" class="btn btn-primary">
+                    <a href="{% url 'website:posts_list' %}" class="btn btn-default">Cancel</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

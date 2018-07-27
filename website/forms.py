@@ -1,6 +1,7 @@
 from django import forms
-from .models import Post, TagPost
+from .models import Post, TagPost, SharedPost
 from tinymce import TinyMCE
+from accounts.models import CustomUser
 
 
 class TinyMCEWidget(TinyMCE):
@@ -12,7 +13,14 @@ class TagPostForm(forms.ModelForm):
 
     class Meta:
         model = TagPost
-        fields = ('tagged_with', )
+        fields = ('tag', )
+
+
+class SharedPostForm(forms.ModelForm):
+
+    class Meta:
+        model = SharedPost
+        fields = ('user', )
 
 
 class PostForm(forms.ModelForm):

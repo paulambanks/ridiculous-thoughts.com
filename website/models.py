@@ -37,6 +37,8 @@ class Post(models.Model):
     privacy = models.CharField(max_length=20, default='Private', choices=PRIVACY_CHOICES,
                                help_text='Private - for your eyes only, Friends - visible only to friends, '
                                          'Public - visible to everyone')
+    tags = models.ManyToManyField(Tag, blank=True, through='TagPost')
+    sharing = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, through='SharedPost')
 
     # Functions
     def save(self, *args, **kwargs):
@@ -54,29 +56,26 @@ class Post(models.Model):
 
 class SharedPost(models.Model):
     id = models.AutoField(primary_key=True)
-    shared_post = models.ForeignKey(Post,
-                                    on_delete=models.CASCADE,
-                                    related_name="post_away")
-    shared_with = models.ForeignKey(CustomUser,
-                                    null=True, on_delete=models.CASCADE,
-                                    related_name="sharer")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="shared_post_id")
+    user = models.ForeignKey(CustomUser, default='', on_delete=models.CASCADE, related_name="shared_with_id")
 
-    def share(self, *args, **kwargs):
-        super(SharedPost, self).save(*args, **kwargs)
+    def __unicode__(self):
+        return self.id
 
     class Meta:
-        unique_together = ('shared_post', 'shared_with')
+        unique_together = ('post', 'user')
+
+    def save(self, *args, **kwargs):
+        super(SharedPost, self).save(*args, **kwargs)
 
 
 class TagPost(models.Model):
     id = models.AutoField(primary_key=True)
-    tagged_post = models.ForeignKey(Post,
-                                    on_delete=models.CASCADE,
-                                    related_name="tagged_posts")
-    tagged_with = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name="tags")
-
-    def save(self, *args, **kwargs):
-        super(TagPost, self).save(*args, **kwargs)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="tagged_post_id")
+    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name="tag_id")
 
     class Meta:
-        unique_together = ('tagged_post', 'tagged_with')
+        unique_together = ('post', 'tag')
+
+    def __str__(self):
+        return self.tag

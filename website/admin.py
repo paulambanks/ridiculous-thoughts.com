@@ -11,11 +11,11 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class SharedPostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'shared_post', 'shared_with',)
+    list_display = ('id', 'post', 'user',)
 
 
 class TagPostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'tagged_post', 'tagged_with',)
+    list_display = ('id', 'post', 'tag',)
 
 
 # Models registration

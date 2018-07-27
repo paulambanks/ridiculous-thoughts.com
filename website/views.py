@@ -8,9 +8,10 @@ from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.utils import timezone
+from django.core.exceptions import ValidationError
 
-from .models import Post, TagPost
-from .forms import PostForm, ContactForm, TagPostForm
+from .models import Post, SharedPost
+from .forms import PostForm, ContactForm, TagPostForm, SharedPostForm
 
 # Create your views here.
 
@@ -112,11 +113,13 @@ def post_new(request):
                     post.created = timezone.now
                     post.save()
 
+                    # Save tag data from the form to Post DB
+
                     tagpost = tag_form.save(commit=False)
-                    tagpost.tagged_post_id = post.id
+                    tagpost.post_id = post.id
                     tagpost.save()
 
-                    return redirect('website:post_detail', pk=post.pk,)
+                    return redirect('website:post_detail', pk=post.pk)
 
         except Exception as e:
             messages.warning(request, 'Post Failed To Save. Error: {}".format(e)')
@@ -197,6 +200,43 @@ def post_publish(request, pk):
 
 
 @login_required
+def post_share(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    template = 'website/post_share.html'
+
+    if post.author == request.user:
+
+        if request.method == "POST":
+            form = SharedPostForm(request.POST)
+
+            try:
+                if form.is_valid():
+                    if 'cancel' in request.POST:
+                        return HttpResponseRedirect(get_success_url())
+                    else:
+                        sharedpost = form.save(commit=False)
+                        sharedpost.post_id = post.id
+                        sharedpost.save()
+                        messages.success(request, "This post has been shared.")
+                        return redirect('website:post_detail', pk=post.pk, )
+
+            except Exception as e:
+                messages.warning(request, 'Your Post Was Not Saved Due To An Error: {}.format(e)')
+
+        else:
+            form = SharedPostForm(instance=post)
+
+        context = {
+            'form': form,
+            'post': post,
+        }
+
+        return render(request, template, context)
+    else:
+        raise PermissionDenied
+
+
+@login_required
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
     template = 'website/confirmation_delete.html'
@@ -254,3 +294,6 @@ def send_email(request):
 def email_success(request):
     return render(request, 'website/success.html')
 
+
+def error(request):
+    return render(request, 'website/error.html')
