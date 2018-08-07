@@ -9,9 +9,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.utils import timezone
 
-from .models import Post, SharedPost
+from .models import Post, Tag
 from .forms import PostForm, ContactForm, TagPostForm, SharedPostForm
-from accounts.models import CustomUser
 
 
 # ----------------- MAIN PUBLIC VIEWS -------------------------- #
@@ -91,6 +90,30 @@ def posts_list(request):
     """
     # TO DO: Each page consists of 6 posts. Should introduce infinite scrolling? or more posts per page?
     post_list = Post.objects.filter(status='Published', privacy='Public').order_by('-updated')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(post_list, 6)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
+    context = {
+        'posts': posts
+    }
+
+    return render(request, template, context)
+
+
+def tagged_posts_list(request, tag_id):
+    template = 'website/post_list.html'
+    """
+    The PUBLIC page containing all blog posts with selected tag. Access is granted to both authorised users and visitors.
+    """
+    # TO DO: Each page consists of 6 posts. Should introduce infinite scrolling? or more posts per page?
+    post_list = Post.objects.filter(status='Published', privacy='Public', tags=tag_id).order_by('-updated')
     page = request.GET.get('page', 1)
 
     paginator = Paginator(post_list, 6)

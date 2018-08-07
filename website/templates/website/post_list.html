@@ -18,7 +18,13 @@
                         <a href="{% url 'website:individual_author_public_posts' post.author_id %}">{{ post.author.username }}</a></h6>
 
                     <div class="post-tags">
-                        <p> Tags: {{ post.tags.all | join:', '   }} </p>
+
+                        <p> Tags:
+                            {% for tag in post.tags.all %}
+                                <a href="{% url 'website:tagged_posts_list' tag.id %}">{{ tag.slug }}</a>
+                            {% endfor %}
+                        </p>
+
                     </div>
 
                     <div class="post-text">

@@ -8,6 +8,7 @@ app_name = "website"
 urlpatterns = [
     url(r'^$', views.home, name="home"),
     url(r'^post_list/$', views.posts_list, name='posts_list'),
+    url(r'^tagged_posts_list/(?P<tag_id>\w+)/$', views.tagged_posts_list, name='tagged_posts_list'),
     url(r'^individual_author_public_posts/(?P<user>\w+)/$', views.individual_author_public_posts,
         name='individual_author_public_posts'),
     url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),
