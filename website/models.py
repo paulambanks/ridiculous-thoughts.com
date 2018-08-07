@@ -78,5 +78,8 @@ class TaggedPost(models.Model):
     class Meta:
         unique_together = ('post', 'tag')
 
-    def __str__(self):
-        return self.tag
+    def __unicode__(self):
+        return self.id
+
+    def remove_tag(self):
+        self.tag.delete()
