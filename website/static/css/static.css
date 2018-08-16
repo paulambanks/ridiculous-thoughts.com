@@ -182,12 +182,32 @@ header {
     text-align: center;
 }
 
+.post-title > p {
+    font-size: 16px;
+    text-align: center;
+}
+
 .post-text {
     margin-bottom: 15px;
 }
 
 .post-tags {
     text-align: center;
+}
+
+ul.tags {
+    padding: 0;
+    display: inline-flex;
+    margin: 0;
+}
+
+ul.tags > li{
+    list-style: none;
+    padding: 0 10px;
+}
+
+.single-tag > a {
+    font-size: 16px;
 }
 
 .col-md-4 {
@@ -213,14 +233,26 @@ label[for=id_tags] {
     display: inherit;
 }
 
-#id_content,
-#id_title {
-    width: 80%;
+span.helptext {
+    font-size: 12px;
 }
 
-#id_tags {
-    width: 25%;
-    text-align: center;
+/*--------- PRIVACY AND TAGS FORM SETTINGS--------*/
+.post-edit-form > p:nth-child(4) {
+    display: grid;
+    width: 50%;
+    margin: 0 auto 15px auto;
+}
+
+.post-edit-form > p:nth-child(5) {
+    display: grid;
+    width: 50%;
+    margin: 0 auto 15px auto;
+}
+
+/*#id_content,*/
+#id_title {
+    width: 80%;
 }
 
 .fixed-bottom {
@@ -239,6 +271,14 @@ form {
 
 .buttons {
     text-align: center;
+    font-size: 16px;
+}
+.buttons > input {
+    font-size: 16px;
+}
+
+.buttons > a {
+    font-size: 16px;
 }
 body > main > div.container-fluid > div > div:nth-child(2) > form {
     text-align: left;
@@ -251,6 +291,7 @@ body > main > div.container-fluid > div > div:nth-child(2) > form {
 .post-edit-form {
     display: flex;
     flex-direction: column;
+    /*width: 80%;*/
 }
 
 
@@ -296,14 +337,6 @@ body > main > div.container-fluid > div > div:nth-child(2) > form {
 .list-inline-item > a {
     color: black;
 }
-
-
-
-/*--------- WELCOME PAGE / JUMBOTRON SETTINGS--------*/
-
-
-
-
 
 /*--------- FOOTER SETTINGS--------*/
 footer {

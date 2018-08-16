@@ -12,30 +12,36 @@
 
                 <div class="single-post">
 
-                    <h3>{{ post.title }}</h3>
-                    <!-- Add link to username so posts can be filtered by the username -->
-                    <h6><i class="far fa-clock"></i> Updated on {{ post.updated }} by
-                        <a href="{% url 'website:individual_author_public_posts' post.author_id %}">{{ post.author.username }}</a></h6>
+                    <div class="post-title">
+                        <h3>{{ post.title }}</h3>
+                        <!-- Add link to username so posts can be filtered by the username -->
+                        <p><i class="far fa-clock"></i> Updated on {{ post.updated }} by
+                            <a href="{% url 'website:individual_author_public_posts' post.author_id %}">{{ post.author.username }}</a></p>
+                    </div>
 
                     <div class="post-tags">
 
-                        <p> Tags:
+                        <ul class="tags">
                             {% for tag in post.tags.all %}
-                                <a href="{% url 'website:tagged_posts_list' tag.id %}">{{ tag.slug }}</a>
+                                <li class="single-tag">
+                                    <a class="btn btn-light tag" href="{% url 'website:tagged_posts_list' tag.id %}">{{ tag.slug }}</a>
+                                </li>
                             {% endfor %}
-                        </p>
-
+                        </ul>
                     </div>
 
                     <div class="post-text">
                         <p>{{ post.content | safe | truncatechars:500 }}</p>
                     </div>
 
-                    <form class="buttons">
-                        <a class="btn btn-secondary" href="{% url 'website:post_detail' pk=post.pk %}"
-                          role="button">View details »</a>
-                    </form>
+                    <div class="post-buttons">
 
+                        <form class="buttons">
+                            <a class="btn btn-secondary" href="{% url 'website:post_detail' pk=post.pk %}"
+                              role="button">View details »</a>
+                        </form>
+
+                    </div>
 
                 </div>
 
