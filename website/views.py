@@ -205,7 +205,7 @@ def post_draft_list(request):
 
 @login_required
 def post_new(request):
-    template = 'website/post_edit.html'
+    template = 'website/post_new.html'
     """
     Page that allows to create the new post. It is visible only for the logged AUTHOR.
     Page also allows to tag created post. It uses two forms at once.

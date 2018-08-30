@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {{ form.media }}
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <h3>NEW POST</h3>
+            <p>Create new post</p>
+
+            <form method="POST" class="post-edit-form">
+
+                {% csrf_token %}
+                {{ form.as_p }}
+                {{ tag_form.as_p }}
+
+                <div class="buttons">
+                    <input type="submit" value="CONFIRM" class="btn btn-primary">
+                    <a href="{% url 'website:posts_list' %}" class="btn btn-default">Cancel</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

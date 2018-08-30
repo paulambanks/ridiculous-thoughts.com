@@ -1,13 +1,26 @@
 from django import forms
 from .models import Post, TaggedPost, SharedPost
-from tinymce import TinyMCE
-
-from accounts.models import CustomUser
+from tinymce.widgets import TinyMCE
 
 
 class TinyMCEWidget(TinyMCE):
     def use_required_attribute(self, *args):
         return False
+
+
+class PostForm(forms.ModelForm):
+
+    class Meta:
+        model = Post
+        fields = ('title', 'content', 'privacy',)
+        widgets = {
+            'content': TinyMCE(attrs={
+                'required': True,
+                'cols': 80,
+                'rows': 30
+                }
+            )
+        }
 
 
 class TagPostForm(forms.ModelForm):
@@ -22,18 +35,6 @@ class SharedPostForm(forms.ModelForm):
     class Meta:
         model = SharedPost
         fields = ('user',)
-
-
-class PostForm(forms.ModelForm):
-    content = forms.CharField(
-        widget=TinyMCEWidget(
-            attrs={'required': True, 'cols': 80, 'rows': 30}
-        )
-    )
-
-    class Meta:
-        model = Post
-        fields = ('title', 'content', 'privacy',)
 
 
 class ContactForm(forms.Form):
