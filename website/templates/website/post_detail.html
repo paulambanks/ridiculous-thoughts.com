@@ -38,13 +38,12 @@
 
             <div class="post-title">
                 <h3>{{ post.title }}</h3>
-                <!-- Add link to username so posts can be filtered by the username -->
-                <p><i class="far fa-clock"></i> Updated on {{ post.updated }} by
-                    <a href="{% url 'website:individual_author_public_posts' post.author_id %}">{{ post.author.username }}</a></p>
+            </div>
+            <div class="post-info">
+                <p><i class="far fa-clock"></i> Updated on {{ post.updated | date:"d F Y" }}.
             </div>
 
             <div class="post-tags">
-
                 <ul class="tags">
                     {% for tag in post.tags.all %}
                         <li class="single-tag">
@@ -56,6 +55,20 @@
 
             <div class="post-text">
                 <p>{{ post.content | safe }}</p>
+            </div>
+
+            <div class="author-info">
+                <h2 class="author-heading">Published by</h2>
+                <div class="author-avatar">
+		            <img src="/static/photo-me.jpg" alt="Picture of Me" class="avatar avatar-56 photo">
+                </div>
+
+                <div class="author-description">
+		            <h3 class="author-title left">{{ post.author.first_name }}</h3>
+		            <p class="author-bio">{{ profile.bio }}</p> <!--profile-bio-->
+                    <a class="author-link" href="{% url 'website:individual_author_public_posts' post.author_id %}">
+				        View all posts by {{ post.author.username }}</a>
+	            </div>
             </div>
 
         </div>

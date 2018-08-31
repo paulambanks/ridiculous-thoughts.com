@@ -1,0 +1,28 @@
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+    {% block content %}
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <h3>Create or Update your profile</h3>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+                    {{ profile_form.as_p }}
+
+                    <div class="buttons">
+                        <button class="btn btn-primary" type="submit">Update</button>
+                        <a href="{% url 'accounts:profile_page' %}" class="btn btn-default">Cancel</a>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+    {% endblock %}

@@ -18,8 +18,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <!-- FONTS
         –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-        <link href="https://fonts.googleapis.com/css?family=Archivo+Black" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Archivo+Black|Montserrat:500" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
         <!-- CSS
         –––––––––––––––––––––––––––––––––––––––––––––––––– -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
@@ -53,6 +52,10 @@
 
                             <div class="collapse navbar-collapse nav-items right" id="navbarResponsive"><!-- USER VIEW-->
                                 <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'accounts:profile_page' %}" title="User Profile">
+                                            <i class="fas fa-user"></i></a>
+                                    </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'website:post_new' %}" title="New Post">
                                             <i class="fas fa-plus"></i></a>

@@ -1,6 +1,8 @@
 from django import forms
-from .models import Post, TaggedPost, SharedPost
+from .models import Post, TaggedPost, SharedPost, Tag
 from tinymce.widgets import TinyMCE
+
+from django.forms import modelformset_factory, formset_factory
 
 
 class TinyMCEWidget(TinyMCE):
@@ -28,6 +30,9 @@ class TagPostForm(forms.ModelForm):
     class Meta:
         model = TaggedPost
         fields = ('tag', )
+
+
+TagPostFormset = formset_factory(TagPostForm, extra=1)
 
 
 class SharedPostForm(forms.ModelForm):

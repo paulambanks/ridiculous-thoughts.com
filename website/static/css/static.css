@@ -1,22 +1,26 @@
 /*--------- MAIN PAGE SETTINGS--------*/
+
 * {
     box-sizing: border-box;
-    font-size: 20px;
+    font-family: 'Noto Serif', serif;
 }
 
 body {
     max-width: 980px;
+    font-size: 19px;
+    line-height: 1.6;
     padding-right: 15px;
     padding-left: 15px;
     padding-bottom: 5%;
     margin: 0 auto;
     width: 100%;
-    font-family: 'Lora', 'Times New Roman', serif;
+    color: #333;
+    font-family: "Noto Serif", serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 800;
-	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: 'Noto Serif', serif;
     line-height: 1.2;
 }
 
@@ -26,6 +30,15 @@ h3, h6 {
 
 p {
     line-height: 1.5;
+}
+
+.col-md-4 {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+.col-md-12 {
+    text-align: center;
 }
 
 /*--------- GENERAL HEADER SETTINGS--------*/
@@ -177,22 +190,31 @@ header {
 .single-post {
     padding: 15px;
     display: flex;
+    font-family: 'Noto Serif', serif;
     flex-direction: column;
     flex-wrap: wrap;
     text-align: center;
 }
 
-.post-title > p {
-    font-size: 16px;
+.post-title > h3 {
+    font-size: 3.9rem;
     text-align: center;
 }
 
-div.post-text {
+.post-info {
+    font-size: 15px;
+    text-align: center;
+}
+
+div.post-text > p {
     margin-bottom: 15px;
+    font-family: 'Noto Serif', serif;
 }
 
 .post-tags {
     text-align: center;
+    padding-bottom: 1%;
+    border-bottom: 1px solid rgba(51, 51, 51, 0.1);
 }
 
 ul.tags {
@@ -210,32 +232,50 @@ ul.tags > li{
     font-size: 16px;
 }
 
-.col-md-4 {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    position: relative;
-}
-.col-md-12 {
-    text-align: center;
-}
-
-form > ul {
-    list-style: none;
+/*--------- POST AUTHOR IN POST DETAILS--------*/
+@media screen and (min-width: 77.5em) {
+    .author-info .avatar {
+    height: 56px;
+    margin: 0 1.6842em 1.6842em 0;
+    width: 56px;
+    }
 }
 
-form > ul > li {
+.author-heading {
+    color: #707070;
+    color: rgba(51, 51, 51, 0.7);
+    font-family: "Noto Sans", sans-serif;
     font-size: 12px;
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+    margin-bottom: 1.5em;
+    text-transform: uppercase;
 }
 
-label[for=id_title],
-label[for=id_content],
-label[for=id_tags] {
-    display: inherit;
+.author-info {
+    border-top: 1px solid rgba(51, 51, 51, 0.1);
+    border-bottom: 1px solid rgba(51, 51, 51, 0.1);
 }
 
-span.helptext {
-    font-size: 12px;
+@media screen and (min-width: 59.6875em) {
+.author-info {
+    margin: 0 5%;
+    padding: 5% 0;
+    }
 }
+
+.author-info .avatar {
+    float: left;
+}
+
+.avatar {
+    border-radius: 50%;
+}
+
+.author-title {
+    text-align: left;
+}
+
 
 /*--------- PRIVACY AND TAGS FORM SETTINGS--------*/
 .post-edit-form > p:nth-child(4) {
@@ -269,6 +309,24 @@ form {
     text-align: center;
 }
 
+form > ul {
+    list-style: none;
+}
+
+form > ul > li {
+    font-size: 12px;
+}
+
+label[for=id_title],
+label[for=id_content],
+label[for=id_tags] {
+    display: inherit;
+}
+
+span.helptext {
+    font-size: 12px;
+}
+
 .buttons {
     text-align: center;
     font-size: 16px;
@@ -280,6 +338,13 @@ form {
 .buttons > a {
     font-size: 16px;
 }
+
+div.post-buttons > form > a {
+    background: white;
+    color: #333;
+    border: white;
+}
+
 body > main > div.container-fluid > div > div:nth-child(2) > form {
     text-align: left;
 }
