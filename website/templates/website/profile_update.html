@@ -1,29 +1,31 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
 
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
+    {{ form.media }}
 
     <div class="row">
-        <div class="col s12 m8 offset-m2">
 
-              <div class="card">
-                <div class="card-content">
+        <div class="col-md-12">
 
-                <h2 class="flow-text">Update your information</h2>
+            <h3>EDIT YOUR PROFILE INFORMATION</h3>
 
-                  <form action="." method="POST" class="padding">
-                    {% csrf_token %} {{ user_form.as_p }}
+            <form action="." method="POST" class="post-edit-form">
+                {% csrf_token %}
 
-                    <div class="divider"></div>
-                    {{ formset.management_form }}
-                        {{ formset.as_p }}
+                {{ formset.management_form }}
 
-                    <button type="submit" class="btn-floating btn-large waves-light waves-effect"><i class="large material-icons">done</i></button>
-                    <a href="{% url 'accounts:profile_page' %}" class="btn btn-default">Cancel</a>
+                    {{ formset.as_p }}
 
-                </form>
+                <div class="buttons">
+                    <input type="submit" value="CONFIRM" class="btn btn-primary">
+                    <a href="{% url 'website:posts_list' %}" class="btn btn-default">Cancel</a>
                 </div>
-            </div>
+
+            </form>
+
         </div>
     </div>
 

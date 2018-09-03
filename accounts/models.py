@@ -64,7 +64,7 @@ class UserProfile(models.Model):
         related_name='profile',
         primary_key=True,
         verbose_name='Member profile')
-    bio = models.CharField(
+    bio = models.TextField(
         max_length=500,
         blank=True,
         default='',
