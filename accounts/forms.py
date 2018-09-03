@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser, Profile
+from .models import CustomUser, UserProfile
 from django import forms
 
 
@@ -24,17 +24,32 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser
         fields = ('email', 'username', 'first_name', 'last_name',)
+        exclude = ('password',)
 
 
 class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'username', 'first_name', 'last_name',)
+        fields = ('username', 'first_name', 'last_name',)
+        exclude = ('password',)
 
 
-class ProfileForm(forms.ModelForm):
+class UserProfileForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        if self.instance.pk is None:
+            self.empty_permitted = False # Here
 
     class Meta:
-        model = Profile
-        fields = ('bio', 'location', 'birth_date',)
+        model = UserProfile
+        fields = ('bio', 'country', 'city',)
+
+# ---------------USER PROFILE------------------------
+
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+
+              <div class="card">
+                <div class="card-content">
+
+                <h2 class="flow-text">Update your information</h2>
+
+                  <form action="." method="POST" class="padding">
+                    {% csrf_token %} {{ user_form.as_p }}
+
+                    <div class="divider"></div>
+                    {{ formset.management_form }}
+                        {{ formset.as_p }}
+
+                    <button type="submit" class="btn-floating btn-large waves-light waves-effect"><i class="large material-icons">done</i></button>
+                    <a href="{% url 'accounts:profile_page' %}" class="btn btn-default">Cancel</a>
+
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

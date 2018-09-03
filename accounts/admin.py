@@ -1,10 +1,15 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .forms import CustomUserCreationForm, CustomUserChangeForm, ProfileForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, UserProfileForm
 from django.contrib.auth.forms import PasswordResetForm
-from .models import CustomUser, Profile
+from .models import CustomUser, UserProfile
 from django.utils.crypto import get_random_string
+
+
+class UserProfileInline(admin.TabularInline):
+    model = UserProfile
+    form = UserProfileForm
 
 
 class CustomUserAdmin(UserAdmin):
@@ -14,6 +19,7 @@ class CustomUserAdmin(UserAdmin):
     """
 
     add_form = CustomUserCreationForm
+    inlines = [UserProfileInline]
     add_fieldsets = (
         (None, {
             'description': (
@@ -55,12 +61,7 @@ class CustomUserAdmin(UserAdmin):
     list_display = ('email', 'username', 'first_name', 'last_name',)
 
 
-class ProfileAdmin(admin.ModelAdmin):
-
-    form = ProfileForm
-    model = Profile
-    list_display = ('id', 'user', 'bio', 'location', 'birth_date', )
-
-
 admin.site.register(CustomUser, CustomUserAdmin)
-admin.site.register(Profile, ProfileAdmin)
+
+
+

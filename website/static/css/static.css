@@ -241,6 +241,11 @@ ul.tags > li{
     }
 }
 
+.avatar {
+    height: 56px;
+    width: 56px;
+}
+
 .author-heading {
     color: #707070;
     color: rgba(51, 51, 51, 0.7);

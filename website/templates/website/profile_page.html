@@ -7,29 +7,27 @@
 
         <div class="col-sm-4">
 
-            <div class="small-image-container"> <!-- Picture -->
-                <img src="/static/photo-me.jpg" alt="Picture of Me">
-            </div>
-            <div class="user-location">
-                <p>{{ user.profile.location }}</p>
-            </div>
-            <div class="user-birthday">
-                <p>{{ user.profile.birth_date }}</p>
-            </div>
+            <div class="user-info">
+                <h2 class="author-heading">Welcome {{ user.profile.user.first_name }} to your Profile Page</h2>
+                <div class="author-avatar">
+		            <img src="/static/photo-me.jpg" alt="Picture of Me" class="avatar avatar-56 photo">
+                </div>
 
-            <div class="update-profile">
-                <a class="btn btn-default" href="{% url 'accounts:new_profile' %}"><i class="fas fa-pencil-alt"></i>Create your profile</a>
-                <a class="btn btn-default" href="{% url 'accounts:update_profile' %}"><i class="fas fa-pencil-alt"></i>Update your profile</a>
             </div>
 
         </div>
 
         <div class="col-sm-8">
-            <div class="user-bio">
-                <p>{{ user.profile.bio }}</p>
+            <div class="user-description">
+                <p class="user-bio">That's something about me: {{ user.profile.bio }}</p> <!--profile-bio-->
+                <a class="user-update-link" href="{% url 'accounts:edit_user' user.profile.pk %}">
+                   Edit your profile</a>
             </div>
-
         </div>
+
     </div>
+
+
+
 
 {% endblock %}

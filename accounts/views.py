@@ -1,75 +1,55 @@
-from django.db import transaction
+from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserChangeForm, ProfileForm
-from django.contrib import messages
-from django.shortcuts import render, get_object_or_404, redirect
-
-from .models import Profile
+from .models import UserProfile, CustomUser
+from .forms import CustomUserChangeForm
+from django.forms.models import inlineformset_factory
+from django.core.exceptions import PermissionDenied
 
 
 def profile_page(request):
     template = 'website/profile_page.html'
+    """
+    The MAIN USER PROFILE PAGE introduces basic user information. 
+    """
     return render(request, template)
 
 
-@login_required
-def new_profile(request):
-    template = 'website/edit_profile.html'
+@login_required()  # only logged in users should access this
+def edit_user(request, pk):
+    """
+    The MAIN USER PROFILE PAGE introduces basic user information.
+    """
+    template = 'website/profile_update.html'
+    # querying the User object with pk from url
+    # user = CustomUser.objects.get(pk=pk)
+    user = request.user
 
-    if request.method == 'POST':
-        profile_form = ProfileForm(request.POST)
+    # pre-populate UserProfileForm with retrieved user values from above.
+    user_form = CustomUserChangeForm(instance=user)
 
-        try:
-            if profile_form.is_valid():
-                profile = profile_form.save(commit=False)
-                profile.user = request.user
-                profile.save()
-                messages.success(request, 'Your profile was successfully updated!')
-                return redirect('website:profile_page', profile.id)
+    ProfileInlineFormset = inlineformset_factory(CustomUser, UserProfile,
+                                                 fields=('bio', 'city', 'country',))
 
-            else:
-                messages.error(request, 'Please correct the error below.')
+    formset = ProfileInlineFormset(instance=user)
 
-        except Exception as e:
-            messages.warning(request, 'Post Failed To Save. Error: {}".format(e)')
+    if request.user.is_authenticated and request.user.id == user.id:
+        if request.method == "POST":
+            user_form = CustomUserChangeForm(request.POST, instance=user)
+            formset = ProfileInlineFormset(request.POST, instance=user)
 
+            if user_form.is_valid():
+                created_user = user_form.save(commit=False)
+                formset = ProfileInlineFormset(request.POST, instance=created_user)
+
+                if formset.is_valid():
+                    created_user.save()
+                    formset.save()
+                    return HttpResponseRedirect('/accounts/profile_page/')
+
+        return render(request, template, {
+            "pk": pk,
+            "user_form": user_form,
+            "formset": formset,
+        })
     else:
-        profile_form = ProfileForm()
-
-    context = {
-        'profile_form': profile_form,
-    }
-
-    return render(request, template, context)
-
-
-@login_required
-def update_profile(request):
-    template = 'website/edit_profile.html'
-
-    if request.method == 'POST':
-        profile_form = ProfileForm(request.POST, instance=request.user.profile)
-
-        try:
-            if profile_form.is_valid():
-                profile = profile_form.save(commit=False)
-                profile.save()
-                messages.success(request, 'Your profile was successfully updated!')
-                return redirect('website:profile_page')
-
-            else:
-                messages.error(request, 'Please correct the error below.')
-
-        except Exception as e:
-            messages.warning(request, 'Post Failed To Save. Error: {}".format(e)')
-
-    else:
-        profile_form = ProfileForm(instance=request.user.profile)
-
-    context = {
-        'profile_form': profile_form,
-    }
-
-    return render(request, template, context)
-
-
+        raise PermissionDenied

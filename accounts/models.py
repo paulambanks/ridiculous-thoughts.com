@@ -57,21 +57,40 @@ class CustomUser(AbstractUser):
     objects = UserManager()
 
 
-class Profile(models.Model):
-
-    user = models.ForeignKey(
-        CustomUser,
+class UserProfile(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name='profile'),
-    bio = models.TextField(
+        related_name='profile',
+        primary_key=True,
+        verbose_name='Member profile')
+    bio = models.CharField(
         max_length=500,
+        blank=True,
+        default='',
+        help_text="Write something about yourself"
+    )
+    city = models.CharField(
+        max_length=100,
+        default='',
         blank=True)
-    location = models.CharField(
-        max_length=30,
-        blank=True)
-    birth_date = models.DateField(
-        null=True,
+    country = models.CharField(
+        max_length=100,
+        default='',
         blank=True)
 
-    def __unicode__(self):
-        return self.id
+    def __str__(self):
+        return self.user.username
+
+
+def create_profile(sender, **kwargs):
+    user = kwargs["instance"]
+    if kwargs["created"]:
+        user_profile = UserProfile(user=user)
+        user_profile.save()
+
+
+post_save.connect(create_profile, sender=CustomUser)
+
+
+
