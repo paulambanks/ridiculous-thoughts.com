@@ -17,7 +17,9 @@
 
                 {% csrf_token %}
                 {{ form.as_p }}
-                {{ tag_form.as_p }}
+                {{ formset.management_form }}
+
+                {{ formset.as_table }}
 
                 <div class="buttons">
                     <input type="submit" value="CONFIRM" class="btn btn-primary">

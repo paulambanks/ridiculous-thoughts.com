@@ -6,10 +6,11 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.mail import send_mail, BadHeaderError
 from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.forms.models import inlineformset_factory
 
 from django.utils import timezone
 
-from .models import Post, Tag
+from .models import Post, TaggedPost
 from .forms import PostForm, ContactForm, TagPostForm, SharedPostForm
 
 
@@ -212,29 +213,30 @@ def post_new(request):
     """
     # TO DO: Needs to be modified to accommodate multiple tagging at once
 
+    TagInlineFormset = inlineformset_factory(Post, TaggedPost, fields=('tag',))
+
     if request.method == "POST":
         form = PostForm(request.POST)
-        tag_form = TagPostForm(request.POST)
+        formset = TagInlineFormset(request.POST)
 
         try:
-            if all([form.is_valid() and tag_form.is_valid()]):
+            if all([form.is_valid() and formset.is_valid()]):
                 if 'cancel' in request.POST:
                     return HttpResponseRedirect(get_success_url())
+
                 else:
-                    # Save post data from the form to Post DB
                     post = form.save(commit=False)
                     post.author = request.user
-                    post.created = timezone.now
-                    post.save()
+                    post.updated = timezone.now
+                    formset = TagInlineFormset(request.POST, instance=post)
 
-                    # Save only one tag data from the form to Post DB; NOT IDEAL!
-                    # I need to add remove the tag, as well as allow for
-                    # multiple tagging happening at once
-                    tagpost = tag_form.save(commit=False)
-                    # I need to add a proper view for unique_together {tag, post} error
-                    tagpost.post_id = post.id
-                    tagpost.save()
-
+                    for form in formset:
+                        if form.has_changed():
+                            post.save()
+                            tag = form.save(commit=False)
+                            tag.post_id = post.id
+                            tag.save()
+                    messages.success(request, "Your Post Was Successfully Updated")
                     return redirect('website:post_detail', pk=post.pk)
 
         except Exception as e:
@@ -242,10 +244,10 @@ def post_new(request):
 
     else:
         form = PostForm()
-        tag_form = TagPostForm()
+        formset = TagInlineFormset()
     context = {
         'form': form,
-        'tag_form': tag_form,
+        'formset': formset,
     }
 
     return render(request, template, context)
@@ -260,30 +262,32 @@ def post_edit(request, pk):  # also post update
     """
     # TO DO: Needs to be modified to accommodate multiple tagging at once
     post = get_object_or_404(Post, pk=pk)
+    # pre-populate UserProfileForm with retrieved user values.
+
+    TagInlineFormset = inlineformset_factory(Post, TaggedPost, fields=('tag',))
 
     if post.author == request.user:
 
         if request.method == "POST":
             form = PostForm(request.POST, instance=post)
-            tag_form = TagPostForm(request.POST)
+            formset = TagInlineFormset(request.POST, instance=post)
 
             try:
-                if all([form.is_valid() and tag_form.is_valid()]):
+                if all([form.is_valid() and formset.is_valid()]):
                     if 'cancel' in request.POST:
                         return HttpResponseRedirect(get_success_url())
                     else:
                         post = form.save(commit=False)
                         post.author = request.user
                         post.updated = timezone.now
-                        post.save()
+                        formset = TagInlineFormset(request.POST, request.FILES, instance=post)
 
-                        # Save additional tags data anytime user edits the post;
-                        # however, I need to add remove the tag, as well as allow for
-                        # multiple changes happening at once
-                        tagpost = tag_form.save(commit=False)
-                        tagpost.post_id = post.id
-                        # I need to add a proper view for unique_together {tag, post} error
-                        tagpost.save()
+                        for form in formset:
+                            if form.has_changed():
+                                post.save()
+                                tag = form.save(commit=False)
+                                tag.post_id = post.id
+                                tag.save()
                         messages.success(request, "Your Post Was Successfully Updated")
                         return redirect('website:post_detail', pk=post.pk)
 
@@ -292,11 +296,11 @@ def post_edit(request, pk):  # also post update
 
         else:
             form = PostForm(instance=post)
-            tag_form = TagPostForm()
+            formset = TagInlineFormset()
 
         context = {
             'form': form,
-            'tag_form': tag_form,
+            'formset': formset,
             'post': post,
         }
 

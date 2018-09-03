@@ -60,12 +60,20 @@
             <div class="author-info">
                 <h2 class="author-heading">Published by</h2>
                 <div class="author-avatar">
-		            <img src="/static/photo-me.jpg" alt="Picture of Me" class="avatar avatar-56 photo">
+                    {% if user.profile.avatar %}
+		                <img src="{{ post.author.profile.avatar.url }}" width="100" height="100" alt="Profile Avatar"
+                             class="avatar photo">
+                    {% else %}
+                        <img src="/static/crazycat.jpeg"
+                             width="200" height="200" alt="Profile Avatar"
+                             class="avatar photo">
+                    {% endif %}
                 </div>
+
 
                 <div class="author-description">
 		            <h3 class="author-title left">{{ post.author.first_name }}</h3>
-		            <p class="author-bio">{{ profile.bio }}</p> <!--profile-bio-->
+		            <p class="author-bio">{{ post.author.profile.bio }}</p> <!--profile-bio-->
                     <a class="author-link" href="{% url 'website:individual_author_public_posts' post.author_id %}">
 				        View all posts by {{ post.author.username }}</a>
 	            </div>

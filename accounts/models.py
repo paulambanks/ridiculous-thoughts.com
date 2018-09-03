@@ -94,8 +94,7 @@ class UserProfile(models.Model):
         if self.avatar and hasattr(self.avatar, 'url'):
             return "{0}{1}".format(settings.MEDIA_URL, self.avatar.url)
         else:
-            return '/static/images/crazycat.jpeg'
-
+            return '/static/crazycat.jpeg'
 
 
 def create_profile(sender, **kwargs):

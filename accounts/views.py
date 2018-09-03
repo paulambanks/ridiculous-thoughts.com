@@ -16,10 +16,11 @@ def profile_page(request):
 
 @login_required()  # only logged in users should access this
 def edit_user(request, pk):
+    template = 'website/profile_update.html'
     """
     Page to EDIT User Profile information.
     """
-    template = 'website/profile_update.html'
+
     user = CustomUser.objects.get(pk=pk)
 
     # pre-populate UserProfileForm with retrieved user values.

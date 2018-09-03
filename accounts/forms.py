@@ -24,7 +24,6 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = CustomUser
         fields = ('email', 'username', 'first_name', 'last_name',)
-        exclude = ('password',)
 
 
 class CustomUserChangeForm(UserChangeForm):
@@ -32,7 +31,6 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('username', 'first_name', 'last_name',)
-        exclude = ('password',)
 
 
 class UserProfileForm(forms.ModelForm):
