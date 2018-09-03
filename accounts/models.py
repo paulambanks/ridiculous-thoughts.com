@@ -70,6 +70,13 @@ class UserProfile(models.Model):
         default='',
         help_text="Write something about yourself"
     )
+    avatar = models.ImageField(
+        upload_to='uploads/',
+        blank=True,
+        default='static/images/crazycat.jpeg',
+        help_text="Profile Avatar",
+        verbose_name="Profile Avatar"
+    )
     city = models.CharField(
         max_length=100,
         default='',
@@ -81,6 +88,14 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    @property
+    def get_absolute_avatar_url(self):
+        if self.avatar and hasattr(self.avatar, 'url'):
+            return "{0}{1}".format(settings.MEDIA_URL, self.avatar.url)
+        else:
+            return '/static/images/crazycat.jpeg'
+
 
 
 def create_profile(sender, **kwargs):

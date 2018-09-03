@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
-
+{% load staticfiles %}
 {% block content %}
+
 
     <div class="row">
 
@@ -10,7 +11,15 @@
             <div class="user-info">
                 <h2 class="author-heading">Welcome {{ user.profile.user.first_name }} to your Profile Page</h2>
                 <div class="author-avatar">
-		            <img src="/static/photo-me.jpg" alt="Picture of Me" class="avatar avatar-56 photo">
+                    {% if user.profile.avatar %}
+                        <img src="{{ user.profile.avatar.url }}"
+                             width="100" height="100" alt="Profile Avatar"
+                             class="avatar photo">
+                    {% else %}
+                        <img src="/static/crazycat.jpeg"
+                             width="200" height="200" alt="Profile Avatar"
+                             class="avatar photo">
+                    {% endif %}
                 </div>
 
             </div>
@@ -26,8 +35,5 @@
         </div>
 
     </div>
-
-
-
 
 {% endblock %}

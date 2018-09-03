@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib.auth.decorators import login_required
 from .models import UserProfile, CustomUser
 from .forms import UserProfileForm
@@ -20,24 +20,24 @@ def edit_user(request, pk):
     Page to EDIT User Profile information.
     """
     template = 'website/profile_update.html'
-    user = request.user
+    user = CustomUser.objects.get(pk=pk)
 
     # pre-populate UserProfileForm with retrieved user values.
     user_form = UserProfileForm(instance=user)
 
     ProfileInlineFormset = inlineformset_factory(CustomUser, UserProfile,
-                                                 fields=('bio', 'city', 'country',))
+                                                 fields=('bio', 'city', 'country', 'avatar'))
 
     formset = ProfileInlineFormset(instance=user)
 
     if request.user.is_authenticated and request.user.id == user.id:
         if request.method == "POST":
-            user_form = UserProfileForm(request.POST, instance=user)
-            formset = ProfileInlineFormset(request.POST, instance=user)
+            user_form = UserProfileForm(request.POST, request.FILES, instance=user)
+            formset = ProfileInlineFormset(request.POST, request.FILES, instance=user)
 
             if user_form.is_valid():
                 created_user = user_form.save(commit=False)
-                formset = ProfileInlineFormset(request.POST, instance=created_user)
+                formset = ProfileInlineFormset(request.POST, request.FILES, instance=created_user)
 
                 if formset.is_valid():
                     created_user.save()
@@ -50,4 +50,12 @@ def edit_user(request, pk):
             "formset": formset,
         })
     else:
-        raise PermissionDenied
+        return redirect('accounts:profile_error')  # needs better way to show error
+
+
+def profile_error(request):
+    template = 'website/profile_error.html'
+    """
+    Return error, if users tried to update a profile of someone else.
+    """
+    return render(request, template)

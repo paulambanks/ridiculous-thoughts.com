@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Post share error{% endblock %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    {{ form.media }}
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <p>
+            Sorry, seems you are trying to update someone else's profile ;)
+            </p>
+
+        </div>
+
+
+    </div>
+
+{% endblock %}

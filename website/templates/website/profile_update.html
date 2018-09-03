@@ -12,7 +12,7 @@
 
             <h3>EDIT YOUR PROFILE INFORMATION</h3>
 
-            <form action="." method="POST" class="post-edit-form">
+            <form action="." method="POST" class="post-edit-form" enctype="multipart/form-data">
                 {% csrf_token %}
 
                 {{ formset.management_form }}
