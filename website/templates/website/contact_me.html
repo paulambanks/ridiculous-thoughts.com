@@ -3,103 +3,106 @@
 
 {% block content %}
 
-    <div class="row">
+    <div class="content-container">
 
-        <div class="col-sm-4">
+        <div class="row">
 
-            <div class="small-image-container"> <!-- Picture -->
-                <img src="/static/photo-me.jpg" alt="Picture of Me">
-            </div>
+            <div class="col-sm-8">
 
-        </div>
+                <p>Hiya! Feel free to contact me via the form below :) </p>
 
-        <div class="col-sm-8">
+                <form action="" method="post">
+                    {% csrf_token %}
 
-            <p>Hiya! Feel free to contact me via the form below :) </p>
+                    {% if request.user.is_authenticated %} <!-- CONTACT FORM FOR LOGGED USERS–––––– -->
 
-            <form action="" method="post">
-                {% csrf_token %}
+                        <label for="subject">
+                            Subject:</label>
+                        <textarea class="form-control" type="textarea" name="subject" id="subject" maxlength="100" rows="1"></textarea>
 
-                {% if request.user.is_authenticated %} <!-- CONTACT FORM FOR LOGGED USERS–––––– -->
+                        <label for="message">
+                            Message:</label>
+                        <textarea class="form-control" type="textarea" name="message" id="message" maxlength="6000" rows="7"></textarea>
 
-                    <label for="subject">
-                        Subject:</label>
-                    <textarea class="form-control" type="textarea" name="subject" id="subject" maxlength="100" rows="1"></textarea>
-
-                    <label for="message">
-                        Message:</label>
-                    <textarea class="form-control" type="textarea" name="message" id="message" maxlength="6000" rows="7"></textarea>
-
-                {% else %} <!-- CONTACT FORM FOR ANONYMOUS USERS–––––– -->
+                    {% else %} <!-- CONTACT FORM FOR ANONYMOUS USERS–––––– -->
 
 
-                    <label for="subject">
-                        Subject:</label>
-                    <textarea class="form-control" type="textarea" name="subject" id="subject" maxlength="100" rows="1"></textarea>
+                        <label for="subject">
+                            Subject:</label>
+                        <textarea class="form-control" type="textarea" name="subject" id="subject" maxlength="100" rows="1"></textarea>
 
-                    <label for="message">
-                        Message:</label>
-                    <textarea class="form-control" type="textarea" name="message" id="message" maxlength="6000" rows="7"></textarea>
+                        <label for="message">
+                            Message:</label>
+                        <textarea class="form-control" type="textarea" name="message" id="message" maxlength="6000" rows="7"></textarea>
 
 
-                    <div class="row no-margin">
-                        <div class="col-sm-4 form-group">
-                            <label for="name">
-                                Your Name:</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                        <div class="row no-margin">
+                            <div class="col-sm-4 form-group">
+                                <label for="name">
+                                    Your Name:</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+
+                            <div class="col-sm-4 form-group">
+                                <label for="email">
+                                    Your Email:</label>
+                                <input type="text" class="form-control" id="email" name="email" required>
+                            </div>
                         </div>
 
-                        <div class="col-sm-4 form-group">
-                            <label for="email">
-                                Your Email:</label>
-                            <input type="text" class="form-control" id="email" name="email" required>
-                        </div>
+                    {% endif %}
+
+                    <br>
+
+                    <div class="buttons">
+                        <button class="btn btn-primary" type="submit">SEND</button>
                     </div>
 
-                {% endif %}
+                </form>
+                <br>
+
+                <!-- SOCIAL LINKS–––––––––––––––––––––––––––––––––––––––––– -->
+                <div class="links">
+                    <ul class="list-inline text-center">
+                      <li class="list-inline-item">
+                        <a href="https://github.com/paulambanks">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="https://www.linkedin.com/in/paulambanks/">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="/feed.xml">
+                          <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                      </li>
+                    </ul>
+                </div>
 
                 <br>
 
-                <div class="buttons">
-                    <button class="btn btn-primary" type="submit">SEND</button>
+            </div>
+            <div class="col-sm-4">
+
+                <div class="small-image-container"> <!-- Picture -->
+                    <img src="/static/photo-me.jpg" alt="Picture of Me">
                 </div>
 
-            </form>
 
-            <br>
-
-            <!-- SOCIAL LINKS–––––––––––––––––––––––––––––––––––––––––– -->
-            <div class="links">
-                <ul class="list-inline text-center">
-                  <li class="list-inline-item">
-                    <a href="https://github.com/paulambanks">
-                      <span class="fa-stack fa-lg">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                      </span>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="https://www.linkedin.com/in/paulambanks/">
-                      <span class="fa-stack fa-lg">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
-                      </span>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="/feed.xml">
-                      <span class="fa-stack fa-lg">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-                      </span>
-                    </a>
-                  </li>
-                </ul>
             </div>
-
         </div>
-
     </div>
 
 {% endblock %}

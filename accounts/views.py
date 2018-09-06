@@ -27,7 +27,7 @@ def edit_user(request, pk):
     user_form = UserProfileForm(instance=user)
 
     ProfileInlineFormset = inlineformset_factory(CustomUser, UserProfile,
-                                                 fields=('bio', 'city', 'country', 'avatar'))
+                                                 fields=('bio', 'city', 'country', 'avatar'),)
 
     formset = ProfileInlineFormset(instance=user)
 
@@ -43,7 +43,7 @@ def edit_user(request, pk):
                 if formset.is_valid():
                     created_user.save()
                     formset.save()
-                    return HttpResponseRedirect('/accounts/profile_page/')
+                    return HttpResponseRedirect('/friends/private_post_list/')
 
         return render(request, template, {
             "pk": pk,

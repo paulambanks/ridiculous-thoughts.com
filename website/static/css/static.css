@@ -6,16 +6,47 @@
 }
 
 body {
-    max-width: 980px;
+    /*max-width: 980px;*/
     font-size: 19px;
     line-height: 1.6;
-    padding-right: 15px;
-    padding-left: 15px;
     padding-bottom: 5%;
     margin: 0 auto;
     width: 100%;
     color: #333;
     font-family: "Noto Serif", serif;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 400px) {
+    body {
+        max-width: 100%;
+        margin: 0 auto;
+        padding-bottom: 5%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 2000px;
+    }
+}
+
+main {
+    /*max-width: 980px;*/
+    font-size: 19px;
+    line-height: 1.6;
+    padding-bottom: 5%;
+    margin: 0 auto;
+    width: 100%;
+    color: #333;
+    font-family: "Noto Serif", serif;
+}
+
+.content-container {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 0 auto;
+    width: 80%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -32,87 +63,20 @@ p {
     line-height: 1.5;
 }
 
-.col-md-4 {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    position: relative;
-}
 .col-md-12 {
     text-align: center;
 }
 
-/*--------- GENERAL HEADER SETTINGS--------*/
+/*-------------------------- GENERAL HEADER SETTINGS--------------------------------*/
 
 header {
-    box-sizing: border-box;
     top: 0;
 	left: 0;
 	right: 0;
-    margin: 0 auto;
-    padding-right: 10px;
-    padding-left: 10px;
+    margin: 0;
     position: fixed;
 	transition: top 0.2s ease-in-out;
-	max-width: 1200px;
     z-index: 2;
-}
-
-
-/*--------- NAVIGATION SETTINGS--------*/
-
-.nav-up {
-    top: -80px;
-}
-
-#mainNav {
-    background: #e2e2e2;
-    margin-bottom: 40px;
-    padding: 0;
-}
-
-#mainNav .navbar-toggler {
-    font-weight: 800;
-    text-transform: uppercase;
-    color: gray;
-}
-
-#mainNav .navbar-brand {
-    font-weight: 800;
-    color: white;
-}
-
-#mainNav .navbar-brand:hover {
-    color: rgba(0,0,0,.5);
-    background: #ddd;
-}
-
-#mainNav .nav-item .nav-link {
-    display: block;
-    width: 100%;
-    text-align: center;
-    font-weight: 800;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: normal;
-}
-
-.navigation .nav-item .nav-link:hover,
-.navigation .nav-item .nav-link:active {
-      background: #ddd;
-}
-
-
-/*--------- MOBILE SETTINGS--------*/
-
-/* Mobile Styles */
-@media only screen and (max-width: 400px) {
-    body {
-        max-width: 380px;
-        padding-right: 10px;
-        padding-left: 10px;
-        margin: 0 auto;
-        padding-bottom: 5%;
-    }
 }
 
 /* Tablet Styles */
@@ -130,14 +94,82 @@ header {
     }
 }
 
+
+/*------------------------------ NAVIGATION SETTINGS---------------------------------------*/
+
+.nav-up {
+    top: -80px;
+}
+
+#mainNav {
+    background: #414042;
+    margin-bottom: 40px;
+    padding: 0;
+}
+
+#mainNav .navbar-toggler {
+    font-weight: 800;
+    text-transform: uppercase;
+    color: white;
+}
+
+#mainNav .navbar-brand {
+    font-weight: 800;
+    color: white;
+}
+
+#mainNav .navbar-brand:hover {
+    color: #BEBEBE;
+}
+
+#mainNav .nav-item .nav-link {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: normal;
+}
+
+.profile-page-link-container .profile-page-link {
+    display: flex;
+    height: inherit;
+    margin: auto 0;
+    text-decoration: none;
+}
+
+.profile-link-username {
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: normal;
+    margin: auto 0;
+    color: white;
+}
+
+.profile-link-username:hover {
+    color: #BEBEBE;
+    text-decoration: none;
+}
+
+.nav-avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+
 @media only screen and (min-width: 992px) {
     #mainNav {
     position: relative;
     margin-bottom: 40px;
-        background: #40bfdc linear-gradient(324deg, #4cabe7, #0f8ad8, #4197c391);
+        background: #414042;
     }
     .container {
         z-index: 1;
+        padding-top: 5px;
+        padding-bottom: 5px;
     }
     .overlay {
         position: absolute;
@@ -145,39 +177,60 @@ header {
         left: 0;
         height: 100%;
         width: 100%;
-        background-color: #212529;
-        opacity: 0.5;
     }
     .navbar-light .navbar-nav .nav-link {
         color: white;
     }
-
+    .navbar-light .navbar-nav .nav-link:hover {
+        color: #BEBEBE;
+    }
 }
+
+/* Tablet Styles */
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+    .navigation .navbar-brand {
+        margin-left: 10px;
+        color: #414042;
+    }
+}
+
 @media only screen and (max-width: 400px) {
     .navigation .navbar-brand {
         font-size: 20px;
         margin-left: 10px;
-        color: gray;
+        color: #414042;
     }
 }
 
-@media only screen and (min-width: 401px) and (max-width: 960px) {
-    .navigation .navbar-brand {
-        margin-left: 10px;
-        color: gray;
-    }
+/*--------- FLUID JUMBOTRON SETTINGS--------*/
+
+.jumbotron-fluid {
+    margin-bottom: 0;
+    padding: 30px 0 0;
+    background-color: #BEBEBE;
 }
 
-/*--------- BOOTSTRAP PAGINATION SETTINGS--------*/
-
-.pagination {
+.jumbotron-image-container {
     justify-content: center;
+    width: 50%;
+    position: relative;
 }
 
-/*--------- PAGE CONTENT SETTINGS--------*/
+.img-responsive {
+    width: 100%;
+    height: auto;
+    opacity: 0.7;
+}
+
+/*--------- PAGINATION SETTINGS--------*/
+
+
+
+/*--------- PAGE WITH POSTS CONTENT SETTINGS--------*/
 
 .container-fluid {
     z-index: 1;
+    padding: 0;
 }
 .row {
     margin-top: 80px;
@@ -214,7 +267,6 @@ div.post-text > p {
 .post-tags {
     text-align: center;
     padding-bottom: 1%;
-    /*border-bottom: 1px solid rgba(51, 51, 51, 0.1);*/
 }
 
 ul.tags {
@@ -232,7 +284,114 @@ ul.tags > li{
     font-size: 16px;
 }
 
-/*--------- POST AUTHOR IN POST DETAILS--------*/
+.pagination {
+    justify-content: center;
+}
+/*----------------------- POST AUTHOR IN POST DETAILS-----------------*/
+
+.card-deck {
+    border-right: double #414042;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 630px) {
+    .card-deck {
+        border-right: none;
+    }
+}
+
+.card {
+    min-width: 300px;
+    max-width: 300px;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 1240px) {
+    .card {
+        min-width: 300px;
+        max-width: 600px;
+    }
+}
+
+.card.body {
+    position: relative;
+
+}
+.card-post-tags {
+    text-align: center;
+    padding-bottom: 1%;
+}
+
+.card-text {
+    font-size: 14px;
+}
+ul.card-tags {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+}
+
+ul.card-tags > li{
+    list-style: none;
+    padding: 2px;
+}
+
+.user-update-link {
+    color: #6c757d;
+}
+.user-update-link:hover {
+    text-decoration: none;
+    color: #414042;
+}
+
+div.card-footer > small > a > i {
+    color: #278487;
+}
+
+
+/* Desktop Styles */
+@media only screen and (min-width: 420px) {
+    .profile-card {
+    min-width: 350px;
+    }
+}
+
+.profile-card-title {
+    padding: .75rem 1.25rem;
+    background: #278487;
+    border-radius: 0.25rem;
+}
+
+.profile-user-info {
+    padding: .75rem 1.25rem;
+
+}
+
+.profile-avatar {
+    text-align: center;
+}
+
+.profile-avatar-photo {
+    border-radius: 50%;
+    max-height: 225px;
+    max-width: 225px;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.profile-card {
+    border: none;
+}
+
+
+.profile-user-bio {
+    font-size: 14px;
+}
+
+
+/*----------------------- POST AUTHOR IN POST DETAILS-----------------*/
+
 @media screen and (min-width: 77.5em) {
     .author-info .avatar {
     height: 56px;
@@ -257,11 +416,6 @@ ul.tags > li{
     text-transform: uppercase;
 }
 
-/*.author-info {*/
-    /*border-top: 1px solid rgba(51, 51, 51, 0.1);*/
-    /*border-bottom: 1px solid rgba(51, 51, 51, 0.1);*/
-/*}*/
-
 @media screen and (min-width: 59.6875em) {
 .author-info {
     margin: 0 5%;
@@ -282,33 +436,66 @@ ul.tags > li{
 }
 
 
-/*--------- PRIVACY AND TAGS FORM SETTINGS--------*/
-.post-edit-form > p:nth-child(4) {
-    display: grid;
-    width: 50%;
-    margin: 0 auto 15px auto;
+/*------------------------- EDIT POST FORM SETTINGS----------------------------*/
+
+.post-edit.edit-form-container {
+    display: flex;
+    width: 100%;
+    background: #BEBEBE;
 }
 
-.post-edit-form > p:nth-child(5) {
-    display: grid;
-    width: 50%;
-    margin: 0 auto 15px auto;
+div.post-edit.col-sm-12.row-flex {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+form.post-edit.form-content {
+    width: 100%;
+}
+
+div.col-sm-8.post-edit.edit-post-content {
+    padding: 1%;
+}
+.fieldWrapper.form-title {
+    padding: 5px 0;
+    margin-bottom: 5px;
+    background: #414042;
+    color: white;
+}
+
+.fieldWrapper.content {
+    padding: 1% 0;
+    margin: 0 1%;
+}
+
+.fieldWrapper.privacy {
+    padding: 1% 0;
+}
+
+div.col-sm-4.post-detail-edit {
+    padding: 1%;
+}
+
+.current-post-tags > ul > li {
+    list-style: none;
+}
+
+.post-detail-card {
+    border: 1px solid rgba(51, 51, 51, 0.1);
+    margin-bottom: 5%;
+    padding-bottom: 5%;
 }
 
 /*#id_content,*/
 #id_title {
-    width: 80%;
+    width: 100%;
+    border: 1px solid rgba(51, 51, 51, 0.1);
+    margin-bottom: 1%;
+    text-align: center;
 }
 
-.fixed-bottom {
-    position: absolute;
-    right: 0;
-    top: 100%;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-}
-/*--------- FORMS SETTINGS--------*/
+/*--------------------- FORMS SETTINGS--------------------------*/
 
 form {
     text-align: center;
@@ -358,14 +545,7 @@ body > main > div.container-fluid > div > div:nth-child(2) > form {
     text-align: left;
 }
 
-.post-edit-form {
-    display: flex;
-    flex-direction: column;
-    /*width: 80%;*/
-}
-
-
-/*--------- IMAGE SETTINGS--------*/
+/*-------------- ABOUT ME IMAGE SETTINGS SETTINGS--------*/
 
 .image-container {
     justify-content: center;
@@ -416,12 +596,12 @@ footer {
     bottom: 0;
 	left: 0;
 	right: 0;
-	/* center all inline content */
 	text-align: center;
     margin: 0 auto;
     padding-right: 10px;
     padding-left: 10px;
 	clear: both;
-	background-color: white;
+	background-color: #36454F;
+    color: white;
 }
 

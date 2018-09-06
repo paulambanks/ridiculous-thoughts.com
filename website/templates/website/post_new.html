@@ -6,28 +6,69 @@
 {% block content %}
     {{ form.media }}
 
-    <div class="row">
+    <div class="content-container">
 
-        <div class="col-md-12">
+        <div class="row">
 
-            <h3>NEW POST</h3>
-            <p>Create new post</p>
+            <div class="post-edit edit-form-container">
 
-            <form method="POST" class="post-edit-form">
+                <form method="POST" class="post-edit form-content">{% csrf_token %}
 
-                {% csrf_token %}
-                {{ form.as_p }}
-                {{ formset.management_form }}
+                    <div class="post-edit col-sm-12 row-flex">
 
-                {{ formset.as_table }}
+                        <div class="col-sm-8 post-edit edit-post-content">
 
-                <div class="buttons">
-                    <input type="submit" value="CONFIRM" class="btn btn-primary">
-                    <a href="{% url 'website:posts_list' %}" class="btn btn-default">Cancel</a>
-                </div>
-            </form>
+                            <div class="fieldWrapper form-title">
+                                <h3>WRITE YOUR NEW POST</h3>
+                            </div>
+                            <div class="post-edit-card">
 
+                            <div class="fieldWrapper title">
+                                {{ form.title }}
+                            </div>
+                            <div class="fieldWrapper content">
+                                {{ form.content }}
+                            </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4 post-detail-edit">
+
+                            <div class="fieldWrapper form-title">
+                                <h3>POST DETAILS</h3>
+                            </div>
+
+                            <div class="post-detail-card">
+
+                                <div class="fieldWrapper privacy">
+                                    <label for="{{ form.privacy.id_for_label }}">Change privacy:</label>
+                                    {{ form.privacy }}
+                                </div>
+
+                                {{ formset.management_form }}
+
+                                <label for="{{ form.tag.id_for_label }}">Add tags:</label>
+
+                                {% for form in formset %}
+                                    <div class="fieldWrapper tag">
+                                        {{ form }}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <input type="submit" value="SAVE DRAFT" class="btn btn-success">
+                        <a href="{% url 'website:posts_list' %}" class="btn btn-secondary">CANCEL</a>
+                    </div>
+                </form>
+            </div>
         </div>
+
     </div>
+
+
+
 
 {% endblock %}

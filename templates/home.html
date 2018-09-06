@@ -3,28 +3,10 @@
 
     {% block content %}
 
-        <div class="image-container"> <!-- Picture -->
-            <img src="/static/mountains.jpg" alt="Picture of Mountains" />
-        </div>
-
-        <div class="col-md-12">
-
-            <h1 id="welcome-to-ridiculousthoughts">Welcome to Ridiculous Thoughts!</h1>
-
-            <form class="buttons left">
-
-                {% if user.is_authenticated %}
-                    Hi {{ user.first_name }}
-
-                {% else %}
-                    <p>If you would like to share your thoughts feel free to contact the Admin or Login to your profile </p>
-                     <div class="buttons">
-                        <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
-                        <a href='{% url 'website:email' %}' class='btn btn-info'>Contact</a>
-                     </div>
-
-                {% endif %}
-            </form>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="jumbotron-container">
+                <img src="/static/coffee-break.jpg" class="img-responsive" alt="Responsive image">
+            </div>
         </div>
 
 

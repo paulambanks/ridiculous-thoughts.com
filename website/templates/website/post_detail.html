@@ -11,11 +11,10 @@
 
         {% if user.is_authenticated and request.user == post.author %}
 
-        <form class="buttons">
             {%  if post.status == "Draft" %}
 
-                <a class="btn btn-default" href="{% url 'website:post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt"></i></a>
-                <a class="btn btn-default" href="{% url 'website:post_remove' pk=post.pk %}"><i class="far fa-trash-alt"></i></a>
+                <a class="btn btn-default" href="{% url 'website:post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt">EDIT</i></a>
+                <a class="btn btn-default" href="{% url 'website:post_remove' pk=post.pk %}"><i class="far fa-trash-alt">TRASH</i></a>
                 <a class="btn btn-default" href="{% url 'website:post_publish' pk=post.pk %}">Publish</a>
 
 
@@ -60,10 +59,13 @@
             <div class="author-info">
                 <h2 class="author-heading">Published by</h2>
                 <div class="author-avatar">
+
                     {% if user.profile.avatar %}
 		                <img src="{{ post.author.profile.avatar.url }}" width="100" height="100" alt="Profile Avatar"
                              class="avatar photo">
+
                     {% else %}
+
                         <img src="/static/crazycat.jpeg"
                              width="200" height="200" alt="Profile Avatar"
                              class="avatar photo">

@@ -16,7 +16,7 @@ from website.models import Post
 def private_posts_list(request):
     """The page with all blog posts, visible to all"""
     template = 'friends/private_post_list.html'
-    post_list = Post.objects.filter(author=request.user, status='Published', privacy='Private').order_by('-created')
+    post_list = Post.objects.filter(author=request.user, status='Published',).order_by('-updated')
     page = request.GET.get('page', 1)
 
     paginator = Paginator(post_list, 6)
@@ -37,7 +37,7 @@ def private_tagged_posts_list(request, tag_id):
     The PUBLIC page containing all blog posts with selected tag. Access is granted to both authorised users and visitors.
     """
     # TO DO: Each page consists of 6 posts. Should introduce infinite scrolling? or more posts per page?
-    post_list = Post.objects.filter(status='Published', privacy='Private', tags=tag_id).order_by('-updated')
+    post_list = Post.objects.filter(author=request.user, status='Published', tags=tag_id).order_by('-updated')
     page = request.GET.get('page', 1)
 
     paginator = Paginator(post_list, 6)

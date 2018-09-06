@@ -17,8 +17,14 @@ class PostForm(forms.ModelForm):
             'content': TinyMCE(attrs={
                 'required': True,
                 'cols': 80,
-                'rows': 30
-                }
+                'rows': 30,
+                'placeholder': 'Write some of your Ridiculous Thoughts!',
+            }),
+            'title': forms.TextInput(attrs={
+                'required': True,
+                'cols': 80,
+                'placeholder': 'Give your Post the title',
+            }
             )
         }
 

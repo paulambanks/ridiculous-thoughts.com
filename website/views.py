@@ -236,6 +236,9 @@ def post_new(request):
                             tag = form.save(commit=False)
                             tag.post_id = post.id
                             tag.save()
+                        else:
+                            post.save()
+
                     messages.success(request, "Your Post Was Successfully Updated")
                     return redirect('website:post_detail', pk=post.pk)
 
@@ -264,7 +267,7 @@ def post_edit(request, pk):  # also post update
     post = get_object_or_404(Post, pk=pk)
     # pre-populate UserProfileForm with retrieved user values.
 
-    TagInlineFormset = inlineformset_factory(Post, TaggedPost, fields=('tag',))
+    TagInlineFormset = inlineformset_factory(Post, TaggedPost, fields=('tag',), can_delete=True)
 
     if post.author == request.user:
 
@@ -280,7 +283,7 @@ def post_edit(request, pk):  # also post update
                         post = form.save(commit=False)
                         post.author = request.user
                         post.updated = timezone.now
-                        formset = TagInlineFormset(request.POST, request.FILES, instance=post)
+                        formset = TagInlineFormset(request.POST, instance=post)
 
                         for form in formset:
                             if form.has_changed():
@@ -288,6 +291,9 @@ def post_edit(request, pk):  # also post update
                                 tag = form.save(commit=False)
                                 tag.post_id = post.id
                                 tag.save()
+                            else:
+                                post.save()
+
                         messages.success(request, "Your Post Was Successfully Updated")
                         return redirect('website:post_detail', pk=post.pk)
 
@@ -419,6 +425,3 @@ def post_remove(request, pk):
         return render(request, template, context)
     else:
         raise PermissionDenied
-
-
-

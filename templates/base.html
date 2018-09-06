@@ -21,7 +21,7 @@
         <link href="https://fonts.googleapis.com/css?family=Noto+Serif" rel="stylesheet">
         <!-- CSS
         –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
               integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
@@ -53,8 +53,16 @@
                             <div class="collapse navbar-collapse nav-items right" id="navbarResponsive"><!-- USER VIEW-->
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{% url 'accounts:profile_page' %}" title="User Profile">
-                                            <i class="fas fa-user"></i></a>
+                                        <div class="profile-page-link-container">
+                                            <a class="profile-page-link" href="{% url 'friends:private_posts_list' %}" title="User Posts">
+                                                {% if user.profile.avatar %}
+                                                   <span><img src="{{ user.profile.avatar.url }}" alt="Profile Avatar" class="nav-avatar"></span>
+                                                {% else %}
+                                                    <span><img src="/static/crazycat.jpeg" alt="Profile Avatar" class="nav-avatar"></span>
+                                                {% endif %}
+                                            <p class="profile-link-username">{{ user.first_name }}</p>
+                                            </a>
+                                        </div>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'website:post_new' %}" title="New Post">
@@ -63,9 +71,6 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'website:post_draft_list' %}" title="Drafts">
                                             <i class="far fa-edit"></i></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{% url 'friends:private_posts_list' %}">MY POSTS</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'friends:friends_posts_list' %}">FRIENDS POSTS</a>
@@ -81,8 +86,7 @@
                             </div>
 
                         {% else %}
-
-                            <div class="collapse navbar-collapse nav-items right" id="navbarResponsive"><!-- PUBLIC VIEW-->
+                            <div class="collapse navbar-collapse nav-items right" id="navbarResponsive">
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item">
                                         <a class="nav-link" href="{% url 'login' %}" title="Login">
@@ -100,7 +104,6 @@
                 </nav>
 
             </header>
-
             <!-- MAIN PAGE CONTENT
             –––––––––––––––––––––––––––––––––––––––––––––––––– -->
             <main role="main">

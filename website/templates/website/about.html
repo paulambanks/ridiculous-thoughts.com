@@ -2,29 +2,22 @@
 
 
 {% block content %}
+    <div class="content-container">
 
-    <div class="row">
+        <div class="row">
 
-        <div class="col-sm-4">
+            <div class="col-sm-8">
+                <p>Hiya! I'm Paula and this is the very first website that I have build from the scratch (Excited! :) ).</p>
+                <p>Through this website, I would like to invite my Family and Friends to share their (ridiculous) thoughts and passions.
+                    But most of all, I would like to share my progress in getting my foot into the programming world...
+                <p>Yes, until not so long ago I was a Biotechnologist and a Biomedical Scientist; and here I am, digging into
+                    Python and Django followed by cracking through css and html.</p>
+                <p>Why? </p>
+                <p>Because what motivates me the most are new challenges, solving problems and learning new skills.
+                    Because I am curious. Because I love the flexibility!
+                </p>
 
-            <div class="small-image-container"> <!-- Picture -->
-                <img src="/static/photo-me.jpg" alt="Picture of Me">
-            </div>
-
-        </div>
-
-        <div class="col-sm-8">
-            <p>Hiya! I'm Paula and this is the very first website that I have build from the scratch (Excited! :) ).</p>
-            <p>Through this website, I would like to invite my Family and Friends to share their (ridiculous) thoughts and passions.
-                But most of all, I would like to share my progress in getting my foot into the programming world...
-            <p>Yes, until not so long ago I was a Biotechnologist and a Biomedical Scientist; and here I am, digging into
-                Python and Django followed by cracking through css and html.</p>
-            <p>Why? </p>
-            <p>Because what motivates me the most are new challenges, solving problems and learning new skills.
-                Because I am curious. Because I love the flexibility!
-            </p>
-
-            <div class="links">
+                <div class="links">
                 <ul class="list-inline text-center">
                     <li class="list-inline-item">
                         <a href='{% url 'website:email' %}'>
@@ -60,9 +53,16 @@
                   </li>
                 </ul>
             </div>
+            </div>
 
+            <div class="col-sm-4">
+
+                <div class="small-image-container"> <!-- Picture -->
+                    <img src="/static/photo-me.jpg" alt="Picture of Me">
+                </div>
+
+            </div>
         </div>
-
     </div>
 
 
