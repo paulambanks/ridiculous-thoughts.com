@@ -5,7 +5,7 @@
 
 {% block content %}
 
-    <div class="row">
+    <div class="row no-margin">
 
         <div class="col-lg-8 col-md-10 mx-auto">
 
@@ -13,25 +13,51 @@
 
             {%  if post.status == "Draft" %}
 
-                <a class="btn btn-default" href="{% url 'website:post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt">EDIT</i></a>
-                <a class="btn btn-default" href="{% url 'website:post_remove' pk=post.pk %}"><i class="far fa-trash-alt">TRASH</i></a>
-                <a class="btn btn-default" href="{% url 'website:post_publish' pk=post.pk %}">Publish</a>
-
+                <div class="add-new-post-button">
+                    <div class="btn-group" role="group">
+                        <a class="nav-link" href="{% url 'website:post_edit' pk=post.pk %}" title="Edit your Posts">
+                            <span class="add-new-post-button-text"> EDIT POST <i class="fas fa-pencil-alt"></i></span>
+                        </a>
+                        <a class="nav-link" href="{% url 'website:post_remove' pk=post.pk %}" title="Remove your Posts">
+                            <span class="add-new-post-button-text"> DELETE POST <i class="far fa-trash-alt"></i></span>
+                        </a>
+                        <a class="nav-link" href="{% url 'website:post_publish' pk=post.pk %}" title="Publish your Posts">
+                            <span class="add-new-post-button-text"> PUBLISH <i class="fas fa-book-reader"></i></span>
+                        </a>
+                    </div>
+                </div>
 
             {% elif post.status == "Published" and post.privacy == "Private"%}
 
-                <a class="btn btn-default" href="{% url 'website:post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt"></i></a>
-                <a class="btn btn-default" href="{% url 'website:post_remove' pk=post.pk %}"><i class="far fa-trash-alt"></i></a>
-                <a class="btn btn-default" href="{% url 'website:post_share' pk=post.pk %}">Share</a>
+                <div class="add-new-post-button">
+                    <div class="btn-group" role="group">
+                        <a class="nav-link" href="{% url 'website:post_edit' pk=post.pk %}" title="Edit your Posts">
+                            <span class="add-new-post-button-text"> EDIT POST <i class="fas fa-pencil-alt"></i></span>
+                        </a>
+                        <a class="nav-link" href="{% url 'website:post_remove' pk=post.pk %}" title="Remove your Posts">
+                            <span class="add-new-post-button-text"> DELETE POST <i class="far fa-trash-alt"></i></span>
+                        </a>
+                        <a class="nav-link" href="{% url 'website:post_share' pk=post.pk %}" title="Share your Posts">
+                            <span class="add-new-post-button-text"> SHARE <i class="fas fa-user-friends"></i></span>
+                        </a>
+                    </div>
+                </div>
 
 
             {% else %}
 
-                <a class="btn btn-default" href="{% url 'website:post_edit' pk=post.pk %}"><i class="fas fa-pencil-alt"></i></a>
-                <a class="btn btn-default" href="{% url 'website:post_remove' pk=post.pk %}"><i class="far fa-trash-alt"></i></a>
+                <div class="add-new-post-button">
+                    <div class="btn-group" role="group">
+                        <a class="nav-link" href="{% url 'website:post_edit' pk=post.pk %}" title="Edit your Posts">
+                            <span class="add-new-post-button-text"> EDIT POST <i class="fas fa-pencil-alt"></i></span>
+                        </a>
+                        <a class="nav-link" href="{% url 'website:post_remove' pk=post.pk %}" title="Remove your Posts">
+                            <span class="add-new-post-button-text"> DELETE POST <i class="far fa-trash-alt"></i></span>
+                        </a>
+                    </div>
+                </div>
 
             {% endif %}
-        </form>
 
         {% endif %}
 
@@ -57,10 +83,10 @@
             </div>
 
             <div class="author-info">
-                <h2 class="author-heading">Published by</h2>
+                <h2 class="author-heading">About the Author</h2>
                 <div class="author-avatar">
 
-                    {% if user.profile.avatar %}
+                    {% if post.author.profile.avatar %}
 		                <img src="{{ post.author.profile.avatar.url }}" width="100" height="100" alt="Profile Avatar"
                              class="avatar photo">
 
@@ -74,10 +100,15 @@
 
 
                 <div class="author-description">
-		            <h3 class="author-title left">{{ post.author.first_name }}</h3>
+		            <h3 class="author-title left">{{ post.author.profile.first_name }}</h3>
 		            <p class="author-bio">{{ post.author.profile.bio }}</p> <!--profile-bio-->
-                    <a class="author-link" href="{% url 'website:individual_author_public_posts' post.author_id %}">
-				        View all posts by {{ post.author.username }}</a>
+                    {% if request.user == post.author %}
+                        <a class="author-link" href="{% url 'friends:private_posts_list' %}">
+				            View all posts by {{ post.author.username }}</a>
+                    {% else %}
+                        <a class="author-link" href="{% url 'website:individual_author_public_posts' post.author_id %}">
+				            View all posts by {{ post.author.username }}</a>
+                    {% endif %}
 	            </div>
             </div>
 

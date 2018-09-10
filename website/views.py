@@ -10,19 +10,45 @@ from django.forms.models import inlineformset_factory
 
 from django.utils import timezone
 
-from .models import Post, TaggedPost
+from accounts.models import UserProfile
+
+from .models import Post, TaggedPost, SharedPost
 from .forms import PostForm, ContactForm, TagPostForm, SharedPostForm
 
 
 # ----------------- MAIN PUBLIC VIEWS -------------------------- #
 
-def home(request):
-    template = 'home.html'
+def about(request):  # TO DO: Add downloadable CV / link to the static website!
+    template = 'website/about.html'
     """
-    The MAIN HOME PAGE introduces visitor to the blog. 
-    Page allows for USER login, use of the CONTACT FORM for the anonymous visitor and access to the ABOUT ME page.
+    The ABOUT page contains information about the website ADMIN.
     """
     return render(request, template)
+
+
+def posts_list(request):
+    template = 'website/post_list.html'
+    """
+    The MAIN HOME PAGE and a PUBLIC page containing all public blog posts. 
+    Access is granted to both authorised users and visitors.
+    """
+    # TO DO: Sorting? Filtering? Search?
+    post_list = Post.objects.filter(status='Published', privacy='Public').order_by('-updated')
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(post_list, 6)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
+    context = {
+        'posts': posts
+    }
+
+    return render(request, template, context)
 
 
 def send_email(request):  # CONTACT FORM
@@ -76,38 +102,6 @@ def email_success(request):  # CONTACT FORM
     return render(request, template)
 
 
-def about(request):  # TO DO: Add downloadable CV / link to the static website!
-    template = 'website/about.html'
-    """
-    The ABOUT page contains information about the website ADMIN.
-    """
-    return render(request, template)
-
-
-def posts_list(request):
-    template = 'website/post_list.html'
-    """
-    The PUBLIC page containing all public blog posts. Access is granted to both authorised users and visitors.
-    """
-    # TO DO: Each page consists of 6 posts. Should introduce infinite scrolling? or more posts per page?
-    post_list = Post.objects.filter(status='Published', privacy='Public').order_by('-updated')
-    page = request.GET.get('page', 1)
-
-    paginator = Paginator(post_list, 6)
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-
-    context = {
-        'posts': posts
-    }
-
-    return render(request, template, context)
-
-
 def tagged_posts_list(request, tag_id):
     template = 'website/post_list.html'
     """
@@ -133,13 +127,15 @@ def tagged_posts_list(request, tag_id):
 
 
 def individual_author_public_posts(request, user):
-    template = 'website/post_list.html'
+    template = 'website/individual_author_public_posts.html'
     """
     The PUBLIC page with all public posts of an individual author. 
     Access is granted to both authorised users and visitors.
     """
     # TO DO: Each page consists of 6 posts. Should introduce infinite scrolling? or more posts per page?
     post_list = Post.objects.filter(author=user, status='Published', privacy='Public').order_by('-updated')
+    profile = UserProfile.objects.get(user=user)
+
     page = request.GET.get('page', 1)
 
     paginator = Paginator(post_list, 6)
@@ -151,7 +147,8 @@ def individual_author_public_posts(request, user):
         posts = paginator.page(paginator.num_pages)
 
     context = {
-        'posts': posts
+        'posts': posts,
+        'profile': profile,
     }
 
     return render(request, template, context)
@@ -358,7 +355,7 @@ def post_share(request, pk):
     if post.privacy == "Private" and post.author == request.user:
 
         if request.method == "POST":
-            form = SharedPostForm(request.POST)
+            formset = SharedPostForm(request.POST)
 
             try:
                 if form.is_valid():

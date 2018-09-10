@@ -14,7 +14,7 @@ def profile_page(request):
     return render(request, template)
 
 
-@login_required()  # only logged in users should access this
+@login_required  # only logged in users should access this
 def edit_user(request, pk):
     template = 'website/profile_update.html'
     """
