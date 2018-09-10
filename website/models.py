@@ -95,9 +95,8 @@ class TaggedPost(models.Model):
         related_name="tagged_post_id")
     tag = models.ForeignKey(
         Tag,
-        default='',
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
         on_delete=models.CASCADE,
         related_name="tag_id")
 

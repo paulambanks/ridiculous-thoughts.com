@@ -200,117 +200,45 @@ def post_draft_list(request):
 
     return render(request, template, context)
 
-
 @login_required
-def post_new(request):
-    template = 'website/post_new.html'
+def post_form(request, pk=None):
     """
     Page that allows to create the new post. It is visible only for the logged AUTHOR.
     Page also allows to tag created post. It uses two forms at once.
     """
     # TO DO: Needs to be modified to accommodate multiple tagging at once
+    if pk:
+        post = Post.objects.get(pk=pk)
+    else:
+        post = Post()
 
+    post_form = PostForm(instance=post)
     TagInlineFormset = inlineformset_factory(Post, TaggedPost, fields=('tag',))
+    tag_formset = TagInlineFormset(instance=post)
 
     if request.method == "POST":
-        form = PostForm(request.POST)
-        formset = TagInlineFormset(request.POST)
+        post_form = PostForm(request.POST)
 
-        try:
-            if all([form.is_valid() and formset.is_valid()]):
-                if 'cancel' in request.POST:
-                    return HttpResponseRedirect(get_success_url())
+        if pk:
+            post_form = PostForm(request.POST, instance=post)
 
-                else:
-                    post = form.save(commit=False)
-                    post.author = request.user
-                    post.updated = timezone.now
-                    formset = TagInlineFormset(request.POST, instance=post)
+        tag_formset = TagInlineFormset(request.POST, request.FILES)
 
-                    for form in formset:
-                        if form.has_changed():
-                            post.save()
-                            tag = form.save(commit=False)
-                            tag.post_id = post.id
-                            tag.save()
-                        else:
-                            post.save()
+        if post_form.is_valid():
+            new_post = post_form.save(commit=False)
+            new_post.author = request.user
+            new_post.updated = timezone.now
 
-                    messages.success(request, "Your Post Was Successfully Updated")
-                    return redirect('website:post_detail', pk=post.pk)
+            tag_formset = TagInlineFormset(request.POST, request.FILES, instance=new_post)
+            if tag_formset.is_valid():
+                new_post.save()
+                tag_formset.save()
+                return redirect('website:post_detail', pk=new_post.pk)
 
-        except Exception as e:
-            messages.warning(request, 'Post Failed To Save. Error: {}".format(e)')
-
-    else:
-        form = PostForm()
-        formset = TagInlineFormset()
-    context = {
-        'form': form,
-        'formset': formset,
-    }
-
-    return render(request, template, context)
-
-
-@login_required
-def post_edit(request, pk):  # also post update
-    template = 'website/post_edit.html'
-    """
-    Page that allows to edit the post. It is visible only for the logged AUTHOR.
-    Page also allows to tag the post. It uses two forms at once.
-    """
-    # TO DO: Needs to be modified to accommodate multiple tagging at once
-    post = get_object_or_404(Post, pk=pk)
-    # pre-populate UserProfileForm with retrieved user values.
-
-    TagInlineFormset = inlineformset_factory(Post, TaggedPost, fields=('tag',), can_delete=True)
-
-    if post.author == request.user:
-
-        if request.method == "POST":
-            form = PostForm(request.POST, instance=post)
-            formset = TagInlineFormset(request.POST, instance=post)
-
-            try:
-                if all([form.is_valid() and formset.is_valid()]):
-                    if 'cancel' in request.POST:
-                        return HttpResponseRedirect(get_success_url())
-                    else:
-                        post = form.save(commit=False)
-                        post.author = request.user
-                        post.updated = timezone.now
-                        formset = TagInlineFormset(request.POST, instance=post)
-
-                        for form in formset:
-                            if form.has_changed():
-                                post.save()
-                                tag = form.save(commit=False)
-                                tag.post_id = post.id
-                                tag.save()
-                            else:
-                                post.save()
-
-                        messages.success(request, "Your Post Was Successfully Updated")
-                        return redirect('website:post_detail', pk=post.pk)
-
-            except Exception as e:
-                messages.warning(request, 'Your Post Was Not Saved Due To An Error: {}.format(e)')
-
-        else:
-            form = PostForm(instance=post)
-            formset = TagInlineFormset()
-
-        context = {
-            'form': form,
-            'formset': formset,
-            'post': post,
-        }
-
-        return render(request, template, context)
-    else:
-        raise PermissionDenied
-
+    return render(request, "website/post_form.html", {
+        "post_form": post_form,
+        "tag_formset": tag_formset,
+    })
 
 def get_success_url():  # CANCELLATION
     template = 'website:posts_list'

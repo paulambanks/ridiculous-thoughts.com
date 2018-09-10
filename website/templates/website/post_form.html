@@ -4,7 +4,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    {{ form.media }}
+    {{ post_form.media }}
 
     <div class="content-container">
 
@@ -24,10 +24,10 @@
                             <div class="post-edit-card">
 
                             <div class="fieldWrapper title">
-                                {{ form.title }}
+                                {{ post_form.title }}
                             </div>
                             <div class="fieldWrapper content">
-                                {{ form.content }}
+                                {{ post_form.content }}
                             </div>
 
                             </div>
@@ -42,15 +42,15 @@
                             <div class="post-detail-card">
 
                                 <div class="fieldWrapper privacy">
-                                    <label for="{{ form.privacy.id_for_label }}">Change privacy:</label>
-                                    {{ form.privacy }}
+                                    <label for="{{ post_form.privacy.id_for_label }}">Change privacy:</label>
+                                    {{ post_form.privacy }}
                                 </div>
 
-                                {{ formset.management_form }}
+                                {{ tag_formset.management_form }}
 
-                                <label for="{{ form.tag.id_for_label }}">Add tags:</label>
+                                <label for="{{ tag_formset.tag.id_for_label }}">Add tags:</label>
 
-                                {% for form in formset %}
+                                {% for form in tag_formset %}
                                     <div class="fieldWrapper tag">
                                         {{ form }}
                                     {% endfor %}
