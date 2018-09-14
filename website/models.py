@@ -106,11 +106,8 @@ class TaggedPost(models.Model):
     def __unicode__(self):
         return self.id
 
-    def remove_tag(self):
-        self.tag.delete()
-
-
 # ------------------ Share posts ---------------------- #
+
 
 class SharedPost(models.Model):
 
@@ -121,10 +118,10 @@ class SharedPost(models.Model):
         related_name="shared_post_id")
     user = models.ForeignKey(
         CustomUser,
-        default='',
+        blank=False,
+        null=False,
         on_delete=models.CASCADE,
-        related_name="user_id",
-        help_text="Just do not share the post with yourself!")
+        related_name="user_id")
 
     def __unicode__(self):
         return self.id
@@ -134,6 +131,7 @@ class SharedPost(models.Model):
 
     def save(self, *args, **kwargs):
         super(SharedPost, self).save(*args, **kwargs)
+
 
 
 

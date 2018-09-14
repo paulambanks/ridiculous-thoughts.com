@@ -6,69 +6,73 @@
 {% block content %}
     {{ post_form.media }}
 
-    <div class="content-container">
+    <div class="row">
 
-        <div class="row">
+        <div class="col-md-8 post-edit-page-container">
 
+            <div class="add-new-post-button">
+                <div class="profile-page-link-container">
+                    <a class="nav-link" title="Contact Form">
+                        <span class="add-new-post-button-text"><i class="fas fa-feather-alt"></i> SHARE YOUR THOUGHTS...
+                            <i class="fas fa-feather-alt"></i></span>
+                    </a>
+                </div>
+            </div>
+            <br>
             <div class="post-edit edit-form-container">
 
                 <form method="POST" class="post-edit form-content">{% csrf_token %}
 
-                    <div class="post-edit col-sm-12 row-flex">
+                    <div class="fieldWrapper title">
+                        {% if post_form.title %}
+                            <label for="id_title">{{ post_form.title }}</label>
+                        {% else %}
+                            <label for="id_title"></label>
+                            <input type="text" class="form-control" id="id_title" name="title" placeholder="Post Title" required>
+                        {% endif %}
+                    </div>
 
-                        <div class="col-sm-8 post-edit edit-post-content">
+                    <div class="fieldWrapper content">
+                        {{ post_form.content }}
+                    </div>
 
-                            <div class="fieldWrapper form-title">
-                                <h3>WRITE YOUR NEW POST</h3>
+                    <br>
+                    <div class="fieldWrapper privacy card-footer">
+                        <label for="{{ post_form.privacy.id_for_label }}">Change privacy:</label>
+                        {{ post_form.privacy }}
+                    </div>
+
+                    <br>
+                    <div class="fieldWrapper tags card-footer">
+                        {{ tag_formset.management_form }}
+
+                        <label for="{{ tag_formset.tag.id_for_label }}">Chose tags...</label>
+
+                        {% for form in tag_formset %}
+                            <div class="fieldWrapper tag">
+                                {{ form }}
                             </div>
-                            <div class="post-edit-card">
+                        {% endfor %}
 
-                            <div class="fieldWrapper title">
-                                {{ post_form.title }}
-                            </div>
-                            <div class="fieldWrapper content">
-                                {{ post_form.content }}
-                            </div>
+                    </div>
 
-                            </div>
-                        </div>
 
-                        <div class="col-sm-4 post-detail-edit">
-
-                            <div class="fieldWrapper form-title">
-                                <h3>POST DETAILS</h3>
-                            </div>
-
-                            <div class="post-detail-card">
-
-                                <div class="fieldWrapper privacy">
-                                    <label for="{{ post_form.privacy.id_for_label }}">Change privacy:</label>
-                                    {{ post_form.privacy }}
-                                </div>
-
-                                {{ tag_formset.management_form }}
-
-                                <label for="{{ tag_formset.tag.id_for_label }}">Add tags:</label>
-
-                                {% for form in tag_formset %}
-                                    <div class="fieldWrapper tag">
-                                        {{ form }}
-                                    {% endfor %}
-                                </div>
-                            </div>
+                    <div class="add-new-post-button">
+                        <div class="btn-group" role="group">
+                            <button class="nav-link btn login-btn" type="submit" title="Save changes">
+                                <span class="add-new-post-button-text"> SAVE <i class="far fa-save"></i></span></button>
+                            <a class="nav-link btn" href='{% url 'website:posts_list' %}' title="Cancel changes">
+                                <span class="add-new-post-button-text"> CANCEL </span></a>
                         </div>
                     </div>
-                    <div class="buttons">
-                        <input type="submit" value="SAVE DRAFT" class="btn btn-success">
-                        <a href="{% url 'website:posts_list' %}" class="btn btn-secondary">CANCEL</a>
-                    </div>
+
                 </form>
+
             </div>
         </div>
 
     </div>
 
 
-
-
 {% endblock %}
+

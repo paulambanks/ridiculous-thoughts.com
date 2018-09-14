@@ -15,7 +15,7 @@ from website.models import Post
 @login_required
 def private_posts_list(request):
     """The page with all blog posts, visible to all"""
-    template = 'friends/private_post_list.html'
+    template = 'friends/private_posts_list.html'
     post_list = Post.objects.filter(author=request.user, status='Published',).order_by('-updated')
     page = request.GET.get('page', 1)
 
@@ -32,7 +32,7 @@ def private_posts_list(request):
 
 @login_required
 def private_tagged_posts_list(request, tag_id):
-    template = 'friends/private_post_list.html'
+    template = 'friends/private_posts_list.html'
     """
     The PUBLIC page containing all blog posts with selected tag. Access is granted to both authorised users and visitors.
     """
@@ -58,7 +58,7 @@ def private_tagged_posts_list(request, tag_id):
 @login_required
 def friends_posts_list(request):
     """The page with all blog posts, visible to all"""
-    template = 'friends/friends_post_list.html'
+    template = 'friends/friends_posts_list.html'
     post_list = Post.objects.filter(status='Published', privacy='Friends').order_by('-updated')
     page = request.GET.get('page', 1)
 
@@ -75,7 +75,7 @@ def friends_posts_list(request):
 
 @login_required
 def friends_tagged_posts_list(request, tag_id):
-    template = 'website/post_list.html'
+    template = 'website/posts_list.html'
     """
     The PUBLIC page containing all blog posts with selected tag. Access is granted to both authorised users and visitors.
     """
@@ -101,7 +101,7 @@ def friends_tagged_posts_list(request, tag_id):
 @login_required
 def individual_friend_post_list(request, user):
     """The page with all blog posts, visible to all"""
-    template = 'friends/friends_post_list.html'
+    template = 'friends/friends_posts_list.html'
     post_list = Post.objects.filter(author=user, status='Published', privacy='Friends').order_by('-updated')
     page = request.GET.get('page', 1)
 

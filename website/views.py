@@ -27,7 +27,7 @@ def about(request):  # TO DO: Add downloadable CV / link to the static website!
 
 
 def posts_list(request):
-    template = 'website/post_list.html'
+    template = 'website/posts_list.html'
     """
     The MAIN HOME PAGE and a PUBLIC page containing all public blog posts. 
     Access is granted to both authorised users and visitors.
@@ -60,6 +60,10 @@ def send_email(request):  # CONTACT FORM
 
     if request.method == 'GET':
         form = ContactForm()
+        # if request.user.is_authenticated:
+        #     form.fields['name'] = request.user
+        #     form.fields['email'] = request.user.email
+
     else:
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -69,6 +73,7 @@ def send_email(request):  # CONTACT FORM
 
             if request.user.is_authenticated:  # if contact form send from the logged user
                 from_email = request.user.email
+                name = request.user.username
 
                 try:
                     message = "User {} with email {} has sent you a message:\n".format(name, from_email) + message
@@ -103,7 +108,7 @@ def email_success(request):  # CONTACT FORM
 
 
 def tagged_posts_list(request, tag_id):
-    template = 'website/post_list.html'
+    template = 'website/posts_list.html'
     """
     The PUBLIC page containing all blog posts with selected tag. Access is granted to both authorised users and visitors.
     """
@@ -200,8 +205,10 @@ def post_draft_list(request):
 
     return render(request, template, context)
 
+
 @login_required
 def post_form(request, pk=None):
+    template = 'website/post_form.html'
     """
     Page that allows to create the new post. It is visible only for the logged AUTHOR.
     Page also allows to tag created post. It uses two forms at once.
@@ -209,11 +216,12 @@ def post_form(request, pk=None):
     # TO DO: Needs to be modified to accommodate multiple tagging at once
     if pk:
         post = Post.objects.get(pk=pk)
+        TagInlineFormset = inlineformset_factory(Post, TaggedPost, fields=('tag',), can_delete=True)
     else:
         post = Post()
+        TagInlineFormset = inlineformset_factory(Post, TaggedPost, fields=('tag',), can_delete=False)
 
     post_form = PostForm(instance=post)
-    TagInlineFormset = inlineformset_factory(Post, TaggedPost, fields=('tag',))
     tag_formset = TagInlineFormset(instance=post)
 
     if request.method == "POST":
@@ -235,10 +243,13 @@ def post_form(request, pk=None):
                 tag_formset.save()
                 return redirect('website:post_detail', pk=new_post.pk)
 
-    return render(request, "website/post_form.html", {
+    context = {
         "post_form": post_form,
-        "tag_formset": tag_formset,
-    })
+        "tag_formset": tag_formset
+    }
+
+    return render(request, template, context)
+
 
 def get_success_url():  # CANCELLATION
     template = 'website:posts_list'
@@ -254,7 +265,7 @@ def post_publish(request, pk):
     """
     Page used to confirm the PUBLISH 
     """
-    post = get_object_or_404(Post, pk=pk)
+    post = Post.objects.get(pk=pk)
 
     if post.author == request.user:
 
@@ -278,40 +289,28 @@ def post_share(request, pk):
     """
     Page used to share a private post with other users. 
     """
-    post = get_object_or_404(Post, pk=pk)
+    post = Post.objects.get(pk=pk)
+
+    SharedPostInlineFormset = inlineformset_factory(Post, SharedPost, form=SharedPostForm, fields=('user',), can_delete=True,)
+
+    formset = SharedPostInlineFormset(instance=post)
+
+    for form in formset:
+        form.fields['user'].queryset = form.fields['user'].queryset.exclude(pk=request.user.pk)
 
     if post.privacy == "Private" and post.author == request.user:
 
         if request.method == "POST":
-            formset = SharedPostForm(request.POST)
+            formset = SharedPostInlineFormset(request.POST, request.FILES, instance=post)
 
-            try:
-                if form.is_valid():
-                    if 'cancel' in request.POST:
-                        return HttpResponseRedirect(get_success_url())
-                    else:
-                        # Saves only one sharing instance from the form to Post DB; NOT IDEAL!
-                        # I need to add un-share the post, as well as allow for
-                        # multiple sharing happening at once
-                        sharedpost = form.save(commit=False)
-                        sharedpost.post_id = post.id
-                        if sharedpost.user_id == post.author_id:  # WORKS!
-                            return redirect('website:error')  # needs better way to show error
-                        # I need to add a proper view for unique_together {user, post} error
-                        else:
-                            sharedpost.save()
-                            messages.success(request, "This post has been shared.")
-                            return redirect('website:post_detail', pk=post.pk, )
-
-            except Exception as e:
-                messages.warning(request, 'Your Post Was Not Saved Due To An Error: {}.format(e)')
-
-        else:
-            form = SharedPostForm(instance=post)
+            if formset.is_valid():
+                formset.save()
+                messages.success(request, "This post has been shared.")
+                return redirect('website:post_detail', pk=post.pk, )
 
         context = {
-            'form': form,
             'post': post,
+            'formset': formset,
         }
 
         return render(request, template, context)

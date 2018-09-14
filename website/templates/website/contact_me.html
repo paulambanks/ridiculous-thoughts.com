@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-
+{% load crispy_forms_tags %}
 {% block content %}
 
     <div class="content-container">
@@ -24,19 +24,19 @@
                     {% if request.user.is_authenticated %} <!-- CONTACT FORM FOR LOGGED USERS–––––– -->
 
                         <label for="subject"></label>
-                        <textarea class="form-control" name="subject" id="subject" maxlength="100" rows="1" placeholder="Subject"></textarea>
+                        <textarea class="form-control mceNoEditor" name="subject" id="subject" maxlength="100" rows="1" placeholder="Subject"></textarea>
 
                         <label for="message"></label>
-                        <textarea class="form-control" name="message" id="message" maxlength="6000" rows="7" placeholder="Your Message"></textarea>
+                        <textarea class="form-control mceNoEditor" name="message" id="message" maxlength="6000" rows="7" placeholder="Your Message"></textarea>
 
                     {% else %} <!-- CONTACT FORM FOR ANONYMOUS USERS–––––– -->
 
 
                         <label for="subject"></label>
-                        <textarea class="form-control" name="subject" id="subject" maxlength="100" rows="1" placeholder="Subject"></textarea>
+                        <textarea class="form-control mceNoEditor" name="subject" id="subject" maxlength="100" rows="1" placeholder="Subject"></textarea>
 
                         <label for="message"></label>
-                        <textarea class="form-control" name="message" id="message" maxlength="6000" rows="7" placeholder="Your Message"></textarea>
+                        <textarea class="form-control mceNoEditor" name="message" id="message" maxlength="6000" rows="7" placeholder="Your Message"></textarea>
 
 
                         <div class="row no-margin">

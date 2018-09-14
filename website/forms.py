@@ -1,6 +1,8 @@
 from django import forms
-from .models import Post, TaggedPost, SharedPost, Tag
+from .models import Post, TaggedPost, SharedPost
+from accounts.models import CustomUser
 from tinymce.widgets import TinyMCE
+from django.forms.models import inlineformset_factory
 
 
 class TinyMCEWidget(TinyMCE):
@@ -37,15 +39,17 @@ class TagPostForm(forms.ModelForm):
 
 
 class SharedPostForm(forms.ModelForm):
+    """ request user excluded """
 
     class Meta:
         model = SharedPost
         fields = ('user',)
+        user = forms.ModelChoiceField(queryset=CustomUser.objects.all())
 
 
 class ContactForm(forms.Form):
     subject = forms.CharField(required=True)
     message = forms.CharField(widget=forms.Textarea, required=True)
-    name = forms.CharField(required=True)
+    name = forms.CharField(required=False)
     email = forms.CharField(required=False)
 

@@ -6,16 +6,8 @@ from django.forms.models import inlineformset_factory
 from django.core.exceptions import PermissionDenied
 
 
-def profile_page(request):
-    template = 'website/profile_page.html'
-    """
-    The MAIN USER PROFILE PAGE introduces basic user information. 
-    """
-    return render(request, template)
-
-
 @login_required  # only logged in users should access this
-def edit_user(request, pk):
+def profile_update(request, pk):
     template = 'website/profile_update.html'
     """
     Page to EDIT User Profile information.
@@ -38,12 +30,13 @@ def edit_user(request, pk):
 
             if user_form.is_valid():
                 created_user = user_form.save(commit=False)
+
                 formset = ProfileInlineFormset(request.POST, request.FILES, instance=created_user)
 
                 if formset.is_valid():
                     created_user.save()
                     formset.save()
-                    return HttpResponseRedirect('/friends/private_post_list/')
+                    return HttpResponseRedirect('/friends/private_posts_list/')
 
         return render(request, template, {
             "pk": pk,

@@ -64,8 +64,8 @@ class UserProfile(models.Model):
         related_name='profile',
         primary_key=True,
         verbose_name='Member profile')
-    bio = models.TextField(
-        max_length=500,
+    bio = models.CharField(
+        max_length=250,
         blank=True,
         default='',
         help_text="Write something about yourself"

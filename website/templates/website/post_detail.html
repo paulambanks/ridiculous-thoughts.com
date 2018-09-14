@@ -84,23 +84,41 @@
 
             <div class="author-info">
                 <h2 class="author-heading">About the Author</h2>
-                <div class="author-avatar">
 
-                    {% if post.author.profile.avatar %}
-		                <img src="{{ post.author.profile.avatar.url }}" width="100" height="100" alt="Profile Avatar"
-                             class="avatar photo">
+                <div class="author-avatar-and-name">
+                    <div class="author-avatar">
 
-                    {% else %}
+                        {% if post.author.profile.avatar %}
+                            <img src="{{ post.author.profile.avatar.url }}" width="100" height="100" alt="Profile Avatar"
+                                 class="avatar photo">
 
-                        <img src="/static/crazycat.jpeg"
-                             width="200" height="200" alt="Profile Avatar"
-                             class="avatar photo">
-                    {% endif %}
+                        {% else %}
+
+                            <img src="/static/crazycat.jpeg"
+                                 width="200" height="200" alt="Profile Avatar"
+                                 class="avatar photo">
+                        {% endif %}
+                    </div>
+
+                    <div class="author-description">
+
+                        <h3 class="author-title left">{{ post.author.profile.user.first_name }}</h3>
+
+                        {% if post.author.profile.city and post.author.profile.country %} <!--profile-location-->
+                            <p class="profile-user-location">{{ user.profile.city }}, {{ user.profile.country }}</p>
+                        {% elif post.author.profile.city and not post.author.profile.country %}
+                            <p class="profile-user-location">{{ user.profile.city }}</p>
+                        {% elif user.profile.country and not user.profile.city %}
+                            <p class="profile-user-location">{{ user.profile.counry }}</p>
+                        {% else %}
+                            <p class="profile-user-location"></p>
+                        {% endif %}
+                    </div>
+
                 </div>
 
 
                 <div class="author-description">
-		            <h3 class="author-title left">{{ post.author.profile.first_name }}</h3>
 		            <p class="author-bio">{{ post.author.profile.bio }}</p> <!--profile-bio-->
                     {% if request.user == post.author %}
                         <a class="author-link" href="{% url 'friends:private_posts_list' %}">
