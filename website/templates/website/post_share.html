@@ -9,7 +9,7 @@
 
         <div class="col-lg-8 col-md-10 mx-auto">
 
-            <div class="add-new-post-button">
+            <div class="page-heading">
                 <div class="profile-page-link-container">
                     <a class="nav-link" title="Contact Form">
                         <span class="add-new-post-button-text"><i class="fas fa-feather-alt"></i> SHARE YOUR POST...
@@ -22,28 +22,9 @@
 
                 <div class="post-card single-card confirm card mb-4 box-shadow">
 
-                    <div class="card-body d-flex flex-column">
-
-                        <div class="card-title">
-                            <h3 class="styled">{{ post.title }}</h3>
-                        </div>
-                        <div class="separator"></div>
-
-                        <div class="card-post-tags">
-                            <ul class="card-tags">
-                                {% for tag in post.tags.all %}
-                                    <li class="card-single-tag">
-                                        <a class="btn btn-light card-tag" href="{% url 'website:tagged_posts_list' tag.id %}">{{ tag.slug }}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-
-                        <div class="post-text">
-                            <p class="card-text">{{ post.content | safe | truncatechars:300 }}</p>
-                        </div>
-
-                    </div>
+                    <!--INCLUDE POST CARD BODY-->
+                    {% include "website/single_post_card_body.html" %}
+                    <!---------------------->
 
                     <div class="card-footer">
                         <small class="text-muted">
@@ -53,22 +34,21 @@
                 </div>
 
                 <div class="fieldWrapper users card-footer">
-                        {{ formset.management_form }}
+                    {{ formset.management_form }}
 
-                        <label for="{{ formset.user.id_for_label }}">Chose user...</label>
+                    <label for="{{ formset.user.id_for_label }}">Chose user...</label>
 
-                        {% for form in formset %}
-                            <div class="fieldWrapper user">
-                                {{ form }}
-                            </div>
-                        {% endfor %}
+                    {% for form in formset %}
+                        <div class="fieldWrapper user">
+                            {{ form }}
+                        </div>
+                    {% endfor %}
 
-                    </div>
-                {{ form.as_p }}
+                </div>
 
                 <div class="add-new-post-button">
                     <div class="btn-group" role="group">
-                        <button class="nav-link btn login-btn" type="submit" title="Save changes">
+                        <button class="nav-link btn login-btn" type="submit" title="Share the Post">
                             <span class="add-new-post-button-text"> SHARE <i class="fas fa-user-friends"></i></span></button>
                         <a class="nav-link btn" href='{% url 'friends:private_posts_list' %}' title="Cancel changes">
                             <span class="add-new-post-button-text"> CANCEL </span></a>

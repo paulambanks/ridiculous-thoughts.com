@@ -24,7 +24,6 @@ class PostForm(forms.ModelForm):
             }),
             'title': forms.TextInput(attrs={
                 'required': True,
-                'cols': 80,
                 'placeholder': 'Give your Post the title',
             }
             )

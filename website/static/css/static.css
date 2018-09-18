@@ -1,197 +1,3 @@
-/*------------------- MAIN SETTINGS-------------------*/
-
-* {
-    box-sizing: border-box;
-    font-family: 'Noto Serif', serif;
-}
-
-body {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    padding-bottom: 5%;
-    margin: 0 auto;
-    width: 100%;
-    font-family: "Noto Serif", serif;
-}
-
-/* Mobile Styles */
-@media only screen and (max-width: 400px) {
-    body {
-        max-width: 100%;
-        margin: 0 auto;
-        padding-bottom: 5%;
-    }
-}
-
-main {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    padding-bottom: 5%;
-    margin: 0 auto;
-    width: 100%;
-    font-family: "Noto Serif", serif;
-}
-
-.content-container {
-    padding-left: 15px;
-    padding-right: 15px;
-    margin: 0 auto;
-    width: 80%;
-}
-
-@media (min-width: 1200px) {
-    .container {
-        max-width: 2000px;
-    }
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 800;
-	font-family: 'Noto Serif', serif;
-    line-height: 1.2;
-}
-
-p {
-    line-height: 1.5;
-}
-
-.row.no-top-margin {
-    margin-top: 0;
-}
-
-/*-------------------------- GENERAL HEADER SETTINGS--------------------------------*/
-
-header {
-    top: 0;
-	left: 0;
-	right: 0;
-    margin: 0;
-    position: fixed;
-	transition: top 0.2s ease-in-out;
-    z-index: 2;
-}
-
-/* Tablet Styles */
-@media only screen and (min-width: 401px) and (max-width: 960px) {
-  header {
-      width: 100%;
-  }
-}
-
-/* Mobile Styles */
-@media only screen and (max-width: 400px) {
-    header {
-      margin-right: auto;
-      margin-left: auto;
-    }
-}
-
-
-/*------------------------------ NAVIGATION SETTINGS---------------------------------------*/
-
-.nav-up {
-    top: -80px;
-}
-
-#mainNav {
-    background: #414042;
-    margin-bottom: 40px;
-    padding: 0;
-}
-
-#mainNav .navbar-toggler {
-    font-weight: 800;
-    text-transform: uppercase;
-    color: #FBF7FF;
-}
-
-#mainNav .navbar-brand {
-    font-weight: 800;
-    color: #FBF7FF;
-}
-
-#mainNav .navbar-brand:hover {
-    color: #C9C6CC;
-}
-
-#mainNav .nav-item .nav-link {
-    display: block;
-    width: 100%;
-    text-align: center;
-    font-weight: 800;
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: normal;
-}
-
-.profile-page-link-container {
-    height: 100%;
-    margin: auto 0;
-}
-
-.profile-link-username {
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: normal;
-    margin: auto 0;
-    color: #FBF7FF;
-}
-
-.profile-link-username:hover {
-    color: #C9C6CC;
-    text-decoration: none;
-}
-
-.nav-avatar {
-    vertical-align: middle;
-    max-width: 30px;
-    max-height: 30px;
-    border-radius: 50%;
-}
-
-@media only screen and (min-width: 992px) {
-    #mainNav {
-    position: relative;
-    margin-bottom: 40px;
-        background: #414042;
-    }
-    .container {
-        z-index: 1;
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-    .overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-    }
-    .navbar-light .navbar-nav .nav-link {
-        color: #FBF7FF;
-    }
-    .navbar-light .navbar-nav .nav-link:hover {
-        color: #C9C6CC;
-    }
-}
-
-/* Tablet Styles */
-@media only screen and (min-width: 401px) and (max-width: 960px) {
-    .navigation .navbar-brand {
-        margin-left: 10px;
-        color: #414042;
-    }
-}
-
-@media only screen and (max-width: 400px) {
-    .navigation .navbar-brand {
-        font-size: 20px;
-        margin-left: 10px;
-        color: #414042;
-    }
-}
-
-
 
 /*------------------ FLUID JUMBOTRON SETTINGS---------------*/
 
@@ -207,9 +13,6 @@ header {
     opacity: 0.7;
 }
 
-
-
-
 /*--------- PAGE WITH POSTS CONTENT SETTINGS--------*/
 
 .container-fluid {
@@ -217,22 +20,15 @@ header {
     padding: 0;
 }
 
-.row .no-margin {
-    margin-top: 0;
-}
-
-.col-sm-8.private-post-list {
-    padding: 1.25rem;
-}
-
-.add-new-post-button {
-    padding: .75rem 1.25rem;
+.add-new-post-button,
+.page-heading {
     border-radius: 0 0 calc(.25rem - 1px) calc(.25rem - 1px);
     border-bottom: 1px solid rgba(0,0,0,.125);
     text-align: center;
 }
 
-span.add-new-post-button-text {
+span.add-new-post-button-text,
+.page-heading{
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: normal;
@@ -240,74 +36,141 @@ span.add-new-post-button-text {
     color: #6c757d;
 }
 
-.profile-link-username:hover {
-    color: #C9C6CC;
-    text-decoration: none;
+div.btn-group {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+div.btn-group.confirm {
+    display: flex;
+    justify-content: center;
+    margin: 2%;
 }
 
 .post-card.single-card.confirm {
-    margin: 15px auto;
+    margin: 2% auto;
     max-width: 300px;
 }
 
-.post-title > h3 {
-    font-size: 3.9rem;
+.post-title,
+.post-info,
+.post-tags {
     text-align: center;
+    padding: 2%;
 }
 
-.post-info {
-    font-size: 15px;
-    text-align: center;
+.post-info > p,
+.post-text > p {
+    margin-bottom: 0;
 }
 
 .post-tags {
-    text-align: center;
-    padding-bottom: 1%;
+    display: flex;
 }
 
-ul.tags {
+ul.tags-list {
     padding: 0;
-    display: inline-flex;
+    display: flex;
+    flex-wrap: wrap;
     margin: 0;
+    width: 100%;
+    justify-content: center;
 }
 
-ul.tags > li{
+ul.tags-list > li{
     list-style: none;
-    padding: 0 10px;
+    padding: 1%;
 }
 
-.single-tag > a {
-    font-size: 16px;
+.post-text {
+    padding: 2% 0 5% 0;
 }
 
+/*----------------------- PAGINATION-----------------*/
 .pagination {
     justify-content: center;
 }
 
+ul.pagination > li.page-item > a.page-link {
+    color: #6A557F;
+}
 
-/*----------------------- POSTS CARDS SETTINGS--------------------*/
+ul.pagination > li.page-item.disabled > a.page-link {
+    color: #6c757d;
+}
+
+ul.pagination > li.page-item.active > a.page-link {
+    background-color: #6A557F;
+    border-color: #6A557F;
+    color: #FBF7FF;
+}
+
+/*----------------------- POST AUTHOR IN POST DETAILS-----------------*/
+
+div.author-container {
+    width: 100%;
+    padding-top: 5%;
+    border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.author-heading {
+    color: #6c757d;
+    text-transform: uppercase;
+}
+
+div.author-info {
+    display: flex;
+    padding: 2% 0;
+}
+
+div.author-avatar {
+    margin-right: 5%;
+}
+
+img.author-avatar {
+    height: 100px;
+    border-radius: 50%;
+    width: 100px;
+}
+
+p.profile-user-location {
+    margin-bottom: 0;
+    font-style: italic;
+}
+
+div.author-description {
+    display: flex;
+    flex-direction: column;
+}
+
+blockquote.author-bio {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1em;
+}
+
+a.author-link {
+    color: #6c757d;
+    text-align: center;
+}
+
+
+/*------------------------- EDIT POST FORM SETTINGS----------------------------*/
+
+
+
+/*----------------------- POSTS CARDS DECK SETTINGS--------------------*/
 
 .card-deck {
     padding-top: .75rem;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: 1fr
 }
 
-.post-card.card {
-    min-width: 275px;
-    max-width: 300px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-/* Mobile Styles */
-@media only screen and (max-width: 1216px) {
-    .post-card.card {
-        min-width: 300px;
-        max-width: 600px;
-    }
-}
-
-.card.body {
+div.card.body {
     position: relative;
 }
 
@@ -321,6 +184,7 @@ ul.card-tags {
     display: flex;
     flex-wrap: wrap;
     margin: 0;
+    justify-content: center;
 }
 
 ul.card-tags > li.card-single-tag {
@@ -338,11 +202,14 @@ p.card-text {
     padding: 1.25rem 0;
 }
 
-div.post-buttons > form > a {
+div.post-buttons.mt-auto > div  {
+    text-align: center;
+}
+div.post-buttons.mt-auto > div > a {
     background: white;
     color: #414042;
     border: none;
-    font-size: 0.9em;
+    font-size: 0.8em;
 }
 
 .styled:before, .styled span:before, .content3 .image .mbr-iconfont:hover,
@@ -375,6 +242,7 @@ div.post-buttons > form > a {
 .user-update-link {
     color: #6c757d;
 }
+
 .user-update-link:hover {
     text-decoration: none;
     color: #414042;
@@ -384,15 +252,8 @@ div.post-buttons > form > a {
     border: none;
 }
 
-/* Desktop Styles */
-@media only screen and (min-width: 420px) {
-    .profile-card {
-    min-width: 350px;
-    }
-}
-
 .profile-user-info {
-    padding: .75rem 1.25rem;
+    padding: .75rem 0;
 }
 
 .profile-avatar {
@@ -428,55 +289,6 @@ div.profile-edit.card-footer > small > a > i {
 
 }
 
-
-/*----------------------- POST AUTHOR IN POST DETAILS-----------------*/
-
-@media screen and (min-width: 77.5em) {
-    .author-info .avatar {
-    height: 100px;
-    margin: 0 1.6842em 1.6842em 0;
-    width: 100px;
-    }
-}
-
-.avatar {
-    height: 56px;
-    width: 56px;
-    border-radius: 50%;
-}
-
-.author-heading {
-    color: #C9C6CC;
-    font-family: "Noto Sans", sans-serif;
-    font-size: 12px;
-    font-size: 1.2rem;
-    letter-spacing: 0.04em;
-    margin-bottom: 1.5em;
-    text-transform: uppercase;
-}
-
-@media screen and (min-width: 59.6875em) {
-    .author-info {
-        margin: 0 5%;
-        padding: 5% 0;
-        }
-    }
-
-.author-info .avatar {
-    float: left;
-}
-
-.author-title {
-    text-align: left;
-}
-
-.author-bio {
-    font-size: 15px;
-}
-
-
-/*------------------------- EDIT POST FORM SETTINGS----------------------------*/
-
 .col-md-8.post-edit-page-container {
     margin: 0 auto;
 }
@@ -493,8 +305,15 @@ form.post-edit.form-content {
 
 .fieldWrapper.title {
     border: none;
-    margin-bottom: 10px;
-    padding: .75rem 1.25rem;
+    padding: 2%;
+}
+
+div.fieldWrapper.title > label {
+    width: 100%;
+}
+input#id_title {
+    width: 100%;
+    text-align: center;
 }
 
 .fieldWrapper.content {
@@ -527,11 +346,7 @@ blockquote p {
   display: inline;
 }
 
-#id_title {
-    width: 100%;
-    text-align: center;
-    margin: auto;
-}
+
 
 /*--------------------- FORMS SETTINGS--------------------------*/
 
@@ -539,9 +354,16 @@ blockquote p {
     margin: 0 auto 1rem auto;
 }
 
-.buttons {
-    text-align: center;
-    font-size: 0.8rem;
+form {
+    padding-bottom: 5%;
+}
+
+.profile-form-avatar-container {
+   max-width: 100%;
+}
+
+.profile-form-current-avatar {
+    display: flex;
 }
 
 .nav-link.btn.login-btn {
@@ -551,16 +373,6 @@ blockquote p {
 }
 .nav-link.btn.login-btn > span {
     color: #FBF7FF;
-}
-
-label[for=id_title],
-label[for=id_content],
-label[for=id_tags] {
-    display: inherit;
-}
-
-span.helptext {
-    font-size: 12px;
 }
 
 .buttons > input {
@@ -612,18 +424,22 @@ span.helptext {
 
 /*--------- FOOTER SETTINGS--------*/
 footer {
-    position: fixed;
+    position: absolute;
     z-index: 3;
     width: 100%;
     bottom: 0;
 	left: 0;
 	right: 0;
 	text-align: center;
-    margin: 0 auto;
+    /*margin: 0 auto;*/
     padding-right: 10px;
     padding-left: 10px;
 	clear: both;
 	background-color: #404042;
     color: #F7F7FF;
+}
+
+footer > h3 {
+    margin: 0;
 }
 

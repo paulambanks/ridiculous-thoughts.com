@@ -1,0 +1,39 @@
+<div class="profile-user-info">
+
+    <div class="profile-avatar">
+
+        <h3 class="author-heading">About the Author</h3>
+
+        {% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}" alt="Profile Avatar"
+                 class="profile-avatar-photo">
+        {% else %}
+            <img src="/static/crazycat.jpeg" alt="Profile Avatar"
+                 class="profile-avatar-photo">
+        {% endif %}
+    </div>
+
+    <div class="author-name-and-location">
+
+        <h3>{{ profile.user.first_name }} {{ profile.user.last_name }}</h3>
+
+        {% if profile.city and profile.country %} <!--profile-location-->
+            <p class="profile-user-location">{{ profile.city }}, {{ profile.country }}</p>
+        {% elif profile.city and not post.author.profile.country %}
+            <p class="profile-user-location">{{ profile.city }}</p>
+        {% elif profile.country and not post.author.profile.city %}
+            <p class="profile-user-location">{{ profile.counry }}</p>
+        {% else %}
+            <small class="text-muted"><p>Tell us something about yourself</p></small>
+        {% endif %}
+
+        {% if profile.bio %} <!--profile-bio-->
+            <blockquote class="author-bio">{{ profile.bio }}</blockquote>
+        {% else %}
+            <small class="text-muted"><p>Tell us something about yourself</p></small>
+        {% endif %}
+
+    </div>
+
+</div>
+

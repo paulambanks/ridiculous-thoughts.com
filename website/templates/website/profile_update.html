@@ -9,7 +9,7 @@
 
         <div class="col-md-12">
 
-            <div class="add-new-post-button">
+            <div class="page-heading">
                 <div class="profile-page-link-container">
                     <a class="nav-link" title="Contact Form">
                         <span class="add-new-post-button-text"><i class="fas fa-feather-alt"></i> EDIT YOUR PROFILE...
@@ -28,14 +28,32 @@
                         {{ formset.management_form }}
 
                         {% for form in formset %}
+                            {% for error in form.non_field_errors %}
+                                <div class="form-group has-errors text-danger small">
+                                    {{error}}
+                                </div>
+                            {% endfor %}
 
-                            {{ form }}
+                            {% for hidden_field in form.hidden_fields %}
+                                {{ hidden_field }}
+                            {% endfor %}
+
+                            {% for field in form.visible_fields %}
+                                <div class="form-group">
+                                    {{ field.label_tag }}
+                                    {{ field }}
+                                    {% if field.help_text %}
+                                        <small class="form-text text-muted">{{ field.help_text }}</small>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
                         {% endfor %}
+
                     </div>
                 </div>
 
                 <div class="add-new-post-button">
-                    <div class="btn-group" role="group">
+                    <div class="btn-group confirm" role="group">
                         <button class="nav-link btn login-btn" type="submit" title="Edit the profile">
                             <span class="add-new-post-button-text"> SAVE CHANGES <i class="fas fa-unlock-alt"></i></span></button>
                         <a class="nav-link btn" href='{% url 'website:posts_list' %}' title="Cancel changes">
@@ -43,16 +61,11 @@
                     </div>
                 </div>
 
-{#                    {{ formset.as_p }}#}
-
-{#                <div class="buttons">#}
-{#                    <input type="submit" value="CONFIRM" class="btn btn-primary">#}
-{#                    <a href="{% url 'website:posts_list' %}" class="btn btn-default">Cancel</a>#}
-{#                </div>#}
-
             </form>
 
         </div>
     </div>
 
 {% endblock %}
+
+

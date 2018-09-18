@@ -35,6 +35,5 @@ function hasScrolled() {
     }
 
     lastScrollTop = st;
-}
-
+};
 

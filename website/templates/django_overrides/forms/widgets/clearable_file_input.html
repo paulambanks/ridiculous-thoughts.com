@@ -1,0 +1,48 @@
+<!--Overrides Django Widget for avatar picture upload-->
+
+<div class="profile-form-avatar-container">
+
+    {% if widget.is_initial %}
+
+        <div class="profile-form-current-avatar">
+
+            <div class="author-avatar">
+                <a href="{{ widget.value.url }}"><img src="{{ widget.value.url }}" alt="Profile Avatar" class="author-avatar photo"></a>
+            </div>
+
+            <div class="profile-form-remove-avatar checkbox">
+                {% if not widget.required %}
+                    <input class="form-check-input" type="checkbox" name="{{ widget.checkbox_name }}" id="{{ widget.checkbox_id }}">
+                    <label for="{{ widget.checkbox_id }}"> Remove Picture </label>
+                {% endif %}
+            </div>
+
+        </div>
+
+        <div class="profile-form-change-avatar">
+            <label>
+                Pick a new Avatar picture:
+                <input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
+            </label>
+
+        </div>
+
+    {% else %}
+        <div class="profile-form-current-avatar">
+            <div class="author-avatar">
+                <img src="/static/crazycat.jpeg" alt="Profile Avatar" class="author-avatar photo">
+                <small class="form-text text-muted">I am a default Profile Avatar. Although I am very cute, feel free to pick your custom picture</small>
+            </div>
+        </div>
+
+
+        <div class="profile-form-change-avatar">
+            <label>
+                Pick a new Avatar picture:
+                <input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
+            </label>
+        </div>
+
+    {% endif %}
+
+</div>

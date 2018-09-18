@@ -152,6 +152,7 @@ def individual_author_public_posts(request, user):
         posts = paginator.page(paginator.num_pages)
 
     context = {
+        'user': 'user',
         'posts': posts,
         'profile': profile,
     }
@@ -216,10 +217,10 @@ def post_form(request, pk=None):
     # TO DO: Needs to be modified to accommodate multiple tagging at once
     if pk:
         post = Post.objects.get(pk=pk)
-        TagInlineFormset = inlineformset_factory(Post, TaggedPost, fields=('tag',), can_delete=True)
+        TagInlineFormset = inlineformset_factory(Post, TaggedPost, fields=('tag',), can_delete=True, max_num=6)
     else:
         post = Post()
-        TagInlineFormset = inlineformset_factory(Post, TaggedPost, fields=('tag',), can_delete=False)
+        TagInlineFormset = inlineformset_factory(Post, TaggedPost, fields=('tag',), can_delete=False, max_num=6)
 
     post_form = PostForm(instance=post)
     tag_formset = TagInlineFormset(instance=post)

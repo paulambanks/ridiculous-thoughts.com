@@ -64,18 +64,17 @@ class UserProfile(models.Model):
         related_name='profile',
         primary_key=True,
         verbose_name='Member profile')
-    bio = models.CharField(
+    bio = models.TextField(
         max_length=250,
         blank=True,
         default='',
-        help_text="Write something about yourself"
+        help_text="Maximum 250 characters ",
     )
     avatar = models.ImageField(
         upload_to='uploads/',
         blank=True,
         default='static/images/crazycat.jpeg',
-        help_text="Profile Avatar",
-        verbose_name="Profile Avatar"
+        verbose_name="Your Current Profile Avatar"
     )
     city = models.CharField(
         max_length=100,

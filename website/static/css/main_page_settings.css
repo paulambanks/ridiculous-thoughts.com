@@ -1,0 +1,1354 @@
+/*------------------- GENERAL PAGE SETTINGS-------------------*/
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Serif', serif;
+}
+
+body {
+    height: 100%;
+    padding-bottom: 2%;
+    max-width: 100%;
+    position: relative;
+    font-size: 1em;
+    line-height: 1.375em;
+}
+
+main {
+    max-width: 100%;
+}
+
+.row {
+    max-width: 100%;
+    margin: auto;
+}
+
+
+/* Desktop Styles */
+@media only screen and (min-width: 420px) {
+    .profile-card {
+    min-width: 300px;
+    }
+}
+
+
+/* ------------------ LAPTOPS SETTINGS-------------------------------- */
+
+/* ----------- Non-Retina Screens ----------- */
+@media screen
+and (min-device-width: 1200px)
+and (max-device-width: 1600px)
+and (-webkit-min-device-pixel-ratio: 1) {
+    h1 {
+        font-size: 3em;
+        line-height: 1.05em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 2.25em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.75em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.22222222em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 1em;
+        line-height: 1.5em;
+    }
+
+    blockquote {
+        font-size: 1.5em;
+        line-height: 1.45833333em;
+    }
+
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+    .card-deck {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+/* ----------- Retina Screens ----------- */
+@media screen
+and (min-device-width: 1200px)
+and (max-device-width: 1600px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (min-resolution: 192dpi) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+    .card-deck {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+
+}
+
+/* -------------------LARGE SCREENS (4K)----------------- */
+@media only screen and (min-width: 1824px) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+    .card-deck {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 2000px;
+    }
+}
+
+/* ---------------APPLE SETTING IPHONE------------------------------------ */
+/* iPhone 4. Comma can be used to apply same rules to multiple media queries. */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+}
+
+/* ----------- iPhone 5, 5S, 5C and 5SE ----------- */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    h1 {
+        font-size: 2em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 1.625em;
+        line-height: 1.15384615em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.375em;
+        line-height: 1.13636364em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.11111111em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 0.8em;
+        line-height: 1.5em;
+    }
+
+    div.card-post-tags > ul > li > a {
+        font-size: 0.8em;
+    }
+
+    blockquote {
+        font-size: 1.25em;
+        line-height: 1.25em;
+    }
+
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+}
+
+/* Portrait */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: portrait) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+    .add-new-post-button {
+        font-size: 0.6rem;
+    }
+}
+
+/* Lanscape */
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: landscape) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+}
+
+/* ----------- iPhone 6, 6S, 7 and 8 ----------- */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    h1 {
+        font-size: 2em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 1.625em;
+        line-height: 1.15384615em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.375em;
+        line-height: 1.13636364em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.11111111em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 0.8em;
+        line-height: 1.5em;
+    }
+
+    div.card-post-tags > ul > li > a {
+        font-size: 0.8em;
+    }
+
+    blockquote {
+        font-size: 1.25em;
+        line-height: 1.25em;
+    }
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+}
+
+/* Portrait */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: portrait) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+    .add-new-post-button {
+        font-size: 0.7rem;
+    }
+}
+
+/* Landscape */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 667px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: landscape) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+}
+
+/* ----------- iPhone 6+, 7+ and 8+ ----------- */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 3) {
+    h1 {
+        font-size: 2em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 1.625em;
+        line-height: 1.15384615em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.375em;
+        line-height: 1.13636364em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.11111111em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 0.8em;
+        line-height: 1.5em;
+    }
+
+    div.card-post-tags > ul > li > a {
+        font-size: 0.8em;
+    }
+
+    blockquote {
+        font-size: 1.25em;
+        line-height: 1.25em;
+    }
+    body {
+        max-width: 100%;
+        position: inherit;
+        padding-bottom: 2%;
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+}
+
+/* Portrait */
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: portrait) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: inherit;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+    .add-new-post-button {
+        font-size: 0.7rem;
+    }
+}
+
+/* Landscape */
+@media only screen
+and (min-device-width: 414px)
+and (max-device-width: 736px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: landscape) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+}
+
+/* ----------- iPhone X ----------- */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 812px)
+and (-webkit-min-device-pixel-ratio: 3) {
+    h1 {
+        font-size: 2em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 1.625em;
+        line-height: 1.15384615em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.375em;
+        line-height: 1.13636364em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.11111111em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 0.8em;
+        line-height: 1.5em;
+    }
+
+    div.card-post-tags > ul > li > a {
+        font-size: 0.8em;
+    }
+
+    blockquote {
+        font-size: 1.25em;
+        line-height: 1.25em;
+    }
+
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+}
+
+/* Portrait */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 812px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: portrait) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+    .add-new-post-button {
+        font-size: 0.7rem;
+    }
+
+    div.btn-group {
+        display: flex;
+        justify-content: space-evenly;
+    }
+}
+
+/* Landscape */
+@media only screen
+and (min-device-width: 375px)
+and (max-device-width: 812px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: landscape) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+}
+
+/* ---------------APPLE SETTING IPADS------------------------------------ */
+/* ----------- iPad 1, 2, Mini and Air ----------- */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (-webkit-min-device-pixel-ratio: 1) {
+    h1 {
+        font-size: 2em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 1.625em;
+        line-height: 1.15384615em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.375em;
+        line-height: 1.13636364em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.11111111em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 0.8em;
+        line-height: 1.5em;
+    }
+
+    div.card-post-tags > ul > li > a {
+        font-size: 0.8em;
+    }
+
+    blockquote {
+        font-size: 1.25em;
+        line-height: 1.25em;
+    }
+
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+}
+
+/* Portrait */
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 1) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+    .add-new-post-button {
+        font-size: 0.7rem;
+    }
+}
+
+/* Landscape */
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (orientation: landscape)
+and (-webkit-min-device-pixel-ratio: 1) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+}
+
+/* ----------- iPad 3, 4 and Pro 9.7" ----------- */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    h1 {
+        font-size: 2em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 1.625em;
+        line-height: 1.15384615em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.375em;
+        line-height: 1.13636364em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.11111111em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 0.8em;
+        line-height: 1.5em;
+    }
+
+    div.card-post-tags > ul > li > a {
+        font-size: 0.8em;
+    }
+
+    blockquote {
+        font-size: 1.25em;
+        line-height: 1.25em;
+    }
+
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+}
+
+/* Portrait */
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+}
+
+/* Landscape */
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (orientation: landscape)
+and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+}
+
+/* ----------- iPad Pro 10.5" ----------- */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 834px)
+and (max-device-width: 1112px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+}
+
+/* Portrait */
+/* Declare the same value for min- and max-width to avoid colliding with desktops */
+/* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
+@media only screen
+and (min-device-width: 834px)
+and (max-device-width: 834px)
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 2) {
+    h1 {
+        font-size: 2em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 1.625em;
+        line-height: 1.15384615em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.375em;
+        line-height: 1.13636364em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.11111111em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 0.8em;
+        line-height: 1.5em;
+    }
+
+    div.card-post-tags > ul > li > a {
+        font-size: 0.8em;
+    }
+
+    blockquote {
+        font-size: 1.25em;
+        line-height: 1.25em;
+    }
+
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+}
+
+/* Landscape */
+/* Declare the same value for min- and max-width to avoid colliding with desktops */
+/* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
+@media only screen
+and (min-device-width: 1112px)
+and (max-device-width: 1112px)
+and (orientation: landscape)
+and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+}
+
+/* ----------- iPad Pro 12.9" ----------- */
+/* Portrait and Landscape */
+@media only screen
+and (min-device-width: 1024px)
+and (max-device-width: 1366px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+}
+
+/* Portrait */
+/* Declare the same value for min- and max-width to avoid colliding with desktops */
+/* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
+@media only screen
+and (min-device-width: 1024px)
+and (max-device-width: 1024px)
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+}
+
+/* Landscape */
+/* Declare the same value for min- and max-width to avoid colliding with desktops */
+/* Source: https://medium.com/connect-the-dots/css-media-queries-for-ipad-pro-8cad10e17106*/
+@media only screen
+and (min-device-width: 1366px)
+and (max-device-width: 1366px)
+and (orientation: landscape)
+and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+
+}
+
+/* ---------------SAMSUNG SETTING PHONES------------------------------------ */
+/* ----------- Galaxy S3 ----------- */
+/* Portrait and Landscape */
+@media screen
+and (device-width: 320px)
+and (device-height: 640px)
+and (-webkit-device-pixel-ratio: 2) {
+    h1 {
+        font-size: 2em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 1.625em;
+        line-height: 1.15384615em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.375em;
+        line-height: 1.13636364em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.11111111em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 0.8em;
+        line-height: 1.5em;
+    }
+
+    div.card-post-tags > ul > li > a {
+        font-size: 0.8em;
+    }
+
+    blockquote {
+        font-size: 1.25em;
+        line-height: 1.25em;
+    }
+
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        width: 100%;
+    }
+
+}
+
+/* Portrait */
+@media screen
+and (device-width: 320px)
+and (device-height: 640px)
+and (-webkit-device-pixel-ratio: 2)
+and (orientation: portrait) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+    }
+
+    .content-container {
+        padding: 0 5% 10% 5%;
+        width: 100%;
+    }
+
+    .add-new-post-button {
+        font-size: 0.7rem;
+    }
+}
+
+/* Landscape */
+@media screen
+and (device-width: 320px)
+and (device-height: 640px)
+and (-webkit-device-pixel-ratio: 2)
+and (orientation: landscape) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+}
+
+/* ----------- Galaxy S4, S5 and Note 3 ----------- */
+/* Portrait and Landscape */
+@media screen
+and (device-width: 320px), screen and (device-width: 360px)
+and (device-height: 640px)
+and (-webkit-device-pixel-ratio: 3) {
+    h1 {
+        font-size: 2em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 1.625em;
+        line-height: 1.15384615em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.375em;
+        line-height: 1.13636364em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.11111111em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 0.8em;
+        line-height: 1.5em;
+    }
+
+    div.card-post-tags > ul > li > a {
+        font-size: 0.8em;
+    }
+
+    blockquote {
+        font-size: 1.25em;
+        line-height: 1.25em;
+    }
+
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        width: 100%;
+    }
+
+}
+
+/* Portrait */
+@media screen
+and (device-width: 320px), screen and (device-width: 360px)
+and (device-height: 640px)
+and (-webkit-device-pixel-ratio: 3)
+and (orientation: portrait) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+    }
+
+    .content-container {
+        padding: 0 5% 10% 5%;
+        width: 100%;
+    }
+
+    .add-new-post-button {
+        font-size: 0.7rem;
+    }
+}
+
+/* Landscape */
+@media screen
+and (device-width: 320px), screen and (device-width: 360px)
+and (device-height: 640px)
+and (-webkit-device-pixel-ratio: 3)
+and (orientation: landscape) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+}
+
+/* ----------- Galaxy S6 ----------- */
+/* Portrait and Landscape */
+@media screen
+and (device-width: 360px)
+and (device-height: 640px)
+and (-webkit-device-pixel-ratio: 4) {
+    h1 {
+        font-size: 2em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 1.625em;
+        line-height: 1.15384615em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.375em;
+        line-height: 1.13636364em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.11111111em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 0.8em;
+        line-height: 1.5em;
+    }
+
+    div.card-post-tags > ul > li > a {
+        font-size: 0.8em;
+    }
+
+    blockquote {
+        font-size: 1.25em;
+        line-height: 1.25em;
+    }
+
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        width: 100%;
+    }
+
+}
+
+/* Portrait */
+@media screen
+and (device-width: 360px)
+and (device-height: 640px)
+and (-webkit-device-pixel-ratio: 4)
+and (orientation: portrait) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+    }
+
+    .content-container {
+        padding: 0 5% 10% 5%;
+        width: 100%;
+    }
+
+    .add-new-post-button {
+        font-size: 0.7rem;
+    }
+}
+
+/* Landscape */
+@media screen
+and (device-width: 360px)
+and (device-height: 640px)
+and (-webkit-device-pixel-ratio: 4)
+and (orientation: landscape) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+}
+
+/* ---------------SAMSUNG SETTING PADS------------------------------------ */
+/* ----------- Galaxy Tab 2 ----------- */
+/* Portrait and Landscape */
+@media (min-device-width: 800px)
+and (max-device-width: 1280px) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        width: 100%;
+    }
+
+}
+
+/* Portrait */
+@media (max-device-width: 800px)
+and (orientation: portrait) {
+    h1 {
+        font-size: 2em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 1.625em;
+        line-height: 1.15384615em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.375em;
+        line-height: 1.13636364em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.11111111em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 0.8em;
+        line-height: 1.5em;
+    }
+
+    div.card-post-tags > ul > li > a {
+        font-size: 0.8em;
+    }
+
+    blockquote {
+        font-size: 1.25em;
+        line-height: 1.25em;
+    }
+
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+    }
+
+    .content-container {
+        padding: 0 5% 10% 5%;
+        width: 100%;
+    }
+
+    .add-new-post-button {
+        font-size: 0.7rem;
+    }
+}
+
+/* Landscape */
+@media (max-device-width: 1280px)
+and (orientation: landscape) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+    }
+
+    .content-container {
+        padding: 2%;
+        width: 100%;
+    }
+}
+
+/* ----------- Galaxy Tab S ----------- */
+/* Portrait and Landscape */
+@media (min-device-width: 800px)
+and (max-device-width: 1280px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        width: 100%;
+    }
+
+}
+
+/* Portrait */
+@media (max-device-width: 800px)
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 2) {
+    h1 {
+        font-size: 2em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 1.625em;
+        line-height: 1.15384615em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.375em;
+        line-height: 1.13636364em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.11111111em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 0.8em;
+        line-height: 1.5em;
+    }
+
+    div.card-post-tags > ul > li > a {
+        font-size: 0.8em;
+    }
+
+    blockquote {
+        font-size: 1.25em;
+        line-height: 1.25em;
+    }
+    body {
+        max-width: 100%;
+        padding-bottom: 2%;
+        position: relative;
+    }
+
+    .content-container {
+        padding: 0 5% 10% 5%;
+        width: 100%;
+    }
+
+    .add-new-post-button {
+        font-size: 0.7rem;
+    }
+
+}
+
+/* Landscape */
+@media (max-device-width: 1280px)
+and (orientation: landscape)
+and (-webkit-min-device-pixel-ratio: 2) {
+    body {
+        position: relative;
+        max-width: 100%;
+        padding-bottom: 2%;
+    }
+
+    .content-container {
+        padding: 0 5% 5% 5%;
+        width: 100%;
+    }
+}

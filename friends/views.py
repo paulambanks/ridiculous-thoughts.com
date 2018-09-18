@@ -8,6 +8,7 @@ from django.urls import reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from website.models import Post
+from accounts.models import UserProfile
 
 # Create your views here.
 
@@ -17,6 +18,8 @@ def private_posts_list(request):
     """The page with all blog posts, visible to all"""
     template = 'friends/private_posts_list.html'
     post_list = Post.objects.filter(author=request.user, status='Published',).order_by('-updated')
+    profile = UserProfile.objects.get(user=request.user)
+
     page = request.GET.get('page', 1)
 
     paginator = Paginator(post_list, 6)
@@ -27,7 +30,12 @@ def private_posts_list(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
 
-    return render(request, template, {'posts': posts})
+    context = {
+        'posts': posts,
+        'profile': profile
+    }
+
+    return render(request, template, context)
 
 
 @login_required

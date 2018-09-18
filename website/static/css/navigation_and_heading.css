@@ -1,0 +1,89 @@
+/*------------------------------ NAVIGATION SETTINGS---------------------------------------*/
+header {
+    top: 0;
+	left: 0;
+	right: 0;
+    margin: 0 auto;
+    position: fixed;
+	transition: top 0.2s ease-in-out;
+    z-index: 2;
+    max-width: 100%;
+}
+
+/*------------------------------ NAVIGATION SETTINGS---------------------------------------*/
+
+.nav-up {
+    top: -80px;
+}
+
+#mainNav {
+    background: #414042;
+    margin-bottom: 40px;
+    padding: 0;
+}
+
+#mainNav > div.container {
+    padding: 0 1%;
+    max-width: 100%;
+}
+
+#mainNav .navbar-brand,
+#mainNav .navbar-toggler,
+#mainNav .nav-item .nav-link {
+    font-weight: 800;
+    color: #FBF7FF;
+}
+
+#mainNav .nav-item .nav-link,
+#mainNav .navbar-toggler,
+#mainNav .profile-link-username {
+    text-align: right;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #FBF7FF;
+    margin: auto 0;
+}
+
+#mainNav .navbar-brand:hover,
+#mainNav .profile-link-username:hover,
+#mainNav .nav-item .nav-link:hover,
+#mainNav .navbar-toggler:hover {
+    color: #C9C6CC;
+}
+
+.nav-avatar {
+    vertical-align: middle;
+    max-width: 30px;
+    max-height: 30px;
+    border-radius: 50%;
+}
+
+/* -----------SETTINGS FOR NAVIGATION FOR SCREEN --------------------  */
+
+@media only screen and (min-width: 992px) {
+    #mainNav {
+    position: relative;
+    margin-bottom: 40px;
+        background: #414042;
+    }
+    .container {
+        z-index: 1;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    #mainNav .navbar-brand {
+        font-size: 20px;
+    }
+}
+
+

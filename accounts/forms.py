@@ -1,6 +1,11 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser, UserProfile
 from django import forms
+from django.forms import ClearableFileInput
+
+
+class CustomClearableFileInputWidget(ClearableFileInput):
+    template = 'django_overrides/forms/widgets/clearable_file_input.html'
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -34,14 +39,36 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class UserProfileForm(forms.ModelForm):
+
     def __init__(self, *args, **kwargs):
         super(UserProfileForm, self).__init__(*args, **kwargs)
         if self.instance.pk is None:
             self.empty_permitted = False # Here
 
+    ClearableFileInput.template_name = 'django_overrides/forms/widgets/clearable_file_input.html'
+
     class Meta:
         model = UserProfile
         fields = ('bio', 'country', 'city', 'avatar',)
+        widgets = {
+            'bio': forms.Textarea(attrs={
+                'class': 'form-control',
+                'cols': 80,
+                'rows': 4,
+                'placeholder': 'Share something about yourself',
+            }),
+            'country': forms.TextInput(attrs={
+                'cols': 80,
+                'class': 'form-control',
+                'placeholder': 'Country',
+            }),
+            'city': forms.TextInput(attrs={
+                'cols': 80,
+                'class': 'form-control',
+                'placeholder': 'City',
+            }),
+
+        }
 
 # ---------------USER PROFILE------------------------
 

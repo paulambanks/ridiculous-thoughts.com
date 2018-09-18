@@ -1,6 +1,6 @@
 tinymce.init({
 
-    selector : "textarea.mceEditor",
+    selector : "textarea.tinymce4-editor",
 
     setup: function (editor) {
         editor.on('change', function (e) {

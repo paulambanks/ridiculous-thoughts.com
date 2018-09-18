@@ -18,8 +18,8 @@ def profile_update(request, pk):
     # pre-populate UserProfileForm with retrieved user values.
     user_form = UserProfileForm(instance=user)
 
-    ProfileInlineFormset = inlineformset_factory(CustomUser, UserProfile,
-                                                 fields=('bio', 'city', 'country', 'avatar'),)
+    ProfileInlineFormset = inlineformset_factory(CustomUser, UserProfile, form=UserProfileForm,
+                                                 fields=('bio', 'city', 'country', 'avatar'), can_delete=False)
 
     formset = ProfileInlineFormset(instance=user)
 
