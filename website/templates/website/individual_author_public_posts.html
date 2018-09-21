@@ -4,13 +4,21 @@
 
 {% block content %}
 
+    <!-- JUMBOTRON // CAROUSEL
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <div class="jumbotron jumbotron-fluid">
+            <!--INCLUDE JUMBOTRON -->
+            {% include "jumbotron.html" %}
+            <!---------------------->
+        </div>
+
     <div class="content-container">
 
         <div class="row no-top-margin">
 
             <div class="col-sm-8 individual-public-post-list">
 
-                <div class="page-heading">
+                <div class="page-heading no-jumbotron">
                     <div class="profile-page-link-container">
                         <a class="nav-link" title="Contact Form">
                             <span class="add-new-post-button-text"><i class="fas fa-feather-alt"></i> Get inspired...

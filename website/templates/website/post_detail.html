@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="content-container">
+    <div class="content-container no-jumbotron">
 
-        <div class="row no-margin">
+        <div class="row">
 
             <div class="container">
 
@@ -15,51 +14,46 @@
                 {% if user.is_authenticated and request.user == post.author %}
 
                     {%  if post.status == "Draft" %}
-
-                        <div class="page-heading">
-                            <div class="btn-group confirm" role="group">
-                                <a class="nav-link" href="{% url 'website:post_edit' pk=post.pk %}" title="Edit your Posts">
-                                    <span class="add-new-post-button-text"> EDIT POST <i class="fas fa-pencil-alt"></i></span>
-                                </a>
-                                <a class="nav-link" href="{% url 'website:post_remove' pk=post.pk %}" title="Remove your Posts">
-                                    <span class="add-new-post-button-text"> DELETE POST <i class="far fa-trash-alt"></i></span>
-                                </a>
-                                <a class="nav-link" href="{% url 'website:post_publish' pk=post.pk %}" title="Publish your Posts">
-                                    <span class="add-new-post-button-text"> PUBLISH <i class="fas fa-book-reader"></i></span>
-                                </a>
+                        <div class="page-heading no-jumbotron">
+                            <div class="btn-group edit" role="group">
+                                <button class="btn btn-edit">
+                                    <a class="nav-link" href="{% url 'website:post_edit' pk=post.pk %}" title="Edit your Posts">
+                                        <i class="fas fa-pencil-alt"></i></a></button>
+                                <button class="btn btn-edit">
+                                    <a class="nav-link" href="{% url 'website:post_remove' pk=post.pk %}" title="Delete your Posts">
+                                        <i class="far fa-trash-alt"></i></a></button>
+                                <button class="btn btn-edit">
+                                    <a class="nav-link" href="{% url 'website:post_publish' pk=post.pk %}" title="Publish your Posts">
+                                        <i class="fas fa-book-reader"></i></a></button>
                             </div>
                         </div>
 
                     {% elif post.status == "Published" and post.privacy == "Private"%}
-
-                        <div class="page-heading">
-                            <div class="btn-group confirm" role="group">
-                                <a class="nav-link" href="{% url 'website:post_edit' pk=post.pk %}" title="Edit your Posts">
-                                    <span class="add-new-post-button-text"> EDIT POST <i class="fas fa-pencil-alt"></i></span>
-                                </a>
-                                <a class="nav-link" href="{% url 'website:post_remove' pk=post.pk %}" title="Remove your Posts">
-                                    <span class="add-new-post-button-text"> DELETE POST <i class="far fa-trash-alt"></i></span>
-                                </a>
-                                <a class="nav-link" href="{% url 'website:post_share' pk=post.pk %}" title="Share your Posts">
-                                    <span class="add-new-post-button-text"> SHARE <i class="fas fa-user-friends"></i></span>
-                                </a>
+                        <div class="page-heading no-jumbotron">
+                            <div class="btn-group edit" role="group">
+                                <button class="btn btn-edit">
+                                    <a class="nav-link" href="{% url 'website:post_edit' pk=post.pk %}" title="Edit your Posts">
+                                        <i class="fas fa-pencil-alt"></i></a></button>
+                                <button class="btn btn-edit">
+                                    <a class="nav-link" href="{% url 'website:post_remove' pk=post.pk %}" title="Delete your Posts">
+                                        <i class="far fa-trash-alt"></i></a></button>
+                                <button class="btn btn-edit">
+                                    <a class="nav-link" href="{% url 'website:post_share' pk=post.pk %}" title="Share your Posts">
+                                        <i class="fas fa-user-friends"></i></a></button>
                             </div>
                         </div>
-
 
                     {% else %}
-
-                        <div class="page-heading">
-                            <div class="btn-group confirm" role="group">
-                                <a class="nav-link" href="{% url 'website:post_edit' pk=post.pk %}" title="Edit your Posts">
-                                    <span class="add-new-post-button-text"> EDIT POST <i class="fas fa-pencil-alt"></i></span>
-                                </a>
-                                <a class="nav-link" href="{% url 'website:post_remove' pk=post.pk %}" title="Remove your Posts">
-                                    <span class="add-new-post-button-text"> DELETE POST <i class="far fa-trash-alt"></i></span>
-                                </a>
+                        <div class="page-heading no-jumbotron">
+                            <div class="btn-group edit" role="group">
+                                <button class="btn btn-edit">
+                                    <a class="nav-link" href="{% url 'website:post_edit' pk=post.pk %}" title="Edit your Posts">
+                                        <i class="fas fa-pencil-alt"></i></a></button>
+                                <button class="btn btn-edit">
+                                    <a class="nav-link" href="{% url 'website:post_remove' pk=post.pk %}" title="Delete your Posts">
+                                        <i class="far fa-trash-alt"></i></a></button>
                             </div>
                         </div>
-
                     {% endif %}
 
                 {% endif %}
@@ -67,6 +61,7 @@
                     <div class="post-title">
                         <h1>{{ post.title }}</h1>
                     </div>
+
                     <div class="post-info">
                         <p><i class="far fa-clock"></i> Updated on {{ post.updated | date:"d F Y" }}</p>
                     </div>
@@ -79,18 +74,15 @@
                                         <a class="btn btn-light tag" href="{% url 'website:tagged_posts_list' tag.id %}">{{ tag.slug }}</a>
                                     </li>
                                 {% endfor %}
+
                             {% else %}
                                 {% if request.user == post.author %}
                                     <li class="card-single-tag">
-                                        <a class="btn btn-light tag" href="{% url 'website:post_edit' pk=post.pk %}" title="Tag your Posts">
-                                            <span class="add-new-post-button-text"> TAG ME! <i class="fas fa-tags"></i></span>
-                                        </a>
+                                        <a class="btn btn-light tag" href="{% url 'website:post_edit' pk=post.pk %}" title="Tag your Posts">TAG ME! <i class="fas fa-tags"></i></a>
                                     </li>
                                 {% else %}
                                     <li class="card-single-tag">
-                                        <a class="btn btn-light tag">
-                                            <span class="add-new-post-button-text"> No tags yet <i class="fas fa-tags"></i></span>
-                                        </a>
+                                        <a class="btn btn-light tag">No tags yet <i class="fas fa-tags"></i></a>
                                     </li>
                                 {% endif %}
                             {% endif %}
@@ -98,7 +90,7 @@
                     </div>
 
                     <div class="post-text">
-                        <p>{{ post.content | safe }}</p>
+                        {{ post.content | safe }}
                     </div>
 
 
@@ -134,23 +126,21 @@
                                 {% else %}
                                     <p class="profile-user-location"></p>
                                 {% endif %}
-                            </div>
-                        </div>
 
-                            <div class="author-description">
+                                <div class="author-description">
 
                                 <blockquote class="author-bio">{{ post.author.profile.bio }}</blockquote> <!--profile-bio-->
                                 {% if request.user == post.author %}
                                     <a class="author-link" href="{% url 'friends:private_posts_list' %}"> * SEE ALL POSTS *</a>
                                 {% else %}
-                                    <a class="author-link" href="{% url 'website:individual_author_public_posts' post.author_id %}">
+                                    <a class="author-link" href="{% url 'website:individual_author_posts' post.author_id %}">
                                         SEE ALL POSTS</a>
                                 {% endif %}
-                            </div>
+                                </div>
 
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

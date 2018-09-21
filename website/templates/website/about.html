@@ -2,20 +2,32 @@
 
 
 {% block content %}
-    <div class="content-container">
+    <div class="content-container no-jumbotron">
 
         <div class="row">
 
-            <div class="col-sm-8">
-                <p>Hiya! I'm Paula and this is the very first website that I have build from the scratch (Excited! :) ).</p>
-                <p>Through this website, I would like to invite my Family and Friends to share their (ridiculous) thoughts and passions.
-                    But most of all, I would like to share my progress in getting my foot into the programming world...
-                <p>Yes, until not so long ago I was a Biotechnologist and a Biomedical Scientist; and here I am, digging into
-                    Python and Django followed by cracking through css and html.</p>
-                <p>Why? </p>
-                <p>Because what motivates me the most are new challenges, solving problems and learning new skills.
-                    Because I am curious. Because I love the flexibility!
-                </p>
+            <div class="col-sm-8 private-post-list">
+
+                <div class="page-heading no-jumbotron">
+                    <div class="profile-page-link-container">
+                        <a class="nav-link" title="Contact Form">
+                            <i class="fas fa-feather-alt"></i> About me...<i class="fas fa-feather-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="about-me">
+
+                    <p>Hiya! I'm Paula and this is the very first website that I have build from the scratch (Excited! :) )</p>
+                    <p>Through this website, I would like to invite my Family and Friends to share their (ridiculous) thoughts and passions.
+                        But most of all, I would like to share my progress in getting my foot into the programming world...
+                    <p>Yes, until not so long ago I was a Biotechnologist and a Biomedical Scientist; and here I am, digging into
+                        Python and Django followed by cracking through css and html.</p>
+                    <p>Why? </p>
+                    <p>Because what motivates me the most are new challenges, solving problems and learning new skills.
+                        Because I am curious. Because I love the flexibility!
+                    </p>
+                </div>
 
                 <div class="links">
                 <ul class="list-inline text-center">
@@ -56,12 +68,26 @@
             </div>
 
             <div class="col-sm-4">
+                <div class="profile-user-info">
 
-                <div class="small-image-container"> <!-- Picture -->
-                    <img src="/static/photo-me.jpg" alt="Picture of Me">
+                    <div class="profile-avatar">
+                        <img src="/static/images/photo-me.jpg" alt="Picture of Me" class="profile-avatar-photo">
+                    </div>
+
+                    <div class="author-name-and-location">
+
+                        <h3>Paula Banks</h3>
+
+                        <p class="profile-user-location">Manchester, UK</p>
+
+                        <blockquote class="author-bio">Biotechnologist, passionate about good food, travels and RPG games. From 2018 switching to programming. </blockquote>
+
+                    </div>
+
                 </div>
 
             </div>
+
         </div>
     </div>
 

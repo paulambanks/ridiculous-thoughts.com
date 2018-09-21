@@ -10,9 +10,9 @@
         <!-- Basic Page Needs
         –––––––––––––––––––––––––––––––––––––––––––––––––– -->
         <meta charset="utf-8">
-        <title>{% block title %}Ridiculous Thoughts Blog{% endblock %}</title>
+        <title>{% block title %}Django Auth Tutorial{% endblock %}</title>
         <meta name="description" content="">
-        <meta name="author" content="Paula Banks">
+        <meta name="author" content="">
         <!-- Mobile Specific Metas
         –––––––––––––––––––––––––––––––––––––––––––––––––– -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -38,6 +38,14 @@
         <header class="nav-down"><!-- Hidden header with JS -->
             {% include "header.html" %}  <!--INCLUDE HEADER -->
         </header>
+
+        <!-- JUMBOTRON // CAROUSEL
+        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+        <div class="jumbotron jumbotron-fluid">
+            <!--INCLUDE JUMBOTRON -->
+            {% include "jumbotron.html" %}
+            <!---------------------->
+        </div>
 
         <!-- MAIN PAGE CONTENT
         –––––––––––––––––––––––––––––––––––––––––––––––––– -->

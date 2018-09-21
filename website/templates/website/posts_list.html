@@ -4,9 +4,17 @@
 
 {% block content %}
 
+    <!-- JUMBOTRON // CAROUSEL
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <div class="jumbotron jumbotron-fluid">
+        <!--INCLUDE JUMBOTRON -->
+        {% include "jumbotron.html" %}
+        <!---------------------->
+    </div>
+
     <div class="content-container">
 
-        <div class="row no-top-margin">
+        <div class="row">
 
             <div class="col-md-12">
 
@@ -18,31 +26,31 @@
 
                 <div class="container">
 
-                <div class="card-deck main-post-list mb-0">
+                    <div class="card-deck main-post-list mb-0">
 
-                    {% for post in posts %}
+                        {% for post in posts %}
 
-                        <div class="post-card card mb-4 box-shadow">
+                            <div class="post-card card mb-4 box-shadow">
 
-                            <!--INCLUDE PAGINATION-->
-                            {% include "website/single_post_card_body.html" %}
-                            <!---------------------->
+                                <!--INCLUDE PAGINATION-->
+                                {% include "website/single_post_card_body.html" %}
+                                <!---------------------->
 
-                            <div class="card-footer">
-                                <small class="text-muted">
-                                    <i class="far fa-clock"></i> Updated on {{ post.updated | date:"d F Y" }}</small><br>
-                                <small class="text-muted">
-                                    <a class="user-update-link"
-                                       href="{% url 'website:individual_author_public_posts' post.author_id %}"
-                                       title="Update Profile"><i class="fas fa-user"></i> {{ post.author.username }}</a>
-                                </small>
+                                <div class="card-footer">
+                                    <small class="text-muted">
+                                        <i class="far fa-clock"></i> Updated on {{ post.updated | date:"d F Y" }}</small><br>
+                                    <small class="text-muted">
+                                        <a class="user-update-link"
+                                           href="{% url 'website:individual_author_posts' post.author_id %}"
+                                           title="Update Profile"><i class="fas fa-user"></i> {{ post.author.username }}</a>
+                                    </small>
+                                </div>
+
                             </div>
 
-                        </div>
+                        {% endfor %}
 
-                    {% endfor %}
-
-                </div>
+                    </div>
                 </div>
 
                 <hr>

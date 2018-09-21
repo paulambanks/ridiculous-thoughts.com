@@ -1,17 +1,14 @@
+
 <div class="page-heading">
-    <div class="profile-page-link-container">
-        <a class="nav-link" href="{% url 'website:post_new' %}" title="Write a new Posts">
-            {% if user.profile.avatar %}
-                <img src="{{ user.profile.avatar.url }}"
-                     alt="Profile Avatar"
-                     class="nav-avatar 30x30 img-responsive">
-            {% else %}
-                <img src="/static/crazycat.jpeg"
-                     alt="Profile Avatar"
-                     class="nav-avatar 30x30 img-responsive">
-            {% endif %}
-            <span class="add-new-post-button-text"> What's on your mind?...
-                <i class="fas fa-feather-alt"></i></span>
-        </a>
+
+    <div class="page-heading-buttons">
+
+        <div class="btn-group edit" role="group">
+            <button class="btn btn-edit"><a class="nav-link" href="{% url 'website:post_new' %}" title="Write a new Posts">
+                <i class="far fa-plus-square"></i> New post </a></button>
+            <button class="btn btn-edit"><a class="nav-link" href="{% url 'website:post_draft_list' %}" title="Drafts">
+                <i class="far fa-edit"></i> Drafts </a></button>
+        </div>
+
     </div>
 </div>

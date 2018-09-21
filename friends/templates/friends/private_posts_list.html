@@ -4,9 +4,9 @@
 
 {% block content %}
 
-    <div class="content-container">
+    <div class="content-container no-jumbotron">
 
-        <div class="row no-top-margin">
+        <div class="row">
 
             <div class="col-sm-8 private-post-list">
 
@@ -67,9 +67,6 @@
                             <small class="text-muted">
                                 <a class="user-update-link" href="{% url 'accounts:profile_update' user.profile.pk %}" title="Update Profile">
                                     <i class="fas fa-user-edit"></i> UPDATE YOUR PROFILE </a></small><br>
-                            <small class="text-muted">
-                                <a class="user-update-link" href="{% url 'website:post_draft_list' %}" title="Drafts">
-                                    <i class="far fa-edit"></i> SEE YOUR DRAFTS </a></small>
                         </div>
                     </div>
 

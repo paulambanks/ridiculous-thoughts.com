@@ -113,7 +113,13 @@ def tagged_posts_list(request, tag_id):
     The PUBLIC page containing all blog posts with selected tag. Access is granted to both authorised users and visitors.
     """
     # TO DO: Each page consists of 6 posts. Should introduce infinite scrolling? or more posts per page?
-    post_list = Post.objects.filter(status='Published', privacy='Public', tags=tag_id).order_by('-updated')
+    if request.user.is_authenticated:
+        others_tagged_post_list = Post.objects.filter(status='Published', privacy='Public' and 'Friends', tags=tag_id).order_by('-updated')
+        own_tagged_post_list = Post.objects.filter(author=request.user, status='Published', tags=tag_id).order_by('-updated')
+        post_list = others_tagged_post_list | own_tagged_post_list
+    else:
+        post_list = Post.objects.filter(status='Published', privacy='Public', tags=tag_id).order_by('-updated')
+
     page = request.GET.get('page', 1)
 
     paginator = Paginator(post_list, 6)
@@ -131,14 +137,22 @@ def tagged_posts_list(request, tag_id):
     return render(request, template, context)
 
 
-def individual_author_public_posts(request, user):
+def individual_author_posts(request, user):
     template = 'website/individual_author_public_posts.html'
     """
     The PUBLIC page with all public posts of an individual author. 
     Access is granted to both authorised users and visitors.
     """
-    # TO DO: Each page consists of 6 posts. Should introduce infinite scrolling? or more posts per page?
-    post_list = Post.objects.filter(author=user, status='Published', privacy='Public').order_by('-updated')
+
+    if request.user.is_authenticated:
+        individual_public_post_list = Post.objects.filter(author=user, status='Published', privacy='Public').order_by('-updated')
+        individual_friends_post_list = Post.objects.filter(author=user, status='Published', privacy='Friends').order_by('-updated')
+        own_post_list = Post.objects.filter(author=request.user, status='Published').order_by('-updated')
+        post_list = individual_public_post_list | individual_friends_post_list | own_post_list
+
+    else:
+        post_list = Post.objects.filter(author=user, status='Published', privacy='Public').order_by('-updated')
+
     profile = UserProfile.objects.get(user=user)
 
     page = request.GET.get('page', 1)
@@ -276,7 +290,8 @@ def post_publish(request, pk):
             return HttpResponseRedirect(reverse('website:posts_list'))
 
         context = {
-            "post": post
+            "post": post,
+            'ready_to_publish': True,
         }
 
         return render(request, template, context)
@@ -344,7 +359,8 @@ def post_remove(request, pk):
             return HttpResponseRedirect(reverse('website:posts_list'))
 
         context = {
-            "post": post
+            "post": post,
+            'ready_to_remove': True,
         }
 
         return render(request, template, context)

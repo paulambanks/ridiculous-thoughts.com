@@ -3,24 +3,20 @@
 
 {% block title %}Login{% endblock %}
 
-    {% block content %}
+{% block content %}
+    <div class="content-container no-jumbotron">
 
         <div class="row">
 
             <div class="col-md-12">
 
-                <div class="add-new-post-button">
-                    <div class="profile-page-link-container">
-                        <a class="nav-link" title="Contact Form">
-                            <span class="add-new-post-button-text"><i class="fas fa-feather-alt"></i> LOGIN TO YOUR ACCOUNT...
-                                <i class="fas fa-feather-alt"></i></span>
-                        </a>
-                    </div>
+                <div class="page-heading no-jumbotron">
+                    <h2><i class="fas fa-feather-alt"></i> SIGN IN <i class="fas fa-feather-alt"></i></h2>
                 </div>
 
                 <form method="POST">{% csrf_token %}
 
-                    <div class="row no-margin">
+                    <div class="row">
                         <div class="col-sm-6 form-group login-form">
                             <label for="id_username"></label>
                             <input type="text" class="form-control" id="id_username" name="username" placeholder="Enter your Email" required>
@@ -31,15 +27,17 @@
                     </div>
 
                     <div class="add-new-post-button">
-                        <div class="btn-group" role="group">
-                            <button class="nav-link btn login-btn" type="submit" title="Login to your account ">
-                                <span class="add-new-post-button-text"> LOGIN <i class="fas fa-unlock-alt"></i></span></button>
-                            <a class="nav-link btn" href='{% url 'accounts:password_reset' %}' title="Forgot my Password">
-                                <span class="add-new-post-button-text"> FORGOT MY PASSWORD <i class="fas fa-question-circle"></i></span></a>
+                        <div class="btn-group submit" role="group">
+                             <button class="btn btn-submit" type="submit" title="Login to your account">
+                                 <i class="fas fa-unlock-alt"></i> LOGIN </button>
+                             <a class="user-update-link" href="{% url 'accounts:password_reset' %}" title="Forgot my Password"><button class="btn btn-cancel">
+                                 <i class="fas fa-question-circle"></i> RESET PASSWORD </button></a>
+
                         </div>
                     </div>
                 </form>
             </div>
         </div>
+    </div>
+{% endblock %}
 
-    {% endblock %}

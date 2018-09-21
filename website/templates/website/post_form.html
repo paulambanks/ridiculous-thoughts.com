@@ -6,71 +6,70 @@
 {% block content %}
     {{ post_form.media }}
 
-    <div class="row">
+    <div class="content-container no-jumbotron">
+        <div class="row">
 
-        <div class="col-md-8 post-edit-page-container">
+            <div class="col-md-8 post-edit-page-container">
 
-            <div class="page-heading">
-                <div class="profile-page-link-container">
-                    <a class="nav-link" title="Contact Form">
-                        <span class="add-new-post-button-text"><i class="fas fa-feather-alt"></i> SHARE YOUR THOUGHTS...
-                            <i class="fas fa-feather-alt"></i></span>
-                    </a>
+                <div class="page-heading no-jumbotron">
+                    <div class="profile-page-link-container">
+                        <h2><i class="fas fa-feather-alt"></i> SHARE YOUR THOUGHTS...<i class="fas fa-feather-alt"></i></h2>
+                    </div>
+                </div>
+                <br>
+
+                <div class="post-edit edit-form-container">
+
+                    <form method="POST" class="post-edit form-content">{% csrf_token %}
+
+                        <div class="fieldWrapper title">
+                            {% if post_form.title %}
+                                <label for="id_title">{{ post_form.title }}</label>
+                            {% else %}
+                                <label for="id_title"></label>
+                                <input type="text" class="form-control" id="id_title" name="title" placeholder="Post Title" required>
+                            {% endif %}
+                        </div>
+
+                        <div class="fieldWrapper content">
+                            {{ post_form.content }}
+                        </div>
+
+                        <br>
+                        <div class="fieldWrapper privacy card-footer">
+                            <label for="{{ post_form.privacy.id_for_label }}">Change privacy:</label>
+                            {{ post_form.privacy }}
+                        </div>
+
+                        <br>
+                        <div class="fieldWrapper tags card-footer">
+                            {{ tag_formset.management_form }}
+
+                            <label for="{{ tag_formset.tag.id_for_label }}">Chose tags...</label>
+
+                            {% for form in tag_formset %}
+                                <div class="fieldWrapper tag">
+                                    {{ form }}
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+
+                        <div class="add-new-post-button">
+                            <div class="btn-group submit" role="group">
+                                <button class="btn btn-submit" type="submit" title="Save changes">
+                                    <i class="far fa-save"></i> SAVE </button>
+                                <a class="btn btn-cancel user-update-link" href='{% url 'website:posts_list' %}' title="Cancel changes">CANCEL </a>
+                            </div>
+                        </div>
+
+                    </form>
+
                 </div>
             </div>
-            <br>
-            <div class="post-edit edit-form-container">
 
-                <form method="POST" class="post-edit form-content">{% csrf_token %}
-
-                    <div class="fieldWrapper title">
-                        {% if post_form.title %}
-                            <label for="id_title">{{ post_form.title }}</label>
-                        {% else %}
-                            <label for="id_title"></label>
-                            <input type="text" class="form-control" id="id_title" name="title" placeholder="Post Title" required>
-                        {% endif %}
-                    </div>
-
-                    <div class="fieldWrapper content">
-                        {{ post_form.content }}
-                    </div>
-
-                    <br>
-                    <div class="fieldWrapper privacy card-footer">
-                        <label for="{{ post_form.privacy.id_for_label }}">Change privacy:</label>
-                        {{ post_form.privacy }}
-                    </div>
-
-                    <br>
-                    <div class="fieldWrapper tags card-footer">
-                        {{ tag_formset.management_form }}
-
-                        <label for="{{ tag_formset.tag.id_for_label }}">Chose tags...</label>
-
-                        {% for form in tag_formset %}
-                            <div class="fieldWrapper tag">
-                                {{ form }}
-                            </div>
-                        {% endfor %}
-
-                    </div>
-
-
-                    <div class="add-new-post-button">
-                        <div class="btn-group" role="group">
-                            <button class="nav-link btn login-btn" type="submit" title="Save changes">
-                                <span class="add-new-post-button-text"> SAVE <i class="far fa-save"></i></span></button>
-                            <a class="nav-link btn" href='{% url 'website:posts_list' %}' title="Cancel changes">
-                                <span class="add-new-post-button-text"> CANCEL </span></a>
-                        </div>
-                    </div>
-
-                </form>
-
-            </div>
         </div>
-
     </div>
 
 

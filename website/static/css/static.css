@@ -1,17 +1,49 @@
 
 /*------------------ FLUID JUMBOTRON SETTINGS---------------*/
 
+.jumbotron {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 .jumbotron-fluid {
     margin-bottom: 0;
     padding: 30px 0 0;
-    background-color: #C9C6CC;
+}
+/*--Jumbotron round indicators--*/
+#myCarousel > ul.carousel-indicators {
+    width: 25%;
+    margin: 0 auto;
+    justify-content: center;
+    bottom: 10%;
 }
 
-.img-responsive {
-    width: 100%;
-    height: auto;
+#myCarousel > ul.carousel-indicators > li.carousel-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 80%;
+}
+
+/*--Jumbotron images/carousel--*/
+
+.carousel-item .img-fluid {
+    width:100%;
     opacity: 0.7;
 }
+
+div.carousel-caption {
+    bottom: 15%;
+    right: 0;
+    text-align: left;
+    width: 100%;
+}
+
+.btn-outline-secondary {
+    color: #FBF7FF;
+    border-color: #FBF7FF;
+    margin: 2% 0;
+}
+
 
 /*--------- PAGE WITH POSTS CONTENT SETTINGS--------*/
 
@@ -20,31 +52,84 @@
     padding: 0;
 }
 
+.page-heading.no-jumbotron {
+    padding: 3%;
+}
+
 .add-new-post-button,
 .page-heading {
-    border-radius: 0 0 calc(.25rem - 1px) calc(.25rem - 1px);
-    border-bottom: 1px solid rgba(0,0,0,.125);
     text-align: center;
 }
 
-span.add-new-post-button-text,
-.page-heading{
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: normal;
-    margin: auto 0;
-    color: #6c757d;
+.page-heading-buttons {
+    width: 50%;
+    margin: 0 auto;
 }
 
 div.btn-group {
     display: flex;
-    justify-content: space-evenly;
+    width: 70%;
+    margin: 2% auto;
 }
 
-div.btn-group.confirm {
-    display: flex;
+div.btn-group.edit {
+    justify-content: space-evenly   ;
+}
+
+.btn.btn-edit {
+    background-color: #f8f9fa;
+    cursor: pointer;
+    border-radius: 0;
+    color: #6A557F;
+    margin: 0 .25rem;
+}
+
+.btn-edit > a {
+    margin-right: 5px;
+    border-radius: 0;
+    color: #6A557F;
+}
+
+.btn.btn-edit:hover {
+    background-color: #6A557F;
+}
+
+.btn.btn-edit:hover a {
+    color: #FBF7FF;
+}
+
+div.btn-group.submit {
     justify-content: center;
-    margin: 2%;
+}
+
+.btn.btn-submit {
+    background-color: #6A557F;
+    color: #f8f9fa;
+    cursor: pointer;
+    margin: 0 .75rem;
+    border-radius: 0;
+}
+
+.btn.btn-submit:hover {
+    background-color: #f8f9fa;
+    color: #6A557F;
+}
+
+.btn.btn-cancel {
+    background-color: #f8f9fa;
+    cursor: pointer;
+    border-radius: 0;
+    color: #6c757d;
+    margin: 0 .75rem;
+}
+
+.btn.btn-cancel:hover {
+    background-color: #6c757d;
+    color: #f8f9fa;
+}
+
+.btn.btn-cancel >a:hover {
+    color: #f8f9fa;
 }
 
 .post-card.single-card.confirm {
@@ -59,7 +144,10 @@ div.btn-group.confirm {
     padding: 2%;
 }
 
-.post-info > p,
+.post-info > p {
+    margin-bottom: 0;
+}
+
 .post-text > p {
     margin-bottom: 0;
 }
@@ -83,7 +171,9 @@ ul.tags-list > li{
 }
 
 .post-text {
-    padding: 2% 0 5% 0;
+    padding: 5% 0;
+    line-height: 1.5;
+    font-size: 1.1em;
 }
 
 /*----------------------- PAGINATION-----------------*/
@@ -156,9 +246,6 @@ a.author-link {
 }
 
 
-/*------------------------- EDIT POST FORM SETTINGS----------------------------*/
-
-
 
 /*----------------------- POSTS CARDS DECK SETTINGS--------------------*/
 
@@ -205,6 +292,13 @@ p.card-text {
 div.post-buttons.mt-auto > div  {
     text-align: center;
 }
+
+
+div.post-buttons.mt-auto > div > a:hover  {
+    background: #6c757d;
+    color: white;
+}
+
 div.post-buttons.mt-auto > div > a {
     background: white;
     color: #414042;
@@ -334,6 +428,7 @@ blockquote {
   padding: 0.5em 10px;
   quotes: "\201C""\201D""\2018""\2019";
 }
+
 blockquote:before {
   color: #ccc;
   content: open-quote;
@@ -342,10 +437,10 @@ blockquote:before {
   margin-right: 0.25em;
   vertical-align: -0.4em;
 }
+
 blockquote p {
   display: inline;
 }
-
 
 
 /*--------------------- FORMS SETTINGS--------------------------*/
@@ -366,14 +461,7 @@ form {
     display: flex;
 }
 
-.nav-link.btn.login-btn {
-    background: #6A557F;
-    margin-right: 5px;
-    border-radius: 0;
-}
-.nav-link.btn.login-btn > span {
-    color: #FBF7FF;
-}
+
 
 .buttons > input {
     font-size: 16px;
@@ -381,45 +469,13 @@ form {
 
 /*-------------- ABOUT ME IMAGE SETTINGS SETTINGS--------*/
 
-.image-container {
-    justify-content: center;
-    width: 100%;
-}
-
-.image-container img {
-    display:inline-block;
-    margin-top: 80px;
-    object-fit: contain;
-    object-position: 100%;
-    width: 100%;
-}
-
-.small-image-container {
-    justify-content: center;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.small-image-container img {
-    display:inline-block;
-    object-fit: contain;
-    object-position: 100%;
-    max-width: 100%;
-    border-radius: 50%;
-}
-
-@media only screen and (max-width: 450px) {
-    .small-image-container {
-        text-align: center;
-    }
-    .small-image-container img {
-        max-width: 75%;
-
-    }
-}
-
 .list-inline-item > a {
     color: #414042;
+}
+
+
+div.about-me {
+    padding: 5%;
 }
 
 /*--------- FOOTER SETTINGS--------*/
@@ -435,8 +491,8 @@ footer {
     padding-right: 10px;
     padding-left: 10px;
 	clear: both;
-	background-color: #404042;
-    color: #F7F7FF;
+	background-color: #414042;
+    color: #FBF7FF;
 }
 
 footer > h3 {
