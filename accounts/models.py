@@ -86,7 +86,7 @@ class UserProfile(models.Model):
         blank=True)
 
     def __str__(self):
-        return self.user.username
+        return self.user
 
     @property
     def get_absolute_avatar_url(self):
