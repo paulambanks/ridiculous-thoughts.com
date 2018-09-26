@@ -7,7 +7,6 @@
 
 body {
     height: 100%;
-    padding-bottom: 2%;
     max-width: 100%;
     position: relative;
     font-size: 1em;
@@ -16,6 +15,13 @@ body {
 
 main {
     max-width: 100%;
+    margin-top: 60px;
+}
+
+.main-container {
+ min-height: 100vh; /* will cover the 100% of viewport */
+ display: block;
+ position: relative;
 }
 
 .row {
@@ -24,7 +30,7 @@ main {
 }
 
 .content-container.no-jumbotron {
-    padding-top: 5%;
+    padding-top: 2%;
 }
 
 
@@ -103,7 +109,6 @@ and (-webkit-min-device-pixel-ratio: 2)
 and (min-resolution: 192dpi) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
         position: relative;
     }
 
@@ -128,7 +133,6 @@ and (min-resolution: 192dpi) {
 @media only screen and (min-width: 1824px) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
         position: relative;
     }
 
@@ -159,7 +163,6 @@ and (min-resolution: 192dpi) {
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
         position: relative;
     }
 
@@ -215,7 +218,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
         line-height: 1.25em;
     }
@@ -235,10 +238,13 @@ and (-webkit-min-device-pixel-ratio: 2)
 and (orientation: portrait) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
     }
 
+    main {
+        margin-top: 60px;
+    }
     .content-container {
         width: 100%;
     }
@@ -256,7 +262,7 @@ and (-webkit-min-device-pixel-ratio: 2)
 and (orientation: landscape) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
     }
 
@@ -311,7 +317,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     }
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
         line-height: 1.25em;
     }
@@ -331,7 +337,7 @@ and (-webkit-min-device-pixel-ratio: 2)
 and (orientation: portrait) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
     }
 
@@ -352,7 +358,7 @@ and (-webkit-min-device-pixel-ratio: 2)
 and (orientation: landscape) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
     }
 
     .content-container {
@@ -406,7 +412,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
     body {
         max-width: 100%;
         position: inherit;
-        padding-bottom: 2%;
+
         line-height: 1.25em;
     }
 
@@ -425,7 +431,7 @@ and (-webkit-min-device-pixel-ratio: 3)
 and (orientation: portrait) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: inherit;
     }
 
@@ -446,7 +452,7 @@ and (-webkit-min-device-pixel-ratio: 3)
 and (orientation: landscape) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
     }
 
     .content-container {
@@ -501,7 +507,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
 
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         line-height: 1.25em;
     }
 
@@ -520,11 +526,14 @@ and (-webkit-min-device-pixel-ratio: 3)
 and (orientation: portrait) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
     }
 
     .content-container {
         width: 100%;
+    }
+    main {
+        margin-top: 60px;
     }
 
     .add-new-post-button {
@@ -545,7 +554,7 @@ and (-webkit-min-device-pixel-ratio: 3)
 and (orientation: landscape) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
     }
 
     .content-container {
@@ -600,7 +609,7 @@ and (-webkit-min-device-pixel-ratio: 1) {
 
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
         line-height: 1.25em;
     }
@@ -620,13 +629,18 @@ and (orientation: portrait)
 and (-webkit-min-device-pixel-ratio: 1) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
     }
 
     .content-container {
         width: 100%;
     }
+
+    main {
+        margin-top: 60px;
+    }
+
 
     .add-new-post-button {
         font-size: 0.7rem;
@@ -641,7 +655,7 @@ and (orientation: landscape)
 and (-webkit-min-device-pixel-ratio: 1) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
     }
 
@@ -696,7 +710,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
         line-height: 1.25em;
     }
@@ -716,7 +730,7 @@ and (orientation: portrait)
 and (-webkit-min-device-pixel-ratio: 2) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
     }
 
@@ -733,7 +747,7 @@ and (orientation: landscape)
 and (-webkit-min-device-pixel-ratio: 2) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
         line-height: 1.25em;
     }
@@ -789,7 +803,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
         line-height: 1.25em;
     }
@@ -812,7 +826,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
     }
 
@@ -831,7 +845,7 @@ and (orientation: landscape)
 and (-webkit-min-device-pixel-ratio: 2) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
     }
 
@@ -886,7 +900,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
         line-height: 1.25em;
     }
@@ -908,7 +922,7 @@ and (orientation: portrait)
 and (-webkit-min-device-pixel-ratio: 2) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
     }
 
@@ -928,7 +942,7 @@ and (orientation: landscape)
 and (-webkit-min-device-pixel-ratio: 2) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
     }
 
@@ -985,7 +999,7 @@ and (-webkit-device-pixel-ratio: 2) {
 
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         line-height: 1.25em;
     }
 
@@ -1004,7 +1018,7 @@ and (-webkit-device-pixel-ratio: 2)
 and (orientation: portrait) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
     }
 
     .content-container {
@@ -1024,7 +1038,7 @@ and (-webkit-device-pixel-ratio: 2)
 and (orientation: landscape) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
     }
 
     .content-container {
@@ -1078,7 +1092,7 @@ and (-webkit-device-pixel-ratio: 3) {
 
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         line-height: 1.25em;
     }
 
@@ -1097,7 +1111,7 @@ and (-webkit-device-pixel-ratio: 3)
 and (orientation: portrait) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
     }
 
     .content-container {
@@ -1117,7 +1131,7 @@ and (-webkit-device-pixel-ratio: 3)
 and (orientation: landscape) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
     }
 
     .content-container {
@@ -1171,7 +1185,7 @@ and (-webkit-device-pixel-ratio: 4) {
 
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         line-height: 1.25em;
     }
 
@@ -1190,7 +1204,7 @@ and (-webkit-device-pixel-ratio: 4)
 and (orientation: portrait) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
     }
 
     .content-container {
@@ -1210,7 +1224,7 @@ and (-webkit-device-pixel-ratio: 4)
 and (orientation: landscape) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
     }
 
     .content-container {
@@ -1263,7 +1277,7 @@ and (max-device-width: 1280px) {
 
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         line-height: 1.25em;
     }
 
@@ -1278,7 +1292,7 @@ and (max-device-width: 1280px) {
 and (orientation: portrait) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
     }
 
     .content-container {
@@ -1296,7 +1310,7 @@ and (orientation: portrait) {
 and (orientation: landscape) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
     }
 
     .content-container {
@@ -1349,7 +1363,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         line-height: 1.25em;
     }
 
@@ -1366,7 +1380,7 @@ and (orientation: portrait)
 and (-webkit-min-device-pixel-ratio: 2) {
     body {
         max-width: 100%;
-        padding-bottom: 2%;
+
         position: relative;
     }
 
@@ -1388,7 +1402,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     body {
         position: relative;
         max-width: 100%;
-        padding-bottom: 2%;
+
     }
 
     .content-container {

@@ -1,50 +1,4 @@
 
-/*------------------ FLUID JUMBOTRON SETTINGS---------------*/
-
-.jumbotron {
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.jumbotron-fluid {
-    margin-bottom: 0;
-    padding: 30px 0 0;
-}
-/*--Jumbotron round indicators--*/
-#myCarousel > ul.carousel-indicators {
-    width: 25%;
-    margin: 0 auto;
-    justify-content: center;
-    bottom: 10%;
-}
-
-#myCarousel > ul.carousel-indicators > li.carousel-indicator {
-    width: 10px;
-    height: 10px;
-    border-radius: 80%;
-}
-
-/*--Jumbotron images/carousel--*/
-
-.carousel-item .img-fluid {
-    width:100%;
-    opacity: 0.7;
-}
-
-div.carousel-caption {
-    bottom: 15%;
-    right: 0;
-    text-align: left;
-    width: 100%;
-}
-
-.btn-outline-secondary {
-    color: #FBF7FF;
-    border-color: #FBF7FF;
-    margin: 2% 0;
-}
-
-
 /*--------- PAGE WITH POSTS CONTENT SETTINGS--------*/
 
 .container-fluid {
@@ -305,6 +259,10 @@ div.post-buttons.mt-auto > div > a {
     border: none;
     font-size: 0.8em;
 }
+.nav-link.small {
+    display: block;
+    padding: 0;
+}
 
 .styled:before, .styled span:before, .content3 .image .mbr-iconfont:hover,
 .folow:before, .date:before, .mbr-gallery-filter li:before, .separator:before, .bgc {
@@ -481,13 +439,14 @@ div.about-me {
 /*--------- FOOTER SETTINGS--------*/
 footer {
     position: absolute;
+    height: 40px;
     z-index: 3;
     width: 100%;
     bottom: 0;
 	left: 0;
 	right: 0;
 	text-align: center;
-    /*margin: 0 auto;*/
+    margin: 0 auto;
     padding-right: 10px;
     padding-left: 10px;
 	clear: both;
@@ -495,7 +454,8 @@ footer {
     color: #FBF7FF;
 }
 
-footer > h3 {
-    margin: 0;
+.footer .fa-heart {
+  color: #6A557F;
 }
+
 

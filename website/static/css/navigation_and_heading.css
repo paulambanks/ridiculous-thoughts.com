@@ -18,8 +18,8 @@ header {
 
 #mainNav {
     background: #414042;
-    margin-bottom: 40px;
     padding: 0;
+    height: 60px;
 }
 
 #mainNav > div.container {
@@ -28,9 +28,28 @@ header {
 }
 
 #mainNav .navbar-brand,
-#mainNav .navbar-toggler,
 #mainNav .nav-item .nav-link {
     font-weight: 800;
+    font-size: 20px;
+    color: #FBF7FF;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 27px;
+}
+
+#mainNav .navbar-brand {
+    padding-left: 10px;
+}
+
+
+#mainNav .nav-item {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+#mainNav .navbar-toggler {
+    font-weight: 800;
+    font-size: 20px;
     color: #FBF7FF;
 }
 
@@ -48,7 +67,7 @@ header {
 #mainNav .profile-link-username:hover,
 #mainNav .nav-item .nav-link:hover,
 #mainNav .navbar-toggler:hover {
-    color: #C9C6CC;
+    color: #6A557F;
 }
 
 .nav-avatar {
@@ -63,8 +82,8 @@ header {
 @media only screen and (min-width: 992px) {
     #mainNav {
     position: relative;
-    margin-bottom: 40px;
-        background: #414042;
+    /*margin-bottom: 40px;*/
+        /*background: #414042;*/
     }
     .container {
         z-index: 1;
@@ -85,5 +104,51 @@ header {
         font-size: 20px;
     }
 }
+
+/*------------------ FLUID JUMBOTRON SETTINGS---------------*/
+
+.jumbotron {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.jumbotron-fluid {
+    margin-bottom: 0;
+    padding: 0;
+}
+/*--Jumbotron round indicators--*/
+#myCarousel > ul.carousel-indicators {
+    width: 25%;
+    margin: 0 auto;
+    justify-content: center;
+    bottom: 10%;
+}
+
+#myCarousel > ul.carousel-indicators > li.carousel-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 80%;
+}
+
+/*--Jumbotron images/carousel--*/
+
+.carousel-item .img-fluid {
+    width:100%;
+    opacity: 0.7;
+}
+
+div.carousel-caption {
+    bottom: 15%;
+    right: 0;
+    text-align: left;
+    width: 100%;
+}
+
+.btn-outline-secondary {
+    color: #FBF7FF;
+    border-color: #FBF7FF;
+    margin: 2% 0;
+}
+
 
 

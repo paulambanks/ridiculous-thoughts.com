@@ -33,29 +33,30 @@
 
     <body>
 
-        <!-- HEADER // NAVIGATION
-        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-        <header class="nav-down"><!-- Hidden header with JS -->
-            {% include "header.html" %}  <!--INCLUDE HEADER -->
-        </header>
+        <div class="main-container">
+            <!-- HEADER // NAVIGATION
+            –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+            <header class="nav-down"><!-- Hidden header with JS -->
+                {% include "header.html" %}  <!--INCLUDE HEADER -->
+            </header>
 
-        <!-- MAIN PAGE CONTENT
-        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-        <main role="main">
+            <!-- MAIN PAGE CONTENT
+            –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+            <main role="main">
 
-            <div class="container-fluid">
-                {% block content %}
-                {% endblock %}
-            </div>
+                <div class="container-fluid">
+                    {% block content %}
+                    {% endblock %}
+                </div>
 
-        </main>
+            </main>
 
-        <!-- FOOTER
-        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-        <footer class="page-footer">
-            <h6>Copyright © Paula Banks 2018</h6>
-        </footer>
-
+            <!-- FOOTER
+            –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+            <footer class="footer text-center pt-2">
+                <small class="copyright">Designed with <i class="fas fa-heart"></i> by Paula Banks</small>
+            </footer>
+        </div>
 
         <!-- JAVASCRIPT
         –––––––––––––––––––––––––––––––––––––––––––––––––– -->
