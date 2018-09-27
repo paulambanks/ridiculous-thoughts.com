@@ -114,11 +114,37 @@ def tagged_posts_list(request, tag_id):
     """
     # TO DO: Each page consists of 6 posts. Should introduce infinite scrolling? or more posts per page?
     if request.user.is_authenticated:
-        others_tagged_post_list = Post.objects.filter(status='Published', privacy='Public' and 'Friends', tags=tag_id).order_by('-updated')
+        others_tagged_post_list = Post.objects.filter(status='Published', tags=tag_id).exclude(privacy='Private').order_by('-updated')
         own_tagged_post_list = Post.objects.filter(author=request.user, status='Published', tags=tag_id).order_by('-updated')
         post_list = others_tagged_post_list | own_tagged_post_list
     else:
         post_list = Post.objects.filter(status='Published', privacy='Public', tags=tag_id).order_by('-updated')
+
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(post_list, 6)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+
+    context = {
+        'posts': posts
+    }
+
+    return render(request, template, context)
+
+
+def shared_post_list(request):
+    template = 'website/shared_post_list.html'
+    """
+    The PUBLIC page containing all blog posts with selected tag. Access is granted to both authorised users and visitors.
+    """
+    # TO DO: Each page consists of 6 posts. Should introduce infinite scrolling? or more posts per page?
+
+    post_list = Post.objects.filter(status='Published', sharing=request.user).order_by('-author')
 
     page = request.GET.get('page', 1)
 
@@ -145,10 +171,9 @@ def individual_author_posts(request, user):
     """
 
     if request.user.is_authenticated:
-        individual_public_post_list = Post.objects.filter(author=user, status='Published', privacy='Public').order_by('-updated')
-        individual_friends_post_list = Post.objects.filter(author=user, status='Published', privacy='Friends').order_by('-updated')
+        individual_public_post_list = Post.objects.filter(author=user, status='Published').exclude(privacy='Private').order_by('-updated')
         own_post_list = Post.objects.filter(author=request.user, status='Published').order_by('-updated')
-        post_list = individual_public_post_list | individual_friends_post_list | own_post_list
+        post_list = individual_public_post_list | own_post_list
 
     else:
         post_list = Post.objects.filter(author=user, status='Published', privacy='Public').order_by('-updated')
@@ -193,6 +218,21 @@ def post_detail(request, pk):
         return render(request, template, context)
     else:
         return PermissionDenied
+
+
+def shared_post_detail(request, id):
+    template = 'website/shared_post_detail.html'
+    """
+    Page with post details. Depends on the permission, appropriate access is granted to both authorised users and visitors.
+    """
+    if request.user.is_authenticated:
+        shared_post = get_object_or_404(Post, id=id)
+
+        context = {
+            'shared_post': shared_post,
+        }
+
+        return render(request, template, context)
 
 
 # ----------------- MAIN AUTHOR VIEWS -------------------------- #

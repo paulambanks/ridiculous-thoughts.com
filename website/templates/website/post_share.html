@@ -47,11 +47,10 @@
                 </div>
 
                 <div class="add-new-post-button">
-                    <div class="btn-group" role="group">
-                        <button class="nav-link btn login-btn" type="submit" title="Share the Post">
-                            <span class="add-new-post-button-text"> SHARE <i class="fas fa-user-friends"></i></span></button>
-                        <a class="nav-link btn" href='{% url 'friends:private_posts_list' %}' title="Cancel changes">
-                            <span class="add-new-post-button-text"> CANCEL </span></a>
+                    <div class="btn-group submit" role="group">
+                        <button class="btn btn-submit" type="submit" title="Share your post">
+                            <i class="far fa-save"></i> Share </button>
+                        <a class="btn btn-cancel user-update-link" href='{% url 'website:posts_list' %}' title="Cancel changes">CANCEL </a>
                     </div>
                 </div>
             </form>

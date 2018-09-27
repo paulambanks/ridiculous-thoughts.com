@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content-container no-jumbotron">
+
+        <div class="row">
+
+            <div class="container">
+
+                <div class="col-md-8 col-sm-12 mb-4 mx-auto">
+
+                    <div class="post-title">
+                        <h1>{{ shared_post.title }}</h1>
+                    </div>
+
+                    <div class="post-info">
+                        <p><i class="far fa-clock"></i> Updated on {{ shared_post.updated | date:"d F Y" }}</p>
+                    </div>
+
+                    <div class="card-post-tags">
+                        <ul class="card-tags">
+                            {% if shared_post.tags.all %}
+                                {% for tag in shared_post.tags.all %}
+                                    <li class="card-single-tag">
+                                        <a class="btn btn-light tag" href="{% url 'website:tagged_posts_list' tag.id %}">{{ tag.slug }}</a>
+                                    </li>
+                                {% endfor %}
+
+                            {% else %}
+                                {% if request.user == shared_post.author %}
+                                    <li class="card-single-tag">
+                                        <a class="btn btn-light tag" href="{% url 'website:post_edit' pk=shared_post.pk %}" title="Tag your Posts">TAG ME! <i class="fas fa-tags"></i></a>
+                                    </li>
+                                {% else %}
+                                    <li class="card-single-tag">
+                                        <a class="btn btn-light tag">No tags yet <i class="fas fa-tags"></i></a>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                    <div class="post-text">
+                        {{ shared_post.content | safe }}
+                    </div>
+
+
+                    <div class="author-container">
+
+                        <h4 class="author-heading">About the Author</h4>
+
+                        <div class="author-info">
+
+                            <div class="author-avatar">
+
+                                {% if shared_post.author.profile.avatar %}
+                                    <img src="{{ shared_post.author.profile.avatar.url }}" alt="Profile Avatar" class="author-avatar photo">
+
+                                {% else %}
+
+                                    <img src="/static/crazycat.jpeg"
+                                         width="200" height="200" alt="Profile Avatar"
+                                         class="avatar photo">
+                                {% endif %}
+                            </div>
+
+                            <div class="author-name-and-location">
+
+                                <h3>{{ shared_post.author.user.first_name }} {{ shared_shared_post.author.profile.user.last_name }}</h3>
+
+                                {% if shared_post.author.profile.city and shared_post.author.profile.country %} <!--profile-location-->
+                                    <p class="profile-user-location">{{ shared_post.author.profile.city }}, {{ shared_post.author.profile.country }}</p>
+                                {% elif shared_post.author.profile.city and not shared_post.author.profile.country %}
+                                    <p class="profile-user-location">{{ shared_post.author.profile.city }}</p>
+                                {% elif user.profile.country and not user.profile.city %}
+                                    <p class="profile-user-location">{{ shared_post.author.profile.counry }}</p>
+                                {% else %}
+                                    <p class="profile-user-location"></p>
+                                {% endif %}
+
+                                <div class="author-description">
+
+                                <blockquote class="author-bio">{{ shared_post.author.profile.bio }}</blockquote> <!--profile-bio-->
+                                {% if request.user == shared_post.author %}
+                                    <a class="author-link" href="{% url 'friends:private_posts_list' %}"> * SEE ALL POSTS *</a>
+{#                                {% else %}#}
+{#                                    <a class="author-link" href="{% url 'website:individual_author_posts' shared_post.author_id %}">#}
+{#                                        SEE ALL POSTS</a>#}
+                                {% endif %}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

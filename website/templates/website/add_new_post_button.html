@@ -8,6 +8,12 @@
                 <i class="far fa-plus-square"></i> New post </a></button>
             <button class="btn btn-edit"><a class="nav-link" href="{% url 'website:post_draft_list' %}" title="Drafts">
                 <i class="far fa-edit"></i> Drafts </a></button>
+
+            {% if request.user.is_authenticated %}
+                <button class="btn btn-edit"><a class="nav-link" href="{% url 'website:shared_post_list' %}" title="Shared posts">
+                    <i class="fas fa-user-friends"></i> Shared Posts </a></button>
+            {% endif %}
+
         </div>
 
     </div>

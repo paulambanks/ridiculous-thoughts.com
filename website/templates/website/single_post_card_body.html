@@ -60,8 +60,20 @@
 
     <div class="post-buttons mt-auto">
         <div class="buttons">
-            <a class="btn btn-secondary" href="{% url 'website:post_detail' pk=post.pk %}"
-              role="button">-----------Continue reading------------</a>
+            {% if post.status == 'Published' and post.privacy == 'Public' or post.privacy == 'Friends' %}
+                <a class="btn btn-secondary" href="{% url 'website:post_detail' pk=post.pk %}"
+                    role="button">-----------Continue reading------------</a>
+            {% elif post.status == 'Published' and post.author == request.user and post.privacy == 'Private' %}
+                <a class="btn btn-secondary" href="{% url 'website:post_detail' pk=post.pk  %}"
+                    role="button">-----------Continue reading------------</a>
+            {% elif post.status == 'Published' and post.sharing.user_id == request.user_id and post.privacy == 'Private' %}
+                <a class="btn btn-secondary" href="{% url 'website:shared_post_detail' id=post.id  %}"
+                    role="button">-----------Continue reading------------</a>
+            {% else %}
+                <a class="btn btn-secondary" href="{% url 'website:post_detail' pk=post.pk %}"
+                    role="button">-----------Continue reading------------</a>
+            {% endif  %}
+
 
             {% if post.status == 'Draft' and not ready_to_remove and not ready_to_publish %}
                 <br>

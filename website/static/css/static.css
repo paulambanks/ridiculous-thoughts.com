@@ -16,18 +16,19 @@
 }
 
 .page-heading-buttons {
-    width: 50%;
+    width: 100%;
     margin: 0 auto;
 }
 
 div.btn-group {
     display: flex;
-    width: 70%;
+    width: 100%;
     margin: 2% auto;
 }
 
 div.btn-group.edit {
-    justify-content: space-evenly   ;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .btn.btn-edit {
@@ -35,7 +36,8 @@ div.btn-group.edit {
     cursor: pointer;
     border-radius: 0;
     color: #6A557F;
-    margin: 0 .25rem;
+    margin: 0.25rem;
+    width: 200px;
 }
 
 .btn-edit > a {
@@ -376,7 +378,6 @@ input#id_title {
 
 .fieldWrapper.privacy {
     text-align: center;
-    
 }
 
 blockquote {
@@ -418,8 +419,6 @@ form {
 .profile-form-current-avatar {
     display: flex;
 }
-
-
 
 .buttons > input {
     font-size: 16px;
