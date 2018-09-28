@@ -170,13 +170,7 @@ def individual_author_posts(request, user):
     Access is granted to both authorised users and visitors.
     """
 
-    if request.user.is_authenticated:
-        individual_public_post_list = Post.objects.filter(author=user, status='Published').exclude(privacy='Private').order_by('-updated')
-        own_post_list = Post.objects.filter(author=request.user, status='Published').order_by('-updated')
-        post_list = individual_public_post_list | own_post_list
-
-    else:
-        post_list = Post.objects.filter(author=user, status='Published', privacy='Public').order_by('-updated')
+    post_list = Post.objects.filter(author=user, status='Published', privacy='Public').order_by('-updated')
 
     profile = UserProfile.objects.get(user=user)
 

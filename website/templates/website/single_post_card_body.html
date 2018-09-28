@@ -17,17 +17,17 @@
 
                         {% if post.status == 'Published' %}
                             <li class="card-single-tag">
-                                <a class="btn btn-light card-tag" href="{% url 'website:tagged_posts_list' tag.id %}">{{ tag.slug }} </a>
+                                <a class="btn card-tag" href="{% url 'website:tagged_posts_list' tag.id %}">{{ tag.slug }} </a>
                             </li>
                         {% else %} <!--Does the Tag belongs to the Draft Post?-->
                             <li class="card-single-tag">
-                                <a class="btn btn-light card-tag">{{ tag.slug }}</a>
+                                <a class="btn card-tag">{{ tag.slug }}</a>
                             </li>
                         {% endif %}
 
                     {% else %}
                         <li class="card-single-tag">
-                            <a class="btn btn-light card-tag" href="{% url 'website:tagged_posts_list' tag.id %}">{{ tag.slug }} </a>
+                            <a class="btn card-tag" href="{% url 'website:tagged_posts_list' tag.id %}">{{ tag.slug }} </a>
                         </li>
                     {% endif %}
 
@@ -37,13 +37,13 @@
 
                 {% if request.user == post.author %}
                     <li class="card-single-tag">
-                        <a class="btn btn-light card-tag" href="{% url 'website:post_edit' pk=post.pk %}" title="Tag your Posts">
+                        <a class="btn card-tag" href="{% url 'website:post_edit' pk=post.pk %}" title="Tag your Posts">
                             <span class="add-new-post-button-text"> TAG ME! <i class="fas fa-tags"></i></span>
                         </a>
                     </li>
                 {% else %}
                     <li class="card-single-tag">
-                        <a class="btn btn-light card-tag">
+                        <a class="btn card-tag">
                             <span class="add-new-post-button-text"> No tags yet <i class="fas fa-tags"></i></span>
                         </a>
                     </li>
@@ -58,20 +58,16 @@
         <p class="card-text">{{ post.content | safe | truncatechars:300 }}</p>
     </div>
 
-    <div class="post-buttons mt-auto">
-        <div class="buttons">
+    <div class="post-card-buttons mt-auto">
+        <div class="buttons page-item">
             {% if post.status == 'Published' and post.privacy == 'Public' or post.privacy == 'Friends' %}
-                <a class="btn btn-secondary" href="{% url 'website:post_detail' pk=post.pk %}"
-                    role="button">-----------Continue reading------------</a>
+                <a class="button page-link" href="{% url 'website:post_detail' pk=post.pk %}">-----------Continue reading------------</a>
             {% elif post.status == 'Published' and post.author == request.user and post.privacy == 'Private' %}
-                <a class="btn btn-secondary" href="{% url 'website:post_detail' pk=post.pk  %}"
-                    role="button">-----------Continue reading------------</a>
+                <a class="button page-link" href="{% url 'website:post_detail' pk=post.pk %}">-----------Continue reading------------</a>
             {% elif post.status == 'Published' and post.sharing.user_id == request.user_id and post.privacy == 'Private' %}
-                <a class="btn btn-secondary" href="{% url 'website:shared_post_detail' id=post.id  %}"
-                    role="button">-----------Continue reading------------</a>
+                <a class="button page-link" href="{% url 'website:shared_post_detail' id=post.id %}">-----------Continue reading------------</a>
             {% else %}
-                <a class="btn btn-secondary" href="{% url 'website:post_detail' pk=post.pk %}"
-                    role="button">-----------Continue reading------------</a>
+                <a class="button page-link" href="{% url 'website:post_detail' pk=post.pk %}">-----------Continue reading------------</a>
             {% endif  %}
 
 

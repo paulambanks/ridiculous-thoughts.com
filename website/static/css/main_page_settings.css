@@ -131,6 +131,40 @@ and (min-resolution: 192dpi) {
 
 /* -------------------LARGE SCREENS (4K)----------------- */
 @media only screen and (min-width: 1824px) {
+    h1 {
+        font-size: 3em;
+        line-height: 1.05em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 2.25em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.75em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.22222222em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 1em;
+        line-height: 1.5em;
+    }
+
+    blockquote {
+        font-size: 1.5em;
+        line-height: 1.45833333em;
+    }
+
     body {
         max-width: 100%;
         position: relative;
@@ -1324,6 +1358,57 @@ and (orientation: landscape) {
 and (max-device-width: 1280px)
 and (-webkit-min-device-pixel-ratio: 2) {
     h1 {
+        font-size: 3em;
+        line-height: 1.05em;
+        font-weight: 800;
+    }
+
+    h2 {
+        font-size: 2.25em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h3 {
+        font-size: 1.75em;
+        line-height: 1.25em;
+        font-weight: 800;
+    }
+
+    h4 {
+        font-size: 1.125em;
+        line-height: 1.22222222em;
+        font-weight: 800;
+    }
+
+    p {
+        font-size: 1em;
+        line-height: 1.5em;
+    }
+
+    blockquote {
+        font-size: 1.5em;
+        line-height: 1.45833333em;
+    }
+
+    body {
+        max-width: 100%;
+
+        line-height: 1.25em;
+    }
+
+    .content-container {
+        padding: 0 0 5% 0;
+        width: 100%;
+    }
+
+}
+
+/* Portrait */
+@media (max-device-width: 800px)
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 2) {
+    h1 {
         font-size: 2em;
         line-height: 1.25em;
         font-weight: 800;
@@ -1360,24 +1445,6 @@ and (-webkit-min-device-pixel-ratio: 2) {
         font-size: 1.25em;
         line-height: 1.25em;
     }
-
-    body {
-        max-width: 100%;
-
-        line-height: 1.25em;
-    }
-
-    .content-container {
-        padding: 0 0 5% 0;
-        width: 100%;
-    }
-
-}
-
-/* Portrait */
-@media (max-device-width: 800px)
-and (orientation: portrait)
-and (-webkit-min-device-pixel-ratio: 2) {
     body {
         max-width: 100%;
 

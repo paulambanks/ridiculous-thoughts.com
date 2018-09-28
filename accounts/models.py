@@ -76,14 +76,16 @@ class UserProfile(models.Model):
         default='static/images/crazycat.jpeg',
         verbose_name="Your Current Profile Avatar"
     )
-    city = models.CharField(
-        max_length=100,
-        default='',
-        blank=True)
     country = models.CharField(
         max_length=100,
         default='',
-        blank=True)
+        blank=True
+    )
+    city = models.CharField(
+        max_length=100,
+        default='',
+        blank=True
+    )
 
     def __str__(self):
         return self.user

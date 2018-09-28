@@ -38,12 +38,20 @@
 
                                 <div class="card-footer">
                                     <small class="text-muted">
-                                        <i class="far fa-clock"></i> Updated on {{ post.updated | date:"d F Y" }}</small><br>
-                                    <small class="text-muted">
-                                        <a class="user-update-link"
-                                           href="{% url 'website:individual_author_posts' post.author_id %}"
-                                           title="Update Profile"><i class="fas fa-user"></i> {{ post.author.username }}</a>
-                                    </small>
+                                        <i class="far fa-calendar-alt"></i> Updated on {{ post.updated | date:"d F Y" }}</small><br>
+                                    {% if request.user.is_authenticated and request.user == post.author %}
+                                        <small class="text-muted">
+                                            <a class="user-update-link"
+                                               href="{% url 'friends:private_posts_list' %}"
+                                               title="Update Profile"><i class="fas fa-user"></i> {{ post.author.username }}</a>
+                                        </small>
+                                    {% else %}
+                                        <small class="text-muted">
+                                            <a class="user-update-link"
+                                               href="{% url 'website:individual_author_posts' post.author_id %}"
+                                               title="Update Profile"><i class="fas fa-user"></i> {{ post.author.username }}</a>
+                                        </small>
+                                    {% endif %}
                                 </div>
 
                             </div>

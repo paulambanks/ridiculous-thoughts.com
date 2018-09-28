@@ -15,8 +15,9 @@ from accounts.models import UserProfile
 
 @login_required
 def private_posts_list(request):
-    """The page with all blog posts, visible to all"""
     template = 'friends/private_posts_list.html'
+    """The page with all blog posts, visible to all"""
+
     post_list = Post.objects.filter(author=request.user, status='Published',).order_by('-updated')
     profile = UserProfile.objects.get(user=request.user)
 

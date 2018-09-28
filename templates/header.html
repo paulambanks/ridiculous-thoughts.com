@@ -20,9 +20,9 @@
                         <div class="profile-page-link-container">
                             <a class="nav-link" href="{% url 'friends:private_posts_list' %}" title="User Profile and Posts">
                                 {% if request.user.profile.avatar %}
-                                    <img src="{{ request.user.profile.avatar.url }}" alt="Profile Avatar" class="nav-avatar 30x30 img-responsive">MY POSTS
+                                    <img src="{{ request.user.profile.avatar.url }}" alt="Profile Avatar" class="nav-avatar 30x30 img-responsive">
                                 {% else %}
-                                    <img src="/static/images/crazycat.jpeg" alt="Profile Avatar" class="nav-avatar 30x30 img-responsive"> MY POSTS
+                                    <img src="/static/images/crazycat.jpeg" alt="Profile Avatar" class="nav-avatar 30x30 img-responsive">
                                 {% endif %}
                             </a>
                         </div>

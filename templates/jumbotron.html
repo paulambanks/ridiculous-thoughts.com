@@ -19,10 +19,13 @@
              </picture>
 
             <div class="carousel-caption">
-                <div>
-                    <h3>Welcome to Ridiculous Thoughts Blog!</h3>
-                    <p> Get inspired </p>
-                    <a href="{% url 'website:about' %}" title="About Me"><span class="btn btn-sm btn-outline-secondary">Learn More</span></a>
+                <h1 class="large">Curious. </h1>
+{#                <h1 class="large">Enthusiastic. </h1>#}
+{#                <h1 class="large">Positive. </h1>#}
+                <div class="row">
+                    <div class="col-md-4 col-lg-2 jumbotron-button">
+                        <button class="jumbotron-btn btn btn-lg btn-warning btn-block"><a href="{% url 'website:about' %}" title="About Me"></a>Learn More</button>
+                    </div>
                 </div>
             </div>
 
@@ -37,27 +40,33 @@
              </picture>
 
             <div class="carousel-caption">
-                <div>
-                    <h3>Welcome to Ridiculous Thoughts Blog!</h3>
-                    <p> Get inspired </p>
-                    <a href="{% url 'website:about' %}" title="About Me"><span class="btn btn-sm btn-outline-secondary">Learn More</span></a>
+{#                <h1 class="large">Curious. </h1>#}
+                <h1 class="large">Enthusiastic. </h1>
+{#                <h1 class="large">Positive. </h1>#}
+                <div class="row">
+                    <div class="col-md-4 col-lg-2 jumbotron-button">
+                        <button class="jumbotron-btn btn btn-lg btn-dark btn-block"><a href="{% url 'website:about' %}" title="About Me"></a>Learn More</button>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="carousel-item">
              <picture>
-                <source srcset="/static/images/jumbotron/programming_2000x500.jpeg" media="(min-width: 1400px)">
+                <source srcset="/static/images/jumbotron/programming_2000x500.jpg" media="(min-width: 1400px)">
                 <source srcset="/static/images/jumbotron/programming_1400x500.jpeg" media="(min-width: 769px)">
                 <source srcset="/static/images/jumbotron/programming_800x500.jpeg" media="(min-width: 577px)">
                 <source srcset="/static/images/jumbotron/programming_600x500.jpeg" media="(max-width: 577px)">
                 <img src="/static/images/jumbotron/programming_2000x500.jpeg" alt="responsive image" class="d-block img-fluid">
              </picture>
 
-            <div class="carousel-caption">
-                <div>
-                    <h3>Welcome to Ridiculous Thoughts Blog!</h3>
-                    <p> Get inspired </p>
-                    <a href="{% url 'website:about' %}" title="About Me"><span class="btn btn-sm btn-outline-secondary">Learn More</span></a>
+            <div class="carousel-caption right">
+{#                <h1 class="large">Curious. </h1>#}
+{#                <h1 class="large">Enthusiastic. </h1>#}
+                <h1 class="large">Positive. </h1>
+                <div class="row button-right">
+                    <div class="col-md-4 col-lg-2 jumbotron-button right">
+                        <button class="jumbotron-btn btn btn-lg btn-warning btn-block"><a href="{% url 'website:about' %}" title="About Me"></a>Learn More</button>
+                    </div>
                 </div>
             </div>
         </div>

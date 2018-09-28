@@ -2,7 +2,12 @@
 
     <div class="profile-avatar">
 
-        <h3 class="author-heading">About the Author</h3>
+        {% if request.user == profile.user %}
+            <h3 class="author-heading">About Me</h3>
+        {% else %}
+            <h3 class="author-heading">About the Author</h3>
+        {% endif %}
+
 
         {% if profile.avatar %}
             <img src="{{ profile.avatar.url }}" alt="Profile Avatar"

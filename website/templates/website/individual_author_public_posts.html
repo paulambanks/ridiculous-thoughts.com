@@ -4,17 +4,9 @@
 
 {% block content %}
 
-    <!-- JUMBOTRON // CAROUSEL
-        –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-        <div class="jumbotron jumbotron-fluid">
-            <!--INCLUDE JUMBOTRON -->
-            {% include "jumbotron.html" %}
-            <!---------------------->
-        </div>
+    <div class="content-container no-jumbotron">
 
-    <div class="content-container">
-
-        <div class="row no-top-margin">
+        <div class="row">
 
             <div class="col-sm-8 individual-public-post-list">
 
@@ -41,7 +33,7 @@
 
                             <div class="card-footer">
                                 <small class="text-muted">
-                                    <i class="far fa-clock"></i> Updated on {{ post.updated | date:"d F Y" }}
+                                    <i class="far fa-calendar-alt"></i> Updated on {{ post.updated | date:"d F Y" }}
                                 </small>
                             </div>
 

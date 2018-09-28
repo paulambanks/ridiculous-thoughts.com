@@ -149,6 +149,8 @@ ul.pagination > li.page-item.active > a.page-link {
     background-color: #6A557F;
     border-color: #6A557F;
     color: #FBF7FF;
+    font-size: .875rem;
+    line-height: 1.5;
 }
 
 /*----------------------- POST AUTHOR IN POST DETAILS-----------------*/
@@ -235,8 +237,28 @@ ul.card-tags > li.card-single-tag {
     padding: 2px;
 }
 
+div.card-post-tags > ul > li.card-single-tag > a.tag {
+    display: inline-block;
+    color: #6c757d;
+    border: 1px solid #cecece;
+    border-radius: 20px;
+    text-transform: lowercase;
+    transition: .2s;
+}
+
 div.card-post-tags > ul > li.card-single-tag > a.card-tag {
+    display: inline-block;
+    color: #6c757d;
+    border: 1px solid #cecece;
+    border-radius: 20px;
+    text-transform: lowercase;
+    transition: .2s;
     font-size: 0.75rem;
+}
+
+div.card-post-tags > ul > li.card-single-tag > a:hover {
+    color: #6A557F;
+    border-color: #6A557F;
 }
 
 p.card-text {
@@ -245,22 +267,24 @@ p.card-text {
     padding: 1.25rem 0;
 }
 
-div.post-buttons.mt-auto > div  {
+div.post-card-buttons.mt-auto > div.buttons.page-item  {
     text-align: center;
 }
 
-
-div.post-buttons.mt-auto > div > a:hover  {
-    background: #6c757d;
-    color: white;
-}
-
-div.post-buttons.mt-auto > div > a {
-    background: white;
-    color: #414042;
+a.button.page-link {
+    font-size: 0.875rem;
+    line-height: 1.5;
     border: none;
-    font-size: 0.8em;
+    color: #6A557F;
 }
+
+a.button.page-link:hover {
+    z-index: 2;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
 .nav-link.small {
     display: block;
     padding: 0;

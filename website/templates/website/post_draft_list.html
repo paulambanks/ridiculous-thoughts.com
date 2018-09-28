@@ -35,7 +35,7 @@
                                 <!---------------------->
 
                                 <div class="card-footer">
-                                    <small class="text-muted"><i class="far fa-clock"></i> Created on {{ post.created | date:"d F Y" }}</small>
+                                    <small class="text-muted"><i class="far fa-calendar-alt"></i> Created on {{ post.created | date:"d F Y" }}</small>
                                     {% if post.privacy == 'Private' %}
                                         <small class="text-muted"><i class="fas fa-lock" title="Private"></i> Private</small>
                                     {% elif post.privacy == 'Friends' %}

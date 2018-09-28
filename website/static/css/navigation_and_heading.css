@@ -31,7 +31,7 @@ header {
 #mainNav .nav-item .nav-link {
     font-weight: 800;
     font-size: 20px;
-    color: #FBF7FF;
+    color: #FFF;
     padding-top: 10px;
     padding-bottom: 10px;
     line-height: 27px;
@@ -50,7 +50,7 @@ header {
 #mainNav .navbar-toggler {
     font-weight: 800;
     font-size: 20px;
-    color: #FBF7FF;
+    color: #FFF;
 }
 
 #mainNav .nav-item .nav-link,
@@ -59,7 +59,7 @@ header {
     text-align: right;
     text-decoration: none;
     text-transform: uppercase;
-    color: #FBF7FF;
+    color: #FFF;
     margin: auto 0;
 }
 
@@ -67,7 +67,8 @@ header {
 #mainNav .profile-link-username:hover,
 #mainNav .nav-item .nav-link:hover,
 #mainNav .navbar-toggler:hover {
-    color: #6A557F;
+    color: #fff;
+    opacity: 0.7;
 }
 
 .nav-avatar {
@@ -116,9 +117,21 @@ header {
     margin-bottom: 0;
     padding: 0;
 }
-/*--Jumbotron round indicators--*/
+
+div > h1.large {
+    font-size: 5vw;
+}
+div.jumbotron-button {
+    padding: 0;
+}
+
+button.jumbotron-btn {
+    font-size: 2vw;
+}
+
+/*--Jumbotron round indicators and carousel--*/
 #myCarousel > ul.carousel-indicators {
-    width: 25%;
+    width: 15%;
     margin: 0 auto;
     justify-content: center;
     bottom: 10%;
@@ -130,24 +143,30 @@ header {
     border-radius: 80%;
 }
 
-/*--Jumbotron images/carousel--*/
-
 .carousel-item .img-fluid {
-    width:100%;
-    opacity: 0.7;
-}
-
-div.carousel-caption {
-    bottom: 15%;
-    right: 0;
-    text-align: left;
     width: 100%;
 }
 
-.btn-outline-secondary {
-    color: #FBF7FF;
-    border-color: #FBF7FF;
-    margin: 2% 0;
+div.carousel-caption {
+    bottom: 30%;
+    right: 0;
+    text-align: left;
+    width: 80%;
+}
+
+div.carousel-caption.right {
+    bottom: 30%;
+    padding-right: 10%;
+    text-align: right;
+    width: 80%;
+}
+
+div.carousel-caption.right > .row.button-right {
+    float: right;
+}
+
+.btn-block {
+    width: fit-content;
 }
 
 
