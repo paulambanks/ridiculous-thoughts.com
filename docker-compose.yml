@@ -1,20 +1,56 @@
-# Use postgres/example user/password credentials
 version: '3.7'
 services:
-  postgres:
-    image: postgres
+  app:
+    image: app:latest
+    build: .
     restart: always
-    environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: django 
-    volume:
+    init: true
+    env_file: 
+      - app.env
+      - database.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - type: volume
+        source: website-static
+        target: /static_cdn
+    depends_on:
+      - database
+  server:
+    image: nginx:alpine
+    restart: always
+    init: true
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - type: volume
+        source: website-static
+        target: /mnt/static
+        read_only: true
+      - type: volume
+        source: website-media
+        target: /mnt/media
+        read_only: true
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+  database:
+    image: postgres:alpine
+    restart: always
+    init: true
+    env_file: 
+      - database.env
+    volumes:
       - db-data:/var/lib/postgresql/data
     ports:
       - 5432:5432
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
+  watchtower:
+    image: v2tec/watchtower:latest
+    init: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 30 --no-pull
 volumes:
-  db-data:  
+  db-data:
+  website-static:
+  website-media:
