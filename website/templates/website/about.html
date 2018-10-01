@@ -8,10 +8,11 @@
 
             <div class="col-sm-8 private-post-list">
 
-                <div class="page-heading no-jumbotron">
+                <div class="page-heading">
                     <div class="profile-page-link-container">
                         <a class="nav-link" title="Contact Form">
-                            <i class="fas fa-feather-alt"></i> About me...<i class="fas fa-feather-alt"></i>
+                            <h2 class="add-new-post-button-text"><i class="fas fa-feather-alt"></i> ABOUT ME
+                                <i class="fas fa-feather-alt"></i></h2>
                         </a>
                     </div>
                 </div>
@@ -24,12 +25,22 @@
                     <p>Yes, until not so long ago I was a Biotechnologist and a Biomedical Scientist; and here I am, digging into
                         Python and Django followed by cracking through css and html.</p>
                     <p>Why? </p>
-                    <p>Because I am motivated by my curiosity, I am excited about solving problems and I learn new skills with a positive attitude!
+                    <p>Because I am motivated by my curiosity, I am enthusiastic about solving problems and I learn new skills with a positive attitude.
                     </p>
                 </div>
 
+                <!--SOCIAL MEDIA LINKS-----------------------------------------------
+                -------------------------------------------------------------------->
                 <div class="links">
                     <ul class="list-inline text-center">
+                        <li class="list-inline-item">
+                            <a href="http://paulambanks.com" target="_top">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fas fa-globe fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
                         <li class="list-inline-item">
                             <a href='{% url 'website:email' %}'>
                                 <span class="fa-stack fa-lg">
@@ -46,26 +57,28 @@
                                 </span>
                             </a>
                         </li>
-                      <li class="list-inline-item">
-                        <a href="https://www.linkedin.com/in/paulambanks/">
-                          <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
-                          </span>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a href="/feed.xml">
-                          <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x"></i>
-                            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-                          </span>
-                        </a>
-                      </li>
+                        <li class="list-inline-item">
+                            <a href="https://www.linkedin.com/in/paulambanks/">
+                                <span class="fa-stack fa-lg">
+                                      <i class="fa fa-circle fa-stack-2x"></i>
+                                      <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="/feed.xml">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
 
+            <!--ABOUT ME INFO----------------------------------------------------
+            -------------------------------------------------------------------->
             <div class="col-sm-4">
                 <div class="profile-user-info">
 
@@ -77,7 +90,7 @@
 
                         <h3>Paula Banks</h3>
 
-                        <p class="profile-user-location">Manchester, UK</p>
+                        <p class="center profile-user-location">Manchester, UK</p>
 
                         <blockquote class="author-bio">Biotechnologist, passionate about good food, travels and RPG games. From 2018 switching to programming. </blockquote>
 

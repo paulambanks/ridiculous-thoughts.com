@@ -57,6 +57,14 @@ class CustomUser(AbstractUser):
     objects = UserManager()
 
 
+# class Country(models.Model):
+#     pass
+#
+#
+# class City(models.Model):
+#     pass
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,

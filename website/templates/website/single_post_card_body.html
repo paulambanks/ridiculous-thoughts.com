@@ -73,13 +73,13 @@
 
             {% if post.status == 'Draft' and not ready_to_remove and not ready_to_publish %}
                 <br>
-                <button class="btn btn-edit">
+                <button class="btn btn-edit small">
                     <a class="nav-link small" href="{% url 'website:post_edit' pk=post.pk %}" title="Edit your Posts">
                         <i class="fas fa-pencil-alt"></i></a></button>
-                <button class="btn btn-edit">
+                <button class="btn btn-edit small">
                     <a class="nav-link small" href="{% url 'website:post_remove' pk=post.pk %}" title="Delete your Posts">
                         <i class="far fa-trash-alt"></i></a></button>
-                <button class="btn btn-edit">
+                <button class="btn btn-edit small">
                     <a class="nav-link small" href="{% url 'website:post_publish' pk=post.pk %}" title="Publish your Posts">
                         <i class="fas fa-book-reader"></i></a></button>
             {% endif %}

@@ -203,7 +203,9 @@ a.author-link {
     text-align: center;
 }
 
-
+.author-name-and-location {
+    text-align: center;
+}
 
 /*----------------------- POSTS CARDS DECK SETTINGS--------------------*/
 
@@ -283,6 +285,10 @@ a.button.page-link:hover {
     text-decoration: none;
     background-color: #e9ecef;
     border-color: #dee2e6;
+}
+
+.btn.btn-edit.small {
+    width: 50px ;
 }
 
 .nav-link.small {
@@ -432,9 +438,9 @@ blockquote p {
     margin: 0 auto 1rem auto;
 }
 
-form {
-    padding-bottom: 5%;
-}
+/*form {*/
+    /*padding-bottom: 5%;*/
+/*}*/
 
 .profile-form-avatar-container {
    max-width: 100%;
@@ -448,12 +454,15 @@ form {
     font-size: 16px;
 }
 
+.links {
+    margin: 2% auto;
+}
+
 /*-------------- ABOUT ME IMAGE SETTINGS SETTINGS--------*/
 
 .list-inline-item > a {
     color: #414042;
 }
-
 
 div.about-me {
     padding: 5%;

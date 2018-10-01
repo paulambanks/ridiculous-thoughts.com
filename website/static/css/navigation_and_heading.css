@@ -129,6 +129,18 @@ button.jumbotron-btn {
     font-size: 2vw;
 }
 
+button.jumbotron-btn > a:hover {
+    text-decoration: none;
+}
+
+button.jumbotron-btn > a.button-dark {
+    color: #343a40;
+}
+
+button.jumbotron-btn > a.button-light {
+    color: #fff;
+}
+
 /*--Jumbotron round indicators and carousel--*/
 #myCarousel > ul.carousel-indicators {
     width: 15%;

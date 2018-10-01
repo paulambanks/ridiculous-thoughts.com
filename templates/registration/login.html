@@ -10,8 +10,13 @@
 
             <div class="col-md-12">
 
-                <div class="page-heading no-jumbotron">
-                    <h2><i class="fas fa-feather-alt"></i> SIGN IN <i class="fas fa-feather-alt"></i></h2>
+                <div class="page-heading">
+                    <div class="profile-page-link-container">
+                        <a class="nav-link" title="Contact Form">
+                            <h2 class="add-new-post-button-text"><i class="fas fa-feather-alt"></i> SIGN IN
+                                <i class="fas fa-feather-alt"></i></h2>
+                        </a>
+                    </div>
                 </div>
 
                 <form method="POST">{% csrf_token %}
