@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   app:
-    image: app:latest
+    image: pmbanks/ridiculous-thoughts.com:latest
     build: .
     restart: always
     init: true
