@@ -124,3 +124,5 @@ app.env
 database.env
 
 static_cdn
+
+src/app/settings/local.py
