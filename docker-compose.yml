@@ -8,12 +8,16 @@ services:
     env_file: 
       - app.env
       - database.env
-    ports:
-      - "8000:8000"
     volumes:
+      - type: volume
+        source: website-nginx-config
+        target: /app/config/nginx
       - type: volume
         source: website-static
         target: /static_cdn
+      - type: volume
+        source: website-media
+        target: /media_cdn
     depends_on:
       - database
   server:
@@ -21,15 +25,24 @@ services:
     restart: always
     init: true
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - type: volume
+        source: website-nginx-config
+        target: /etc/nginx/conf.d
+        read_only: true
+        volume:
+          nocopy: true
       - type: volume
         source: website-static
         target: /mnt/static
         read_only: true
+        volume:
+          nocopy: true
       - type: volume
         source: website-media
         target: /mnt/media
         read_only: true
+        volume:
+          nocopy: true
     ports:
       - "80:80"
     depends_on:
@@ -42,15 +55,14 @@ services:
       - database.env
     volumes:
       - db-data:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
   watchtower:
     image: v2tec/watchtower:latest
     init: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 30 --no-pull
+    command: --interval 30
 volumes:
   db-data:
+  website-nginx-config:
   website-static:
   website-media:

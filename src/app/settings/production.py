@@ -1,9 +1,9 @@
 from .base import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['web', 'localhost']
+ALLOWED_HOSTS = ['web', 'ridiculous-thoughts.com']
 
 DATABASES = {
     'default': {
