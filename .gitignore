@@ -122,3 +122,5 @@ venv.bak/
 # Docker Compose environment files.
 app.env
 database.env
+
+static_cdn
