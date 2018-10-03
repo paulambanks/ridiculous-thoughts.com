@@ -60,9 +60,6 @@ def send_email(request):  # CONTACT FORM
 
     if request.method == 'GET':
         form = ContactForm()
-        # if request.user.is_authenticated:
-        #     form.fields['name'] = request.user
-        #     form.fields['email'] = request.user.email
 
     else:
         form = ContactForm(request.POST)

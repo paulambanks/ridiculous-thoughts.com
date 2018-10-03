@@ -2,7 +2,6 @@ from django import forms
 from .models import Post, TaggedPost, SharedPost
 from accounts.models import CustomUser
 from tinymce.widgets import TinyMCE
-from django.forms.models import inlineformset_factory
 
 
 class TinyMCEWidget(TinyMCE):
@@ -20,13 +19,12 @@ class PostForm(forms.ModelForm):
                 'required': True,
                 'cols': 80,
                 'rows': 30,
-                'placeholder': 'Write some of your Ridiculous Thoughts!',
             }),
             'title': forms.TextInput(attrs={
                 'required': True,
-                'placeholder': 'Give your Post the title',
-            }
-            )
+                'placeholder': "Post Title",
+            }),
+            'privacy': forms.Select(choices=Post.PRIVACY_CHOICES)
         }
 
 

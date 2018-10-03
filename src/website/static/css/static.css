@@ -379,36 +379,66 @@ div.profile-edit.card-footer > small > a > i {
 
 .post-edit.edit-form-container {
     display: flex;
-    margin: 0 auto;
+    margin: 0 auto 5%;
     background-color: rgba(0,0,0,.03);
 }
 
-form.post-edit.form-content {
-    margin: 0 auto;
+.post-edit.form-content {
+    width: 100%;
 }
 
 .fieldWrapper.title {
     border: none;
     padding: 2%;
+    height: 10vh;
 }
 
 div.fieldWrapper.title > label {
     width: 100%;
+    height: 100%;
 }
+
 input#id_title {
     width: 100%;
+    height: 100%;
     text-align: center;
 }
 
 .fieldWrapper.content {
     width: 90%;
-    margin: 0 auto;
+    border: none;
+    padding: 2%;
+    margin: auto;
 }
 
-
-.fieldWrapper.privacy {
+.fieldWrapper {
     text-align: center;
+    width: 90%;
+    margin: auto;
 }
+
+.fieldWrapper > .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+.chose-individual-tag {
+    padding: 5px;
+}
+.chose-individual-tag > select {
+    height: calc(2.25rem + 2px);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+}
+
+.chose-individual-tag > label {
+    display: none;
+}
+
+
 
 blockquote {
   background: #f9f9f9;
@@ -491,10 +521,16 @@ footer {
 .fa-lock.fa-7x,
 .fa-unlock-alt.fa-7x,
 .fa-at.fa-7x,
-.fa-check-circle.fa-7x {
+.fa-check-circle.fa-7x,
+.fa-feather-alt.fa-7x,
+.fa-trash-alt.fa-7x,
+.fa-book-reader.fa-7x {
     color: #6A557F;
 }
 
+.g-recaptcha > div {
+    margin: 0 auto;
+}
 
 
 

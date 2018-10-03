@@ -11,47 +11,59 @@
 
             <div class="col-md-8 post-edit-page-container">
 
-                <div class="page-heading no-jumbotron">
+                <div class="page-heading">
                     <div class="profile-page-link-container">
-                        <h2><i class="fas fa-feather-alt"></i> SHARE YOUR THOUGHTS...<i class="fas fa-feather-alt"></i></h2>
+                        <a class="nav-link" title="Contact Form">
+                            <h3 class="add-new-post-button-text">Share Your Thoughts</h3>
+                                <i class="fas fa-feather-alt fa-7x"></i>
+                        </a>
                     </div>
                 </div>
-                <br>
+
 
                 <div class="post-edit edit-form-container">
 
-                    <form method="POST" class="post-edit form-content">{% csrf_token %}
+                    <form method="POST" id="post" class="post-edit form-content">{% csrf_token %}
 
-                        <div class="fieldWrapper title">
+                        <div class="fieldWrapper title card-footer">
                             {% if post_form.title %}
                                 <label for="id_title">{{ post_form.title }}</label>
                             {% else %}
                                 <label for="id_title"></label>
-                                <input type="text" class="form-control" id="id_title" name="title" placeholder="Post Title" required>
+                                <input type="text" class="form-control" id="id_title" name="title" required>
                             {% endif %}
                         </div>
 
-                        <div class="fieldWrapper content">
+                        <br>
+                        <div class="fieldWrapper content card-footer">
                             {{ post_form.content }}
                         </div>
 
                         <br>
                         <div class="fieldWrapper privacy card-footer">
-                            <label for="{{ post_form.privacy.id_for_label }}">Change privacy:</label>
-                            {{ post_form.privacy }}
+                            <label for="id_privacy">Change Post Privacy</label>
+                            <select title="Privacy selector" id="id_privacy" name="privacy" class="form-control">
+                                {% for choice in post_form.privacy.field.choices %}
+                                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                {% endfor %}
+                            </select>
+
                         </div>
 
                         <br>
+
                         <div class="fieldWrapper tags card-footer">
-                            {{ tag_formset.management_form }}
+                            <label for="id_tags" class="label-for-tags">Chose Post Tags</label>
 
-                            <label for="{{ tag_formset.tag.id_for_label }}">Chose tags...</label>
+                            <div id="id_tags" class="tags-container">
+                                {{ tag_formset.management_form }}
 
-                            {% for form in tag_formset %}
-                                <div class="fieldWrapper tag">
-                                    {{ form }}
-                                </div>
-                            {% endfor %}
+                                {% for form in tag_formset %}
+                                    <div class="chose-individual-tag">
+                                        {{ form }}
+                                    </div>
+                                {% endfor %}
+                            </div>
 
                         </div>
 
@@ -60,7 +72,7 @@
                             <div class="btn-group submit" role="group">
                                 <button class="btn btn-submit" type="submit" title="Save changes">
                                     <i class="far fa-save"></i> SAVE </button>
-                                <a class="btn btn-cancel user-update-link" href='{% url 'website:posts_list' %}' title="Cancel changes">CANCEL </a>
+                                <a class="btn btn-cancel user-update-link" href="{% url 'website:posts_list' %}" title="Cancel changes">CANCEL </a>
                             </div>
                         </div>
 
