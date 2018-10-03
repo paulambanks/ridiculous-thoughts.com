@@ -15,8 +15,3 @@ DATABASES = {
         'PORT': os.environ['POSTGRES_PORT'],
     }
 }
-
-STATICFILES_DIRS = [
-    '/app/website/static',
-    '/usr/local/lib/python3.7/site-packages/django/contrib/admin/static',
-]
