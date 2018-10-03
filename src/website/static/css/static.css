@@ -486,8 +486,15 @@ footer {
     color: #FBF7FF;
 }
 
-.footer .fa-heart {
-  color: #6A557F;
+.footer .fa-heart,
+.fa-envelope.fa-7x,
+.fa-lock.fa-7x,
+.fa-unlock-alt.fa-7x,
+.fa-at.fa-7x,
+.fa-check-circle.fa-7x {
+    color: #6A557F;
 }
+
+
 
 
