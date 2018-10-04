@@ -135,9 +135,10 @@ REST_FRAMEWORK = {
 RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY', '')
 RECAPTCHA_PRIVATE_KEY = os.getenv('GOOGLE_RECAPTCHA_SECRET_KEY', '')
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST', '')
+
 EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST', '')
 EMAIL_HOST = os.getenv('EMAIL_HOST', '')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')

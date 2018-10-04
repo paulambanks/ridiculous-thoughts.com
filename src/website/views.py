@@ -67,14 +67,16 @@ def send_email(request):  # CONTACT FORM
             subject = form.cleaned_data['subject']
             name = form.cleaned_data['name']
             message = form.cleaned_data['message']
+            from_email = 'admin@ridiculous-thoughts.com'
 
             if request.user.is_authenticated:  # if contact form send from the logged user
-                from_email = request.user.email
+                # from_email = request.user.email
+                email = request.user.email
                 name = request.user.username
 
                 try:
-                    message = "User {} with email {} has sent you a message:\n".format(name, from_email) + message
-                    send_mail(subject, message, from_email, ['bankspaula576@gmail.com'])
+                    message = "User {} with email {} has sent you a message:\n".format(name, email) + message
+                    send_mail(subject, message, from_email, ['admin@ridiculous-thoughts.com'])
                 except BadHeaderError:
                     return HttpResponse('Invalid header found.')
 
@@ -83,7 +85,7 @@ def send_email(request):  # CONTACT FORM
 
                 try:
                     message = "User {} with email {} has sent you a message:\n".format(name, email) + message
-                    send_mail(subject, message, email, ['bankspaula576@gmail.com'])
+                    send_mail(subject, message, from_email, ['admin@ridiculous-thoughts.com'])
                 except BadHeaderError:
                     return HttpResponse('Invalid header found.')
 
