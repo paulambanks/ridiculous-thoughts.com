@@ -277,9 +277,9 @@ and (orientation: portrait) {
         position: relative;
     }
 
-    main {
-        margin-top: 60px;
-    }
+    /*main {*/
+        /*margin-top: 60px;*/
+    /*}*/
     .content-container {
         width: 100%;
     }
@@ -567,9 +567,9 @@ and (orientation: portrait) {
     .content-container {
         width: 100%;
     }
-    main {
-        margin-top: 60px;
-    }
+    /*main {*/
+        /*margin-top: 60px;*/
+    /*}*/
 
     .add-new-post-button {
         font-size: 0.7rem;
@@ -672,9 +672,9 @@ and (-webkit-min-device-pixel-ratio: 1) {
         width: 100%;
     }
 
-    main {
-        margin-top: 60px;
-    }
+    /*main {*/
+        /*margin-top: 60px;*/
+    /*}*/
 
 
     .add-new-post-button {
