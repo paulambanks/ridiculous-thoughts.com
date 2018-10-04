@@ -56,13 +56,17 @@ div.btn-group.edit {
 
 div.btn-group.submit {
     justify-content: center;
+    flex-wrap: wrap;
 }
 
-.btn.btn-submit {
+.btn-group.submit > .btn-cancel {
+    margin: 2%;
+}
+.btn-group.submit > .btn-submit {
     background-color: #6A557F;
     color: #f8f9fa;
     cursor: pointer;
-    margin: 0 .75rem;
+    margin: 2%;
     border-radius: 0;
 }
 
@@ -529,8 +533,12 @@ footer {
     color: #6A557F;
 }
 
-.g-recaptcha > div {
+.g-recaptcha {
+    /*transform:scale(0.77);*/
     margin: 0 auto;
+    display: table
+    /*transform-origin:0 0;*/
+    /*margin: 0 auto;*/
 }
 
 
