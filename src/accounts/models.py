@@ -52,7 +52,7 @@ class CustomUser(AbstractUser):
     REQUIRED_FIELDS = ['first_name', 'last_name']  # Email & Password are required by default.
 
     def __str__(self):
-        return self.email
+        return str(self.email)
 
     objects = UserManager()
 
@@ -96,7 +96,7 @@ class UserProfile(models.Model):
     )
 
     def __str__(self):
-        return self.user
+        return str(self.user)
 
     @property
     def get_absolute_avatar_url(self):
