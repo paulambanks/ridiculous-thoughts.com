@@ -51,11 +51,14 @@ header {
     font-weight: 800;
     font-size: 20px;
     color: #FFF;
-    padding-right: 2%;
+    text-align: right;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-right: 3%;
+    /*padding-right: 2%;*/
 }
 
 #mainNav .nav-item .nav-link,
-#mainNav .navbar-toggler,
 #mainNav .profile-link-username {
     text-align: right;
     text-decoration: none;
@@ -81,8 +84,8 @@ header {
     background-color: #414042;
 }
 
-ul.navbar-nav {
-    margin-right: 2%;
+div.navbar-collapse > ul.navbar-nav {
+    padding-right: 2%;
 }
 
 .nav-avatar {

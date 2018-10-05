@@ -20,9 +20,9 @@ main {
 }
 
 .main-container {
- min-height: 100vh; /* will cover the 100% of viewport */
- display: block;
- position: relative;
+    min-height: 100vh; /* will cover the 100% of viewport */
+    display: block;
+    position: relative;
 }
 
 .row {
@@ -32,7 +32,11 @@ main {
 
 .content-container.no-jumbotron {
     padding-top: 2%;
-    padding-bottom: 5%;
+    width: 100%;
+}
+
+.content-container {
+        width: 100%;
 }
 
 
@@ -86,9 +90,6 @@ and (-webkit-min-device-pixel-ratio: 1) {
     }
 
 
-    .content-container {
-        width: 100%;
-    }
 
     .card-deck {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -109,10 +110,6 @@ and (min-device-width: 1200px)
 and (max-device-width: 1600px)
 and (-webkit-min-device-pixel-ratio: 2)
 and (min-resolution: 192dpi) {
-    body {
-        max-width: 100%;
-        position: relative;
-    }
 
     .content-container {
         width: 100%;
@@ -203,7 +200,7 @@ and (min-resolution: 192dpi) {
     }
 
     .content-container {
-        padding: 0 0 5% 0;
+        /*padding: 0 0 5% 0;*/
         width: 100%;
     }
 }
@@ -260,7 +257,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     }
 
     .content-container {
-        padding: 0 0 5% 0;
+        /*padding: 0 0 5% 0;*/
         width: 100%;
     }
 
@@ -359,7 +356,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     }
 
     .content-container {
-        padding: 0 0 5% 0;
+        /*padding: 0 0 5% 0;*/
         width: 100%;
     }
 
@@ -453,7 +450,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
     }
 
     .content-container {
-        padding: 0 0 5% 0;
+        /*padding: 0 0 5% 0;*/
         width: 100%;
     }
 
@@ -548,7 +545,7 @@ and (-webkit-min-device-pixel-ratio: 3) {
     }
 
     .content-container {
-        padding: 0 0 5% 0;
+        /*padding: 0 0 5% 0;*/
         width: 100%;
     }
 
@@ -651,7 +648,7 @@ and (-webkit-min-device-pixel-ratio: 1) {
     }
 
     .content-container {
-        padding: 0 0 5% 0;
+        /*padding: 0 0 5% 0;*/
         width: 100%;
     }
 
@@ -752,7 +749,7 @@ and (-webkit-min-device-pixel-ratio: 2) {
     }
 
     .content-container {
-        padding: 0 0 5% 0;
+        /*padding: 0 0 5% 0;*/
         width: 100%;
     }
 
@@ -839,13 +836,12 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     body {
         max-width: 100%;
-
         position: relative;
         line-height: 1.25em;
     }
 
     .content-container {
-        padding: 0 0 5% 0;
+        /*padding: 0 0 5% 0;*/
         width: 100%;
     }
 
@@ -862,7 +858,6 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     body {
         max-width: 100%;
-
         position: relative;
     }
 
@@ -881,7 +876,6 @@ and (orientation: landscape)
 and (-webkit-min-device-pixel-ratio: 2) {
     body {
         max-width: 100%;
-
         position: relative;
     }
 
@@ -936,13 +930,11 @@ and (-webkit-min-device-pixel-ratio: 2) {
 
     body {
         max-width: 100%;
-
         position: relative;
         line-height: 1.25em;
     }
 
     .content-container {
-        padding: 0 0 5% 0;
         width: 100%;
     }
 
@@ -958,7 +950,6 @@ and (orientation: portrait)
 and (-webkit-min-device-pixel-ratio: 2) {
     body {
         max-width: 100%;
-
         position: relative;
     }
 
@@ -978,7 +969,6 @@ and (orientation: landscape)
 and (-webkit-min-device-pixel-ratio: 2) {
     body {
         max-width: 100%;
-
         position: relative;
     }
 
@@ -1040,7 +1030,6 @@ and (-webkit-device-pixel-ratio: 2) {
     }
 
     .content-container {
-        padding: 0 0 5% 0;
         width: 100%;
     }
 
@@ -1052,14 +1041,6 @@ and (device-width: 320px)
 and (device-height: 640px)
 and (-webkit-device-pixel-ratio: 2)
 and (orientation: portrait) {
-    body {
-        max-width: 100%;
-
-    }
-
-    .content-container {
-        width: 100%;
-    }
 
     .add-new-post-button {
         font-size: 0.7rem;
@@ -1072,14 +1053,7 @@ and (device-width: 320px)
 and (device-height: 640px)
 and (-webkit-device-pixel-ratio: 2)
 and (orientation: landscape) {
-    body {
-        max-width: 100%;
 
-    }
-
-    .content-container {
-        width: 100%;
-    }
 }
 
 /* ----------- Galaxy S4, S5 and Note 3 ----------- */
@@ -1128,12 +1102,10 @@ and (-webkit-device-pixel-ratio: 3) {
 
     body {
         max-width: 100%;
-
         line-height: 1.25em;
     }
 
     .content-container {
-        padding: 0 0 5% 0;
         width: 100%;
     }
 
@@ -1145,14 +1117,6 @@ and (device-width: 320px), screen and (device-width: 360px)
 and (device-height: 640px)
 and (-webkit-device-pixel-ratio: 3)
 and (orientation: portrait) {
-    body {
-        max-width: 100%;
-
-    }
-
-    .content-container {
-        width: 100%;
-    }
 
     .add-new-post-button {
         font-size: 0.7rem;
@@ -1165,14 +1129,7 @@ and (device-width: 320px), screen and (device-width: 360px)
 and (device-height: 640px)
 and (-webkit-device-pixel-ratio: 3)
 and (orientation: landscape) {
-    body {
-        max-width: 100%;
 
-    }
-
-    .content-container {
-        width: 100%;
-    }
 }
 
 /* ----------- Galaxy S6 ----------- */
@@ -1221,12 +1178,10 @@ and (-webkit-device-pixel-ratio: 4) {
 
     body {
         max-width: 100%;
-
         line-height: 1.25em;
     }
 
     .content-container {
-        padding: 0 0 5% 0;
         width: 100%;
     }
 
@@ -1238,14 +1193,6 @@ and (device-width: 360px)
 and (device-height: 640px)
 and (-webkit-device-pixel-ratio: 4)
 and (orientation: portrait) {
-    body {
-        max-width: 100%;
-
-    }
-
-    .content-container {
-        width: 100%;
-    }
 
     .add-new-post-button {
         font-size: 0.7rem;
@@ -1258,14 +1205,7 @@ and (device-width: 360px)
 and (device-height: 640px)
 and (-webkit-device-pixel-ratio: 4)
 and (orientation: landscape) {
-    body {
-        max-width: 100%;
 
-    }
-
-    .content-container {
-        width: 100%;
-    }
 }
 
 /* ---------------SAMSUNG SETTING PADS------------------------------------ */
@@ -1326,16 +1266,6 @@ and (max-device-width: 1280px) {
 /* Portrait */
 @media (max-device-width: 800px)
 and (orientation: portrait) {
-    body {
-        max-width: 100%;
-
-    }
-
-    .content-container {
-        padding: 0 0 5% 0;
-        width: 100%;
-    }
-
     .add-new-post-button {
         font-size: 0.7rem;
     }
@@ -1344,14 +1274,7 @@ and (orientation: portrait) {
 /* Landscape */
 @media (max-device-width: 1280px)
 and (orientation: landscape) {
-    body {
-        max-width: 100%;
 
-    }
-
-    .content-container {
-        width: 100%;
-    }
 }
 
 /* ----------- Galaxy Tab S ----------- */
@@ -1400,7 +1323,6 @@ and (-webkit-min-device-pixel-ratio: 2) {
     }
 
     .content-container {
-        padding: 0 0 5% 0;
         width: 100%;
     }
 
@@ -1454,7 +1376,6 @@ and (-webkit-min-device-pixel-ratio: 2) {
     }
 
     .content-container {
-        padding: 0 5% 10% 5%;
         width: 100%;
     }
 

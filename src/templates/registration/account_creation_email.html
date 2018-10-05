@@ -1,15 +1,21 @@
 {% autoescape off %}
 
-You're receiving this e-mail because you requested a password reset for your user account at {{ site_name }}.
+Hi {{ user.firs_name }}!
 
-    Please go to the following page and choose a new password:
+You are receiving this email because You have been registered at {{ site_name }} Blog.
+
+Feel free to use the following link to activate your account and complete your profile.
+
+    Please go to the following page and create your password:
 
     {% block reset_link %}
         {{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
     {% endblock %}
 
-Your username is this email address.
+Your username will be your email address.
 
-Thanks for using our site!
+Happy to have you!
+
+Paula
 
 {% endautoescape %}
