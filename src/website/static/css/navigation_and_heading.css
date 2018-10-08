@@ -70,6 +70,7 @@ header {
 .navbar-brand.logo {
     margin-right: 0;
     padding-right: 2%;
+    width: fit-content;
 }
 
 #mainNav .navbar-brand:hover,
@@ -86,6 +87,8 @@ header {
 
 div.navbar-collapse > ul.navbar-nav {
     padding-right: 2%;
+    width: 100%;
+    justify-content: flex-end;
 }
 
 .nav-avatar {
