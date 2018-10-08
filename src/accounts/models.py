@@ -81,7 +81,7 @@ class UserProfile(models.Model):
     avatar = models.ImageField(
         upload_to='uploads/',
         blank=True,
-        default='static/images/crazycat.jpeg',
+        default='',
         verbose_name="Your Current Profile Avatar"
     )
     country = models.CharField(
@@ -102,8 +102,6 @@ class UserProfile(models.Model):
     def get_absolute_avatar_url(self):
         if self.avatar and hasattr(self.avatar, 'url'):
             return "{0}{1}".format(settings.MEDIA_URL, self.avatar.url)
-        else:
-            return '/static/crazycat.jpeg'
 
 
 def create_profile(sender, **kwargs):
