@@ -21,7 +21,7 @@ services:
     depends_on:
       - database
   server:
-    image: nginx:alpine
+    image: nginx:1.15-alpine
     restart: always
     init: true
     volumes:
@@ -48,7 +48,7 @@ services:
     depends_on:
       - app
   database:
-    image: postgres:alpine
+    image: postgres:10-alpine
     restart: always
     init: true
     env_file: 
