@@ -24,14 +24,21 @@
                 Pick a new Avatar picture:
                 <input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
             </label>
+            <small id="avatarHelp" class="form-text text-muted">
+               <ul class="avatar-validators">
+                   <li>Make sure I am square picture - otherwise I will look strange when made into an Avatar size</li>
+                   <li>Make sure I am a JPEG or a PNG image</li>
+                   <li>I should be quite small - max 1MB</li>
+               </ul>
+            </small>
 
         </div>
 
     {% else %}
         <div class="profile-form-current-avatar">
             <div class="author-avatar">
-                <img src="/static/crazycat.jpeg" alt="Profile Avatar" class="author-avatar photo">
-                <small class="form-text text-muted">I am a default Profile Avatar. Although I am very cute, feel free to pick your custom picture</small>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg" alt="Profile Avatar" class="author-avatar photo">
+                <small class="form-text text-muted">I am a default Profile Avatar. Feel free to pick your custom picture</small>
             </div>
         </div>
 
@@ -41,6 +48,13 @@
                 Pick a new Avatar picture:
                 <input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
             </label>
+            <small id="avatarHelp" class="form-text text-muted">
+               <ul class="avatar-validators">
+                   <li>Make sure I am square picture - otherwise I will look strange when made into an Avatar size</li>
+                   <li>Make sure I am a JPEG or a PNG image</li>
+                   <li>I should be quite small - max 1MB</li>
+               </ul>
+            </small>
         </div>
 
     {% endif %}

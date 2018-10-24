@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser, UserProfile
 from django import forms
 from django.forms import ClearableFileInput
+from django.core.files.images import get_image_dimensions
 
 
 class CustomClearableFileInputWidget(ClearableFileInput):
@@ -43,7 +44,7 @@ class UserProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserProfileForm, self).__init__(*args, **kwargs)
         if self.instance.pk is None:
-            self.empty_permitted = False # Here
+            self.empty_permitted = False
 
     ClearableFileInput.template_name = 'django_overrides/forms/widgets/clearable_file_input.html'
 
