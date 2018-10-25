@@ -124,5 +124,5 @@ app.env
 database.env
 
 static_cdn
-
+media_cdn
 src/app/settings/local.py
